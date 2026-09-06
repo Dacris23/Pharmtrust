@@ -8,11 +8,8 @@
   <meta name="theme-color" content="#0f172a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Updated Supabase CDN supporting publishable keys -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
   <script>
     tailwind.config = {
@@ -20,17 +17,8 @@
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#ecfdf5',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857'
-            },
-            charcoal: {
-              800: '#1e293b',
-              900: '#0f172a',
-              950: '#020617'
-            }
+            brand: { 50: '#ecfdf5', 500: '#10b981', 600: '#059669', 700: '#047857' },
+            charcoal: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
           }
         }
       }
@@ -90,7 +78,7 @@
     </div>
   </section>
 
-  <!-- Main Search & Filter Bar -->
+  <!-- Filter & Search Bar -->
   <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
     <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
       <div class="relative w-full md:w-96">
@@ -116,16 +104,16 @@
   <!-- Product Catalog Grid -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="col-span-full py-16 text-center text-slate-400">Loading catalog...</div>
+      <div class="col-span-full py-16 text-center text-slate-400">Loading catalog from live database...</div>
     </div>
   </main>
 
-  <!-- Prescription Upload Module -->
+  <!-- Prescription Upload Section -->
   <section id="prescription" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-10">
       <div class="max-w-xl">
         <h2 class="text-2xl font-bold text-white mb-2">Have a Doctor's Prescription?</h2>
-        <p class="text-slate-400 text-sm mb-6">Upload a photo of your valid medical prescription. Our licensed pharmacist will verify the dosage, pack the items, and send you a checkout confirmation.</p>
+        <p class="text-slate-400 text-sm mb-6">Upload a photo of your valid prescription. Our licensed pharmacist will verify the dosage, pack the items, and send you a checkout confirmation.</p>
         
         <form id="rxForm" onsubmit="handlePrescriptionSubmit(event)" class="space-y-4">
           <div>
@@ -145,7 +133,6 @@
             <div class="border-2 border-dashed border-slate-800 rounded-2xl p-6 text-center hover:border-emerald-500 transition cursor-pointer" onclick="document.getElementById('rxFile').click()">
               <i data-lucide="camera" class="w-8 h-8 text-emerald-500 mx-auto mb-2"></i>
               <p class="text-xs text-slate-300 font-medium">Click to capture photo or select image</p>
-              <p class="text-[10px] text-slate-500 mt-1">PNG, JPG, or PDF up to 5MB</p>
               <input type="file" id="rxFile" accept="image/*" class="hidden" onchange="previewRx(this)">
             </div>
             <div id="rxPreviewBox" class="mt-3 hidden items-center space-x-2 text-xs text-emerald-400">
@@ -161,7 +148,7 @@
     </div>
   </section>
 
-  <!-- Drug Details Modal -->
+  <!-- Drug Modal -->
   <div id="drugModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-start mb-4">
@@ -205,7 +192,7 @@
     </div>
   </div>
 
-  <!-- Shopping Cart / Checkout Modal -->
+  <!-- Cart Modal -->
   <div id="cartModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6">
       <div class="flex justify-between items-center mb-4">
@@ -239,28 +226,16 @@
   </div>
 
   <script>
-    // Supabase Credentials
     const SUPABASE_URL = 'https://iydakgrvvwnjacffennc.supabase.co';
-    // Use your copied Publishable Key (e.g., sb_publishable_... or standard anon key eyJ...)
-    const SUPABASE_KEY = 'PASTE_YOUR_COPIED_KEY_HERE';
+    const SUPABASE_KEY = 'sb_publishable_AjpEBohY3PE7CCcWG5Mluw_9K-vaI9t';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let products = [];
     let currentCategory = "All";
     let cart = [];
 
-    // Fetch live inventory from Supabase
     async function loadMedicationsFromDB() {
       const grid = document.getElementById('productGrid');
-      if (grid) {
-        grid.innerHTML = `
-          <div class="col-span-full py-16 text-center">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-emerald-500 mb-3"></div>
-            <p class="text-sm text-slate-400">Loading catalog from live database...</p>
-          </div>
-        `;
-      }
-
       try {
         const { data, error } = await supabaseClient
           .from('medications')
@@ -284,11 +259,10 @@
       }
     }
 
-    // Render Product Cards
     function renderProducts(items) {
       const grid = document.getElementById('productGrid');
       if (items.length === 0) {
-        grid.innerHTML = `<div class="col-span-full py-16 text-center text-slate-500 text-sm">No medications found matching your criteria.</div>`;
+        grid.innerHTML = '<div class="col-span-full py-16 text-center text-slate-500 text-sm">No medications currently available.</div>';
         return;
       }
 
@@ -341,7 +315,6 @@
       lucide.createIcons();
     }
 
-    // Filter Logic
     function filterProducts() {
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
       const filtered = products.filter(p => {
