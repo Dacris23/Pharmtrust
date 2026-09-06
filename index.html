@@ -12,6 +12,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -239,95 +240,66 @@
 
   <script>
     // 1. DATA SOURCE (Directly matches the Google Sheet structure)
-    const products = [
-      {
-        id: "PROD-001",
-        brand: "Augmentin 625mg",
-        generic: "Amoxicillin + Clavulanic Acid",
-        category: "Anti-Infectives & Antibiotics",
-        dosage: "Tablet",
-        pack: "14 Tablets",
-        rxRequired: true,
-        nafdac: "04-1234",
-        price: 14500,
-        isClearance: false,
-        pharmacy: "MedPlus Pharmacy",
-        img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500",
-        uses: "Bacterial infections of the respiratory tract, ear, nose, throat, skin, and urinary tract.",
-        contraindications: "Severe penicillin allergy or previous history of penicillin-induced liver jaundice.",
-        warnings: "Complete the full course even if symptoms subside. Take with meals to avoid gastric irritation."
-      },
-      {
-        id: "PROD-002",
-        brand: "Panadol Extra",
-        generic: "Paracetamol + Caffeine",
-        category: "Pain Relief & Fever",
-        dosage: "Caplet",
-        pack: "100 Caplets",
-        rxRequired: false,
-        nafdac: "04-5678",
-        price: 1500,
-        isClearance: false,
-        pharmacy: "MedPlus Pharmacy",
-        img: "https://images.unsplash.com/photo-1584017911766-d451b3d0e843?w=500",
-        uses: "Fast relief from headaches, dental pain, body aches, menstrual cramps, and febrile conditions.",
-        contraindications: "Severe chronic liver disease or known hypersensitivity to paracetamol.",
-        warnings: "Do not exceed 8 caplets in 24 hours. Do not consume simultaneously with other paracetamol products."
-      },
-      {
-        id: "PROD-003",
-        brand: "Glucophage 500mg",
-        generic: "Metformin HCl",
-        category: "Chronic Care & Diabetes",
-        dosage: "Tablet",
-        pack: "50 Tablets",
-        rxRequired: true,
-        nafdac: "04-9912",
-        price: 8200,
-        isClearance: false,
-        pharmacy: "MedPlus Pharmacy",
-        img: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=500",
-        uses: "Management and glycemic control of Type 2 Diabetes Mellitus in adults.",
-        contraindications: "Severe renal failure (eGFR < 30 mL/min) or acute metabolic ketoacidosis.",
-        warnings: "Take immediately after food. Avoid heavy alcohol intake to minimize risk of lactic acidosis."
-      },
-      {
-        id: "PROD-004",
-        brand: "Lonart DS",
-        generic: "Artemether + Lumefantrine",
-        category: "Clearance Deals & OTC",
-        dosage: "Tablet",
-        pack: "6 Tablets",
-        rxRequired: false,
-        nafdac: "04-3321",
-        price: 2500,
-        originalPrice: 4200,
-        isClearance: true,
-        pharmacy: "HealthPlus Pharmacy",
-        img: "https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=500",
-        uses: "Acute uncomplicated Plasmodium falciparum malaria infection in adults and children.",
-        contraindications: "First trimester of pregnancy without direct specialist supervision.",
-        warnings: "Must be ingested with full-cream milk or fatty meal for reliable therapeutic absorption."
-      },
-      {
-        id: "PROD-005",
-        brand: "Ciprotab 500mg",
-        generic: "Ciprofloxacin",
-        category: "Anti-Infectives & Antibiotics",
-        dosage: "Tablet",
-        pack: "10 Tablets",
-        rxRequired: true,
-        nafdac: "04-7741",
-        price: 3500,
-        isClearance: false,
-        pharmacy: "HealthPlus Pharmacy",
-        img: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=500",
-        uses: "Typhoid fever, complicated cystitis, deep bone/joint infections, and acute infectious diarrhea.",
-        contraindications: "Co-administration with tizanidine or known fluoroquinolone allergy.",
-        warnings: "Ensure heavy water intake. Do not ingest antacids, magnesium, or iron supplements within 2 hours."
-      }
-    ];
+      // Supabase Database Setup
+  const SUPABASE_URL = 'https://iydakgrvvwnjacffennc.supabase.co';
+  const SUPABASE_KEY = 'Sb_publishable_AjpEBohY3PE7CCcWG5Mluw_9K-vaI9t';
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+  let products = [];
+
+  // Fetch live inventory from Supabase
+  async function loadMedicationsFromDB() {
+    const grid = document.getElementById('productGrid');
+    if (grid) {
+      grid.innerHTML = `
+        <div class="col-span-full py-16 text-center">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-emerald-500 mb-3"></div>
+          <p class="text-sm text-slate-400">Loading catalog from live database...</p>
+        </div>
+      `;
+    }
+
+    try {
+      const { data, error } = await supabaseClient
+        .from('medications')
+        .select('*')
+        .eq('in_stock', true);
+
+      if (error) throw error;
+
+      products = data.map(item => ({
+        id: item.id,
+        brand: item.brand,
+        generic: item.generic,
+        category: item.category,
+        dosage: item.dosage,
+        pack: item.pack,
+        price: Number(item.price),
+        originalPrice: item.original_price ? Number(item.original_price) : null,
+        isClearance: item.is_clearance,
+        rxRequired: item.rx_required,
+        nafdac: item.nafdac,
+        pharmacy: item.pharmacy,
+        img: item.img,
+        uses: item.uses,
+        warnings: item.warnings,
+        contraindications: item.contraindications
+      }));
+
+      renderProducts(products);
+    } catch (err) {
+      console.error('Database fetch error:', err);
+      if (grid) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center text-rose-400">
+            <p class="text-sm font-semibold">Failed to load catalog</p>
+            <p class="text-xs text-slate-500 mt-1">Please refresh the page.</p>
+          </div>
+        `;
+      }
+    }
+  }
+    
     let currentCategory = "All";
     let cart = [];
 
@@ -502,10 +474,10 @@
       msg += `*Delivery Address:* ${addr}%0A%0A`;
       msg += `I am attaching my prescription photograph below for dispensing verification:`;
 
-      window.open(`https://wa.me/2348012345678?text=${msg}`, '_blank');
+      window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
     }
 
-    renderProducts(products);
+    loadMedicationsFromDB();
   </script>
 </body>
 </html>
