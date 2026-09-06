@@ -35,7 +35,7 @@
             Pharma<span class="text-emerald-400">Trust</span>
           </span>
           <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">
-            Okada Network
+            Nationwide Network
           </span>
         </div>
       </a>
@@ -45,7 +45,7 @@
         <a href="upload-rx.html" class="text-emerald-400 border-b-2 border-emerald-500 pb-0.5 font-bold">Upload Rx</a>
         <a href="profile.html" class="text-slate-300 hover:text-emerald-400 transition">My Profile</a>
         <a href="contact.html" class="text-slate-300 hover:text-emerald-400 transition">Contact</a>
-        <a href="admin.html" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Staff Portal</a>
+        <a href="admin.html" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Pharmacist Portal ↗</a>
       </nav>
 
       <button onclick="toggleMobileNav()" class="md:hidden p-2 text-slate-400 hover:text-white bg-slate-800/80 rounded-xl">
@@ -59,7 +59,7 @@
       <a href="upload-rx.html" class="block py-1.5 text-emerald-400 font-bold">Upload Doctor Prescription</a>
       <a href="profile.html" class="block py-1.5 text-slate-300">My Clinical Profile & Allergies</a>
       <a href="contact.html" class="block py-1.5 text-slate-300">Emergency Hotlines & Contact</a>
-      <a href="admin.html" class="block py-1.5 text-slate-400 font-mono">Dispensary Staff Portal ↗</a>
+      <a href="admin.html" class="block py-1.5 text-slate-400 font-mono">Pharmacist Portal ↗</a>
     </div>
   </header>
 
@@ -67,10 +67,10 @@
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
       <div class="mb-5">
         <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider mb-2">
-          Clinical Review Portal
+          Prescription Intake
         </span>
         <h1 class="text-xl sm:text-2xl font-bold text-white">Upload Doctor's Prescription</h1>
-        <p class="text-xs text-slate-400 mt-1">Our licensed dispensary pharmacists inspect the dosage regimen, weight-adjusted safety, and cross-examine known allergies before issuing your itemized quote.</p>
+        <p class="text-xs text-slate-400 mt-1">Our licensed dispensary pharmacists verify your dosage regimen, cross-examine allergies, and prepare your medications for dispatch anywhere in Nigeria.</p>
       </div>
 
       <form id="rxUploadForm" onsubmit="submitPrescription(event)" class="space-y-3.5 text-xs">
@@ -110,9 +110,32 @@
           <input type="text" id="rxAllergies" placeholder="e.g. Penicillin, Sulfa, NSAIDs (or write None)" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-rose-500 outline-none">
         </div>
 
+        <!-- Geographic Location (Nationwide) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Delivery State</label>
+            <select id="rxState" required class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+              <option value="Edo">Edo State</option>
+              <option value="Lagos">Lagos State</option>
+              <option value="Abuja">FCT Abuja</option>
+              <option value="Oyo">Oyo State</option>
+              <option value="Rivers">Rivers State</option>
+              <option value="Delta">Delta State</option>
+              <option value="Kano">Kano State</option>
+              <option value="Enugu">Enugu State</option>
+              <option value="Ogun">Ogun State</option>
+              <option value="Other">Other State</option>
+            </select>
+          </div>
+          <div>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Local Govt Area (LGA)</label>
+            <input type="text" id="rxLga" required placeholder="e.g. Ovia North-East, Ikeja, Benin City" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+          </div>
+        </div>
+
         <div>
-          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Delivery Destination in Okada</label>
-          <input type="text" id="rxAddress" required placeholder="e.g. Room 14 Block C, Crystal Hostel, Okada" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Street Address / Landmark / Hostel Details</label>
+          <input type="text" id="rxAddress" required placeholder="e.g. Room 14 Block C, Crystal Hostel or 12 Broad Street" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
         </div>
 
         <div>
@@ -159,7 +182,9 @@
           document.getElementById('rxWeight').value = profile.weight_kg || '';
           document.getElementById('rxGender').value = profile.gender || 'male';
           document.getElementById('rxAllergies').value = profile.allergies || 'None';
-          document.getElementById('rxAddress').value = profile.delivery_address || '';
+          document.getElementById('rxState').value = profile.state || 'Edo';
+          document.getElementById('rxLga').value = profile.lga || '';
+          document.getElementById('rxAddress').value = profile.street_address || profile.delivery_address || '';
         }
       }
     }
@@ -198,6 +223,8 @@
         const weight = Number(document.getElementById('rxWeight').value);
         const gender = document.getElementById('rxGender').value;
         const allergies = document.getElementById('rxAllergies').value.trim() || 'None';
+        const state = document.getElementById('rxState').value;
+        const lga = document.getElementById('rxLga').value.trim();
         const addr = document.getElementById('rxAddress').value.trim();
 
         await supabaseClient.from('prescriptions').insert([{
@@ -207,7 +234,10 @@
           patient_weight_kg: weight,
           patient_gender: gender,
           patient_allergies: allergies,
-          delivery_address: addr,
+          state: state,
+          lga: lga,
+          street_address: addr,
+          delivery_address: `${addr}, ${lga}, ${state}`,
           image_url: publicUrl,
           patient_id: currentUser ? currentUser.id : null,
           status: 'pending_review'
@@ -217,7 +247,7 @@
         msg += `*Patient Name:* ${encodeURIComponent(name)}%0A`;
         msg += `*Vitals:* Age: ${age} yrs • Weight: ${weight}kg • Sex: ${gender}%0A`;
         msg += `*Allergies:* ${encodeURIComponent(allergies)}%0A`;
-        msg += `*Delivery Destination:* ${encodeURIComponent(addr)}%0A%0A`;
+        msg += `*Destination:* ${encodeURIComponent(addr)}, ${encodeURIComponent(lga)}, ${encodeURIComponent(state)} State%0A%0A`;
         msg += `*Prescription Image Link:*%0A${encodeURIComponent(publicUrl)}%0A%0A`;
         msg += `Hello Pharmacist, please review my prescription and issue an official itemized bill.`;
 
