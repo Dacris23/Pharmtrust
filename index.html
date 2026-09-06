@@ -25,15 +25,15 @@
 </head>
 <body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500/30">
 
-  <!-- ROLE GATEWAY MODAL (ONE-LINK ENTRY SCREEN) -->
+  <!-- ROLE GATEWAY MODAL (FIRST VISIT ROUTING) -->
   <div id="roleGatewayModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl text-center">
       <img src="logo.jpg" alt="PharmaTrust" class="w-14 h-14 rounded-2xl mx-auto mb-3 border border-slate-700 object-contain shadow-lg">
       <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider mb-2">
-        PharmaTrust Gateway
+        PharmaTrust Nationwide Gateway
       </span>
       <h2 class="text-xl sm:text-2xl font-extrabold text-white mb-1.5">Who are you accessing as?</h2>
-      <p class="text-xs text-slate-400 mb-5 max-w-md mx-auto">Please select your primary access role to be routed to the appropriate portal.</p>
+      <p class="text-xs text-slate-400 mb-5 max-w-md mx-auto">Connecting Pharmacies. Building Trust. Improving Lives. Select your profile to enter.</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-2 text-left">
         <!-- Student / Patient -->
@@ -42,8 +42,8 @@
             <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
               <i data-lucide="graduation-cap" class="w-4 h-4"></i>
             </div>
-            <h3 class="text-xs font-bold text-white mb-1">Student / Customer</h3>
-            <p class="text-[11px] text-slate-400 leading-snug">Order medications, upload prescriptions, and get fast delivery in Okada.</p>
+            <h3 class="text-xs font-bold text-white mb-1">Student / Patient</h3>
+            <p class="text-[11px] text-slate-400 leading-snug">Order verified medicines, upload doctor scripts, and get fast delivery nationwide.</p>
           </div>
           <span class="mt-3 text-[10px] font-bold text-emerald-400 uppercase">Enter Storefront →</span>
         </button>
@@ -54,10 +54,10 @@
             <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
               <i data-lucide="stethoscope" class="w-4 h-4"></i>
             </div>
-            <h3 class="text-xs font-bold text-white mb-1">Dispensary Pharmacist</h3>
-            <p class="text-[11px] text-slate-400 leading-snug">Audit doctor prescriptions, manage stock, and issue patient quotes.</p>
+            <h3 class="text-xs font-bold text-white mb-1">Community Pharmacy</h3>
+            <p class="text-[11px] text-slate-400 leading-snug">Review prescriptions, inspect vitals/allergies, and manage counter stock.</p>
           </div>
-          <span class="mt-3 text-[10px] font-bold text-blue-400 uppercase">Staff Portal →</span>
+          <span class="mt-3 text-[10px] font-bold text-blue-400 uppercase">Dispensary Portal →</span>
         </button>
 
         <!-- Industrial Supplier -->
@@ -69,7 +69,7 @@
             <h3 class="text-xs font-bold text-white mb-1">Industrial Supplier</h3>
             <p class="text-[11px] text-slate-400 leading-snug">Distribute master cartons, receive depot orders, and fulfill bulk waybills.</p>
           </div>
-          <span class="mt-3 text-[10px] font-bold text-amber-400 uppercase">B2B Wholesale →</span>
+          <span class="mt-3 text-[10px] font-bold text-amber-400 uppercase">B2B Restock →</span>
         </button>
       </div>
     </div>
@@ -87,7 +87,7 @@
             Pharma<span class="text-emerald-400">Trust</span>
           </span>
           <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">
-            Okada Network
+            Nationwide Network
           </span>
         </div>
       </a>
@@ -101,6 +101,7 @@
         <a href="upload-rx.html" class="text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
         <a href="profile.html" class="text-slate-300 hover:text-emerald-400 transition">My Profile</a>
         <a href="contact.html" class="text-slate-300 hover:text-emerald-400 transition">Contact</a>
+        <a href="admin.html" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Pharmacist Portal ↗</a>
       </nav>
 
       <!-- Right Action Controls -->
@@ -134,6 +135,7 @@
       <a href="upload-rx.html" class="block py-1.5 text-slate-300 hover:text-white">Upload Doctor Prescription</a>
       <a href="profile.html" class="block py-1.5 text-slate-300 hover:text-white">My Clinical Profile & Allergies</a>
       <a href="contact.html" class="block py-1.5 text-slate-300 hover:text-white">Emergency Hotlines & Contact</a>
+      <a href="admin.html" class="block py-1.5 text-slate-400 font-mono">Pharmacist Portal ↗</a>
     </div>
   </header>
 
@@ -143,13 +145,13 @@
       <div class="max-w-2xl relative z-10">
         <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full mb-3">
           <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-          <span>Verified NAFDAC & PCN Regulated Network • Okada</span>
+          <span>Verified NAFDAC & PCN Regulated Network • Nationwide Nigeria</span>
         </div>
         <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3 leading-tight">
           Connecting Pharmacies.<br><span class="text-emerald-400">Building Trust. Improving Lives.</span>
         </h1>
         <p class="text-slate-400 text-xs sm:text-sm mb-6 leading-relaxed">
-          Order genuine medicines with verified dosage strengths and automated 6-month expiry discount clearances. Real patient ratings, clinical contraindication checks, and instant WhatsApp dispatch.
+          Order genuine medicines with verified dosage strengths and automated 6-month expiry discount clearances. Real patient ratings, clinical contraindication checks, and instant WhatsApp dispatch across Nigeria.
         </p>
         <div class="flex flex-wrap gap-2.5">
           <a href="#catalog" class="inline-flex items-center px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition shadow-lg shadow-emerald-900/30">
@@ -172,11 +174,11 @@
       </div>
       <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
         <div class="p-2 bg-blue-500/10 text-blue-400 rounded-xl"><i data-lucide="network" class="w-4 h-4"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Connected</h4><p class="text-[10px] text-slate-400">Okada Dispensaries</p></div>
+        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Connected</h4><p class="text-[10px] text-slate-400">Licensed Dispensaries</p></div>
       </div>
       <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
         <div class="p-2 bg-teal-500/10 text-teal-400 rounded-xl"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Accessible</h4><p class="text-[10px] text-slate-400">Campus & Town</p></div>
+        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Accessible</h4><p class="text-[10px] text-slate-400">Campus & Nationwide</p></div>
       </div>
       <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
         <div class="p-2 bg-rose-500/10 text-rose-400 rounded-xl"><i data-lucide="heart-pulse" class="w-4 h-4"></i></div>
@@ -218,7 +220,7 @@
           <span class="font-bold text-white text-sm">PharmaTrust Ecosystem</span>
         </div>
         <p class="text-[11px] leading-relaxed">
-          Decentralized pharmaceutical inventory management, prescription audit trails, and anti-counterfeit drug logistics for Okada.
+          Decentralized pharmaceutical inventory management, prescription audit trails, and anti-counterfeit drug logistics nationwide.
         </p>
         <div class="pt-1">
           <a href="https://linkedin.com/company/pharmatrust-ng" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition text-[11px]">
@@ -241,22 +243,22 @@
         <ul class="space-y-1.5 text-[11px] font-mono text-slate-300">
           <li>• <a href="https://wa.me/2348065092665" class="hover:text-emerald-400">+234 806 509 2665</a> (Clinical)</li>
           <li>• <a href="https://wa.me/2348169489126" class="hover:text-emerald-400">+234 816 948 9126</a> (Support)</li>
-          <li>• Main Road, Okada Town, Edo State</li>
+          <li>• Nationwide Verification & Logistics</li>
         </ul>
       </div>
       <div>
-        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-2.5">Enterprise Staff</h4>
-        <p class="text-[11px] text-slate-300 mb-1">Superintendent Pharmacist On-Call:</p>
-        <p class="text-xs text-emerald-400 font-semibold mb-2">MedPlus Okada Central Node</p>
-        <a href="admin.html" class="inline-block px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-[10px] transition">Staff Portal ↗</a>
+        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-2.5">Licensed Practitioners</h4>
+        <p class="text-[11px] text-slate-300 mb-1">Community & Hospital Pharmacists:</p>
+        <p class="text-xs text-emerald-400 font-semibold mb-2">Dispensary Node Operations</p>
+        <a href="admin.html" class="inline-block px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-[10px] transition">Pharmacist Portal ↗</a>
       </div>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-[10px] text-slate-500">
       <div>© 2026 PharmaTrust. Connecting Pharmacies. Building Trust. Improving Lives.</div>
       <div class="mt-1 sm:mt-0 space-x-2">
-        <span>Okada, Edo State, Nigeria</span>
+        <span>Nigeria Operations</span>
         <span>•</span>
-        <span>PCN/OKD/2026/01</span>
+        <span>PCN Regulated Premises</span>
       </div>
     </div>
   </footer>
@@ -368,15 +370,45 @@
     </div>
   </div>
 
-  <!-- Shopping Cart Modal -->
+  <!-- Shopping Cart Modal with Dynamic Nationwide Address -->
   <div id="cartModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-md w-full p-5">
+    <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-md w-full p-5 max-h-[92vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-3">
         <h3 class="text-lg font-bold text-white">Your Medication Cart</h3>
         <button onclick="toggleModal('cartModal')" class="text-slate-400 hover:text-white">✕</button>
       </div>
 
-      <div id="cartItemsContainer" class="divide-y divide-slate-800 max-h-56 overflow-y-auto mb-3"></div>
+      <div id="cartItemsContainer" class="divide-y divide-slate-800 max-h-48 overflow-y-auto mb-3"></div>
+
+      <!-- Nationwide Delivery Form -->
+      <div class="p-3 bg-charcoal-950 rounded-xl border border-slate-800 space-y-2 mb-3 text-xs">
+        <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block">Delivery Destination in Nigeria</span>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[9px] text-slate-400 uppercase font-semibold">State</label>
+            <select id="cartState" class="w-full bg-charcoal-900 border border-slate-800 rounded-lg p-1.5 text-white outline-none">
+              <option value="Edo">Edo State</option>
+              <option value="Lagos">Lagos State</option>
+              <option value="Abuja">FCT Abuja</option>
+              <option value="Oyo">Oyo State</option>
+              <option value="Rivers">Rivers State</option>
+              <option value="Delta">Delta State</option>
+              <option value="Kano">Kano State</option>
+              <option value="Enugu">Enugu State</option>
+              <option value="Ogun">Ogun State</option>
+              <option value="Other">Other State</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[9px] text-slate-400 uppercase font-semibold">Local Govt (LGA)</label>
+            <input type="text" id="cartLga" placeholder="e.g. Ovia North-East" class="w-full bg-charcoal-900 border border-slate-800 rounded-lg p-1.5 text-white outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="text-[9px] text-slate-400 uppercase font-semibold">Street / Landmark Address</label>
+          <input type="text" id="cartStreet" placeholder="e.g. Room 14 Block C, Crystal Hostel or 12 Broad St" class="w-full bg-charcoal-900 border border-slate-800 rounded-lg p-1.5 text-white outline-none">
+        </div>
+      </div>
 
       <div class="pt-2.5 border-t border-slate-800 space-y-1.5 text-xs mb-3">
         <div class="flex justify-between text-slate-400">
@@ -384,7 +416,7 @@
           <span id="cartSubtotal" class="text-white font-semibold">₦0</span>
         </div>
         <div class="flex justify-between text-slate-400">
-          <span>Delivery Fee (Okada Town & Campus)</span>
+          <span>Delivery Fee (Local / Regional)</span>
           <span id="cartDelivery" class="text-white font-semibold">₦1,000</span>
         </div>
         <div class="flex justify-between text-sm font-bold text-white pt-1.5 border-t border-slate-800">
@@ -451,7 +483,12 @@
         triggerBtn.className = "hidden sm:inline-flex text-xs px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-300 border border-rose-500/20 hover:bg-rose-500/20 transition";
 
         const { data: profile } = await supabaseClient.from('profiles').select('*').eq('user_id', currentUser.id).single();
-        if (profile) currentUserProfile = profile;
+        if (profile) {
+          currentUserProfile = profile;
+          if (document.getElementById('cartState')) document.getElementById('cartState').value = profile.state || 'Edo';
+          if (document.getElementById('cartLga')) document.getElementById('cartLga').value = profile.lga || '';
+          if (document.getElementById('cartStreet')) document.getElementById('cartStreet').value = profile.street_address || profile.delivery_address || '';
+        }
       } else {
         currentUser = null;
         currentUserProfile = null;
@@ -560,7 +597,9 @@
             pharmacies (
               pharmacy_name,
               contact_phone,
-              address_text
+              address_text,
+              state,
+              lga
             )
           `)
           .order('in_stock', { ascending: false });
@@ -586,7 +625,7 @@
           warnings: row.products.key_warnings,
           contraindications: row.products.contraindications,
           in_stock: row.in_stock,
-          pharmacy: row.pharmacies ? row.pharmacies.pharmacy_name : 'MedPlus Okada',
+          pharmacy: row.pharmacies ? `${row.pharmacies.pharmacy_name} (${row.pharmacies.state})` : 'Central Dispensary',
           pharmacy_phone: '2348065092665'
         }));
 
@@ -599,7 +638,7 @@
     function renderProducts(items) {
       const grid = document.getElementById('productGrid');
       if (items.length === 0) {
-        grid.innerHTML = '<div class="col-span-full py-16 text-center text-slate-500 text-sm">No matching medications found.</div>';
+        grid.innerHTML = '<div class="col-span-full py-16 text-center text-slate-500 text-xs">No matching medications found.</div>';
         return;
       }
 
@@ -653,7 +692,7 @@
                 <div class="p-2 bg-rose-950/20 border border-rose-500/20 rounded-xl text-center">
                   <span class="text-[10px] text-rose-300 font-semibold block mb-0.5">Out of Stock at Node</span>
                   <button onclick="routeToNearestPharmacy('${p.generic}')" class="text-[10px] text-emerald-400 underline font-semibold">
-                    Locate nearby in Okada ↗
+                    Locate nearby in Nigeria ↗
                   </button>
                 </div>
               `}
@@ -670,7 +709,7 @@
         alert(`Stock found! Available at ${match.pharmacy} for ₦${match.price.toLocaleString()}.`);
         openDrugModal(match.id);
       } else {
-        alert("All dispensaries in Okada are currently out of this generic chemical. Use the Upload Rx page for direct dispensary sourcing.");
+        alert("All registered dispensaries in our network are currently out of this generic chemical. Use the Upload Rx page for special prescription sourcing.");
       }
     }
 
@@ -849,6 +888,15 @@
       const total = subtotal + 1000;
       const hasControlled = cart.some(i => i.is_controlled);
 
+      const state = document.getElementById('cartState') ? document.getElementById('cartState').value : 'Edo';
+      const lga = document.getElementById('cartLga') ? document.getElementById('cartLga').value.trim() : '';
+      const street = document.getElementById('cartStreet') ? document.getElementById('cartStreet').value.trim() : '';
+
+      if (!lga || !street) {
+        alert("Please enter your delivery State, LGA, and street address inside the cart.");
+        return;
+      }
+
       let msg = hasControlled ? `*🚨 CONTROLLED DRUG DISPATCH - PHARMATRUST*%0A%0A` : `*NEW MEDICATION ORDER - PHARMATRUST*%0A%0A`;
       
       if (currentUserProfile) {
@@ -856,8 +904,9 @@
         msg += `*Age:* ${currentUserProfile.age} yrs • *Weight:* ${currentUserProfile.weight_kg ? currentUserProfile.weight_kg + 'kg' : 'N/A'} • *Sex:* ${currentUserProfile.gender}%0A`;
         msg += `*Blood Group:* ${currentUserProfile.blood_group || 'N/A'} • *Genotype:* ${currentUserProfile.genotype || 'N/A'}%0A`;
         msg += `*Allergies:* ${encodeURIComponent(currentUserProfile.allergies)}%0A`;
-        msg += `*Delivery Destination:* ${encodeURIComponent(currentUserProfile.delivery_address)}%0A%0A`;
       }
+      
+      msg += `*Delivery Location:* ${encodeURIComponent(street)}, ${encodeURIComponent(lga)}, ${encodeURIComponent(state)} State%0A%0A`;
       
       msg += `*Medications Ordered:*%0A`;
       cart.forEach(i => {
