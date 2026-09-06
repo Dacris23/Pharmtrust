@@ -6,8 +6,6 @@
   <title>PharmaTrust | Digital Pharmacy Network</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
   <meta name="theme-color" content="#0f172a">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
@@ -17,7 +15,7 @@
       theme: {
         extend: {
           colors: {
-            brand: { 50: '#ecfdf5', 500: '#10b981', 600: '#059669', 700: '#047857' },
+            brand: { 500: '#10b981', 600: '#059669', 700: '#047857' },
             charcoal: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
           }
         }
@@ -36,14 +34,14 @@
         </div>
         <div>
           <span class="text-xl font-bold tracking-tight text-white">Pharma<span class="text-emerald-500">Trust</span></span>
-          <span class="block text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Verified NAFDAC Dispensary</span>
+          <span class="block text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Verified NAFDAC Dispensary Network</span>
         </div>
       </div>
 
-      <nav class="flex items-center space-x-4">
-        <a href="#catalog" class="text-sm font-medium text-slate-300 hover:text-emerald-400 transition">Catalog</a>
-        <a href="#prescription" class="text-sm font-medium text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
-        <a href="admin.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pharmacist Portal</a>
+      <nav class="flex items-center space-x-3">
+        <a href="#catalog" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-emerald-400 transition">Catalog</a>
+        <a href="#prescription" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
+        <a href="admin.html" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition border border-slate-700">Pharmacist Portal</a>
         <button onclick="toggleModal('cartModal')" class="relative p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition">
           <i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-400"></i>
           <span id="cartCount" class="absolute -top-1 -right-1 bg-emerald-500 text-charcoal-950 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
@@ -53,24 +51,24 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="bg-gradient-to-r from-charcoal-900 via-charcoal-800 to-emerald-950/40 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
       <div class="max-w-2xl relative z-10">
-        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full mb-4">
+        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full mb-3">
           <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-          <span>Direct Pharmacist-Supervised Network</span>
+          <span>Direct Pharmacist-Supervised Network • Okada</span>
         </div>
-        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
           Genuine Care, <span class="text-emerald-400">Directly Dispensed.</span>
         </h1>
-        <p class="text-slate-400 text-base sm:text-lg mb-6 leading-relaxed">
-          Order genuine medicines from licensed community pharmacies in Okada. Instant verification, transparent pricing, and rapid delivery.
+        <p class="text-slate-400 text-sm sm:text-base mb-6 leading-relaxed">
+          Order authentic medicines from licensed community pharmacies in Okada. Automatic 6-month expiry clearance deals and instant WhatsApp dispatch.
         </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="#catalog" class="inline-flex items-center px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition shadow-lg shadow-emerald-900/30">
+        <div class="flex flex-wrap gap-3">
+          <a href="#catalog" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm transition shadow-lg shadow-emerald-900/30">
             <i data-lucide="search" class="w-4 h-4 mr-2"></i> Browse Medications
           </a>
-          <a href="#prescription" class="inline-flex items-center px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 transition">
+          <a href="#prescription" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700 transition">
             <i data-lucide="file-up" class="w-4 h-4 mr-2"></i> Upload Prescription
           </a>
         </div>
@@ -79,14 +77,14 @@
   </section>
 
   <!-- Filter & Search Bar -->
-  <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+  <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
     <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
       <div class="relative w-full md:w-96">
         <i data-lucide="search" class="absolute left-3 top-3.5 w-5 h-5 text-slate-400"></i>
         <input 
           type="text" 
           id="searchInput" 
-          placeholder="Search by brand, generic, or symptom..." 
+          placeholder="Search brand, generic, or symptom..." 
           class="w-full bg-charcoal-900 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500"
           oninput="filterProducts()"
         >
@@ -95,8 +93,7 @@
         <button onclick="setCategory('All')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition">All</button>
         <button onclick="setCategory('Anti-Infectives & Antibiotics')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Antibiotics</button>
         <button onclick="setCategory('Pain Relief & Fever')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Pain Relief</button>
-        <button onclick="setCategory('Chronic Care & Diabetes')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Chronic Care</button>
-        <button onclick="setCategory('Clearance Deals & OTC')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 transition">Clearance Deals</button>
+        <button onclick="setCategory('Clearance Deals & OTC')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 transition">Flash Deals (-35%)</button>
       </div>
     </div>
   </section>
@@ -104,35 +101,36 @@
   <!-- Product Catalog Grid -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="col-span-full py-16 text-center text-slate-400">Loading catalog from live database...</div>
+      <div class="col-span-full py-16 text-center text-slate-400">Loading catalog from database...</div>
     </div>
   </main>
 
-  <!-- Prescription Upload Section -->
+  <!-- Prescription Upload Module -->
   <section id="prescription" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-10">
       <div class="max-w-xl">
         <h2 class="text-2xl font-bold text-white mb-2">Have a Doctor's Prescription?</h2>
-        <p class="text-slate-400 text-sm mb-6">Upload a photo of your valid prescription. Our licensed pharmacist will verify the dosage, pack the items, and send you a checkout confirmation.</p>
+        <p class="text-slate-400 text-xs sm:text-sm mb-6">Upload a photo of your prescription. Our licensed pharmacist will review the regimen, cross-examine allergies, and issue an itemized quote.</p>
         
         <form id="rxForm" onsubmit="handlePrescriptionSubmit(event)" class="space-y-4">
           <div>
-            <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Your Full Name</label>
-            <input type="text" required id="rxName" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" placeholder="e.g. Basit Adeife">
+            <label class="block text-[11px] font-semibold uppercase text-slate-400 mb-1">Your Full Name</label>
+            <input type="text" required id="rxName" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-500 outline-none" placeholder="e.g. Basit Adeife">
           </div>
           <div>
-            <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Phone Number (WhatsApp)</label>
-            <input type="tel" required id="rxPhone" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" placeholder="+234 812 345 6789">
+            <label class="block text-[11px] font-semibold uppercase text-slate-400 mb-1">WhatsApp Phone Number</label>
+            <input type="tel" required id="rxPhone" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-500 outline-none" placeholder="+234 812 345 6789">
           </div>
           <div>
-            <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Delivery Address / Campus Location</label>
-            <input type="text" required id="rxAddress" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" placeholder="Hostel Block C, IUO Okada">
+            <label class="block text-[11px] font-semibold uppercase text-slate-400 mb-1">Delivery Address / Hostel Location</label>
+            <input type="text" required id="rxAddress" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-500 outline-none" placeholder="Hostel Block C, IUO Okada">
           </div>
           <div>
-            <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Upload Prescription Image</label>
+            <label class="block text-[11px] font-semibold uppercase text-slate-400 mb-1">Upload Prescription Photo</label>
             <div class="border-2 border-dashed border-slate-800 rounded-2xl p-6 text-center hover:border-emerald-500 transition cursor-pointer" onclick="document.getElementById('rxFile').click()">
               <i data-lucide="camera" class="w-8 h-8 text-emerald-500 mx-auto mb-2"></i>
               <p class="text-xs text-slate-300 font-medium">Click to capture photo or select image</p>
+              <p class="text-[10px] text-slate-500 mt-1">PNG, JPG, or PDF up to 5MB</p>
               <input type="file" id="rxFile" accept="image/*" class="hidden" onchange="previewRx(this)">
             </div>
             <div id="rxPreviewBox" class="mt-3 hidden items-center space-x-2 text-xs text-emerald-400">
@@ -140,15 +138,15 @@
               <span id="rxFileName">Image selected</span>
             </div>
           </div>
-          <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition flex items-center justify-center">
-            <i data-lucide="send" class="w-4 h-4 mr-2"></i> Dispatch Prescription to Pharmacist
+          <button type="submit" id="rxSubmitBtn" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs uppercase tracking-wider transition flex items-center justify-center shadow-lg shadow-emerald-900/30">
+            <i data-lucide="send" class="w-4 h-4 mr-2"></i> Dispatch to Pharmacist for Review
           </button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- Drug Modal -->
+  <!-- Drug Details Modal -->
   <div id="drugModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-start mb-4">
@@ -156,35 +154,30 @@
           <h3 id="modalTitle" class="text-2xl font-bold text-white"></h3>
           <p id="modalGeneric" class="text-xs text-emerald-400 font-medium"></p>
         </div>
-        <button onclick="toggleModal('drugModal')" class="text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-6 h-6"></i>
-        </button>
+        <button onclick="toggleModal('drugModal')" class="text-slate-400 hover:text-white">✕</button>
       </div>
 
-      <img id="modalImg" class="w-full h-48 object-cover rounded-xl mb-4 border border-slate-800" src="" alt="">
+      <img id="modalImg" class="w-full h-44 object-cover rounded-xl mb-4 border border-slate-800" src="" alt="">
 
       <div class="space-y-4 text-sm">
         <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800">
-          <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Primary Indications & Uses</span>
-          <p id="modalUses" class="text-slate-200"></p>
+          <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Indications & Uses</span>
+          <p id="modalUses" class="text-slate-200 text-xs"></p>
         </div>
-
         <div class="p-3.5 bg-amber-950/20 border border-amber-500/20 rounded-xl">
           <span class="block text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">Key Warnings</span>
           <p id="modalWarnings" class="text-amber-200/90 text-xs"></p>
         </div>
-
         <div class="p-3.5 bg-rose-950/20 border border-rose-500/20 rounded-xl">
           <span class="block text-xs font-semibold text-rose-400 uppercase tracking-wider mb-1">Contraindications</span>
           <p id="modalContra" class="text-rose-200/90 text-xs"></p>
         </div>
-
         <div class="flex items-center justify-between pt-2 border-t border-slate-800">
           <div>
             <span class="text-xs text-slate-400 block">Unit Price</span>
             <span id="modalPrice" class="text-xl font-bold text-white"></span>
           </div>
-          <button id="modalAddBtn" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl">
+          <button id="modalAddBtn" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl uppercase">
             Add to Order
           </button>
         </div>
@@ -192,14 +185,12 @@
     </div>
   </div>
 
-  <!-- Cart Modal -->
+  <!-- Shopping Cart Modal -->
   <div id="cartModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6">
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-xl font-bold text-white">Your Medication Cart</h3>
-        <button onclick="toggleModal('cartModal')" class="text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
+        <button onclick="toggleModal('cartModal')" class="text-slate-400 hover:text-white">✕</button>
       </div>
 
       <div id="cartItemsContainer" class="divide-y divide-slate-800 max-h-60 overflow-y-auto mb-4"></div>
@@ -219,8 +210,8 @@
         </div>
       </div>
 
-      <button onclick="checkoutOrder()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl flex items-center justify-center">
-        <i data-lucide="message-circle" class="w-4 h-4 mr-2"></i> Submit & Send via WhatsApp
+      <button onclick="checkoutOrder()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl flex items-center justify-center text-xs uppercase tracking-wider">
+        <i data-lucide="message-circle" class="w-4 h-4 mr-2"></i> Submit & Dispatch via WhatsApp
       </button>
     </div>
   </div>
@@ -240,29 +231,21 @@
         const { data, error } = await supabaseClient
           .from('medications')
           .select('*')
-          .eq('in_stock', true);
+          .neq('target_market', 'b2b_wholesale')
+          .order('in_stock', { ascending: false });
 
         if (error) throw error;
-
         products = data || [];
         renderProducts(products);
       } catch (err) {
-        console.error('Database fetch error:', err);
-        if (grid) {
-          grid.innerHTML = `
-            <div class="col-span-full py-16 text-center text-rose-400">
-              <p class="text-sm font-semibold">Failed to load catalog</p>
-              <p class="text-xs text-slate-500 mt-1">${err.message || 'Please refresh the page.'}</p>
-            </div>
-          `;
-        }
+        if (grid) grid.innerHTML = `<div class="col-span-full py-12 text-center text-rose-400 text-xs">Error loading catalog: ${err.message}</div>`;
       }
     }
 
     function renderProducts(items) {
       const grid = document.getElementById('productGrid');
       if (items.length === 0) {
-        grid.innerHTML = '<div class="col-span-full py-16 text-center text-slate-500 text-sm">No medications currently available.</div>';
+        grid.innerHTML = '<div class="col-span-full py-16 text-center text-slate-500 text-sm">No matching medications found.</div>';
         return;
       }
 
@@ -272,7 +255,7 @@
             <img src="${p.img}" alt="${p.brand}" loading="lazy" class="w-full h-full object-cover">
             ${p.is_clearance ? `
               <span class="absolute top-3 left-3 bg-amber-500 text-charcoal-950 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-                Clearance Deal
+                ⚡ Flash Sale (-35%)
               </span>` : ''}
             ${p.rx_required ? `
               <span class="absolute top-3 right-3 bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
@@ -289,7 +272,7 @@
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5"></span>
                 ${p.pharmacy}
               </div>
-              <h3 class="text-lg font-bold text-white leading-tight">${p.brand}</h3>
+              <h3 class="text-base font-bold text-white leading-tight">${p.brand}</h3>
               <p class="text-xs text-slate-400 italic mb-2">${p.generic}</p>
               <div class="text-[11px] text-slate-500 mb-3">${p.dosage} • ${p.pack}</div>
             </div>
@@ -300,14 +283,23 @@
                 ${p.original_price ? `<span class="text-xs text-slate-500 line-through">₦${Number(p.original_price).toLocaleString()}</span>` : ''}
               </div>
 
-              <div class="grid grid-cols-2 gap-2">
-                <button onclick="openDrugModal('${p.id}')" class="py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
-                  Safety Info
-                </button>
-                <button onclick="addToCart('${p.id}')" class="py-2 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition">
-                  Order
-                </button>
-              </div>
+              ${p.in_stock ? `
+                <div class="grid grid-cols-2 gap-2">
+                  <button onclick="openDrugModal('${p.id}')" class="py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+                    Safety Info
+                  </button>
+                  <button onclick="addToCart('${p.id}')" class="py-2 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition">
+                    Order
+                  </button>
+                </div>
+              ` : `
+                <div class="p-2.5 bg-rose-950/20 border border-rose-500/20 rounded-xl text-center">
+                  <span class="text-[11px] text-rose-300 font-semibold block mb-1">Out of Stock at ${p.pharmacy}</span>
+                  <button onclick="routeToNearestPharmacy('${p.generic}')" class="text-[10px] text-emerald-400 underline font-semibold">
+                    Find nearest dispensary in Okada ↗
+                  </button>
+                </div>
+              `}
             </div>
           </div>
         </div>
@@ -315,14 +307,21 @@
       lucide.createIcons();
     }
 
+    function routeToNearestPharmacy(generic) {
+      const match = products.find(p => p.generic.toLowerCase().includes(generic.toLowerCase()) && p.in_stock);
+      if (match) {
+        alert(`Stock located! Available at ${match.pharmacy} for ₦${match.price.toLocaleString()}.`);
+        openDrugModal(match.id);
+      } else {
+        alert("All dispensaries in Okada are currently out of this generic formula. Please upload your prescription photo for direct allocation.");
+      }
+    }
+
     function filterProducts() {
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
       const filtered = products.filter(p => {
-        const matchesCategory = currentCategory === "All" || p.category === currentCategory;
-        const matchesSearch = !q || 
-                              p.brand.toLowerCase().includes(q) || 
-                              p.generic.toLowerCase().includes(q) || 
-                              p.uses.toLowerCase().includes(q);
+        const matchesCategory = currentCategory === "All" || p.category === currentCategory || (currentCategory.includes('Clearance') && p.is_clearance);
+        const matchesSearch = !q || p.brand.toLowerCase().includes(q) || p.generic.toLowerCase().includes(q) || p.uses.toLowerCase().includes(q);
         return matchesCategory && matchesSearch;
       });
       renderProducts(filtered);
@@ -340,10 +339,10 @@
       filterProducts();
     }
 
-    function toggleModal(modalId) {
-      const el = document.getElementById(modalId);
-      el.classList.toggle('hidden');
-      el.classList.toggle('flex');
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
     }
 
     function openDrugModal(id) {
@@ -367,18 +366,14 @@
       const p = products.find(x => x.id === id);
       if (!p) return;
       const existing = cart.find(x => x.id === id);
-      if (existing) {
-        existing.qty++;
-      } else {
-        cart.push({...p, qty: 1});
-      }
+      if (existing) existing.qty++;
+      else cart.push({ ...p, qty: 1 });
       updateCartUI();
     }
 
     function updateCartUI() {
-      const countEl = document.getElementById('cartCount');
       const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-      countEl.innerText = totalQty;
+      document.getElementById('cartCount').innerText = totalQty;
 
       const container = document.getElementById('cartItemsContainer');
       if (cart.length === 0) {
@@ -413,7 +408,7 @@
       });
       msg += `%0A*Delivery Fee (Okada Town):* NGN 1,000%0A`;
       msg += `*Total Amount:* NGN ${total.toLocaleString()}%0A%0A`;
-      msg += `Please send payment account details and dispatch confirmation.`;
+      msg += `Please send payment account details and delivery confirmation.`;
 
       const targetPhone = cart[0].pharmacy_phone || '2348065092665';
       window.open(`https://wa.me/${targetPhone}?text=${msg}`, '_blank');
@@ -427,19 +422,60 @@
       }
     }
 
-    function handlePrescriptionSubmit(e) {
+    async function handlePrescriptionSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('rxName').value;
-      const phone = document.getElementById('rxPhone').value;
-      const addr = document.getElementById('rxAddress').value;
-      
-      let msg = `*PRESCRIPTION DISPATCH - PHARMATRUST*%0A%0A`;
-      msg += `*Patient Name:* ${name}%0A`;
-      msg += `*Contact Phone:* ${phone}%0A`;
-      msg += `*Delivery Address:* ${addr}%0A%0A`;
-      msg += `I am attaching my prescription photograph below for dispensing verification:`;
+      const btn = document.getElementById('rxSubmitBtn');
+      const originalHTML = btn.innerHTML;
+      const fileInput = document.getElementById('rxFile');
+      const file = fileInput.files[0];
 
-      window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
+      if (!file) return alert("Please select a prescription photo.");
+
+      try {
+        btn.disabled = true;
+        btn.innerHTML = `<span class="animate-spin mr-2">⏳</span> Uploading Securely to Storage...`;
+
+        const fileExt = file.name.split('.').pop();
+        const filePath = `rx_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+
+        const { error: uploadError } = await supabaseClient.storage
+          .from('prescriptions')
+          .upload(filePath, file);
+
+        if (uploadError) throw uploadError;
+
+        const { data: { publicUrl } } = supabaseClient.storage
+          .from('prescriptions')
+          .getPublicUrl(filePath);
+
+        const name = document.getElementById('rxName').value.trim();
+        const phone = document.getElementById('rxPhone').value.trim();
+        const addr = document.getElementById('rxAddress').value.trim();
+
+        await supabaseClient.from('prescriptions').insert([{
+          patient_name: name,
+          phone: phone,
+          delivery_address: addr,
+          image_url: publicUrl,
+          status: 'pending_review'
+        }]);
+
+        let msg = `*PRESCRIPTION DISPATCH - PHARMATRUST*%0A%0A`;
+        msg += `*Patient Name:* ${encodeURIComponent(name)}%0A`;
+        msg += `*Contact Phone:* ${encodeURIComponent(phone)}%0A`;
+        msg += `*Delivery Address:* ${encodeURIComponent(addr)}%0A%0A`;
+        msg += `*Secure Prescription Link:*%0A${encodeURIComponent(publicUrl)}%0A%0A`;
+        msg += `Please review dosage details and issue an official itemized bill.`;
+
+        window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
+        e.target.reset();
+        document.getElementById('rxPreviewBox').classList.add('hidden');
+      } catch (err) {
+        alert("Upload error: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+      }
     }
 
     loadMedicationsFromDB();
