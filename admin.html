@@ -34,7 +34,7 @@
           <span class="text-base sm:text-lg font-extrabold tracking-tight text-white leading-none">Pharma<span class="text-emerald-400">Trust</span></span>
           <span class="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.2 rounded font-semibold uppercase">Portal</span>
         </div>
-        <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">Clinical Dispensary Node</span>
+        <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">Pharmacist & Supplier Hub</span>
       </div>
     </a>
 
@@ -56,13 +56,13 @@
         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2 uppercase">
           Licensed Healthcare Portal
         </span>
-        <h2 class="text-xl font-bold text-white">Dispensary Sign In</h2>
+        <h2 class="text-xl font-bold text-white">Dispensary & Supplier Login</h2>
         <p class="text-xs text-slate-400 mt-1">Audit patient vitals & allergies, issue prescription quotes, and manage counter inventory batches.</p>
       </div>
 
       <form onsubmit="handleLogin(event)" class="space-y-4">
         <div>
-          <label class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Registered Pharmacist Email</label>
+          <label class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Registered Professional Email</label>
           <input type="email" id="loginEmail" required placeholder="pharmacist@pharmatrust.ng" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-emerald-500 transition">
         </div>
         <div>
@@ -76,7 +76,7 @@
       </form>
 
       <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
-        <span>New Pharmacy / Wholesale Depo?</span>
+        <span>New Pharmacy / Wholesale Depot?</span>
         <button type="button" onclick="openVendorModal()" class="text-emerald-400 font-semibold hover:underline">
           Submit PCN Credentials ↗
         </button>
@@ -98,7 +98,7 @@
         </div>
         <div class="text-[11px] text-slate-400 px-2 flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Node: <span class="text-emerald-400 font-semibold" id="nodePharmacyName">MedPlus Pharmacy Okada</span>
+          Node: <span class="text-emerald-400 font-semibold" id="nodePharmacyName">MedPlus Pharmacy</span>
         </div>
       </div>
 
@@ -129,7 +129,7 @@
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-base font-bold text-white">Incoming Prescriptions (Clinical Review)</h3>
-              <p class="text-xs text-slate-400">Inspect patient prescription slips, allergy alerts, and dispatch official itemized WhatsApp bills.</p>
+              <p class="text-xs text-slate-400">Inspect patient prescription slips, allergy alerts, State/LGA location, and dispatch WhatsApp bills.</p>
             </div>
             <button onclick="loadPrescriptions()" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-400 transition">
               Refresh
@@ -141,7 +141,7 @@
               <thead>
                 <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider">
                   <th class="py-3 px-4">Patient & Vitals</th>
-                  <th class="py-3 px-4">Delivery Address</th>
+                  <th class="py-3 px-4">Delivery Location</th>
                   <th class="py-3 px-4">Prescription Photo</th>
                   <th class="py-3 px-4">Status</th>
                   <th class="py-3 px-4 text-right">Action</th>
@@ -294,7 +294,7 @@
             </span>
             <h2 class="text-xl sm:text-2xl font-bold text-white">Manufacturer & Wholesale Bulk Procurement</h2>
             <p class="text-slate-400 text-xs mt-1 leading-relaxed">
-              Order outer shippers and cartons directly from verified manufacturer depots with tamper-evident batch documentation.
+              Order outer shippers and cartons directly from verified manufacturer depots nationwide with tamper-evident batch documentation.
             </p>
           </div>
         </div>
@@ -310,7 +310,7 @@
               <p class="text-xs text-slate-400 italic mb-3">Carton of 50 Packs (1000s Blisters)</p>
               <div class="p-3 bg-charcoal-950 rounded-2xl mb-4 space-y-1 text-xs">
                 <div><span class="text-slate-500">Distributor Depot:</span> <span class="text-amber-400">Emzor Pharmaceuticals Ltd</span></div>
-                <div><span class="text-slate-500">Lead Time to Okada:</span> <span class="text-white">24 - 48 Hours</span></div>
+                <div><span class="text-slate-500">Dispatch Location:</span> <span class="text-white">Lagos Central Hub / Nationwide Waybill</span></div>
               </div>
             </div>
             <div>
@@ -331,7 +331,7 @@
               <p class="text-xs text-slate-400 italic mb-3">Master Carton of 20 Tins (500 Caps/Tin)</p>
               <div class="p-3 bg-charcoal-950 rounded-2xl mb-4 space-y-1 text-xs">
                 <div><span class="text-slate-500">Distributor Depot:</span> <span class="text-amber-400">Fidson Healthcare Plc</span></div>
-                <div><span class="text-slate-500">Lead Time to Okada:</span> <span class="text-white">48 Hours</span></div>
+                <div><span class="text-slate-500">Dispatch Location:</span> <span class="text-white">Ogun State Depot / Nationwide Logistics</span></div>
               </div>
             </div>
             <div>
@@ -403,21 +403,21 @@
     </div>
   </div>
 
-  <!-- VENDOR ONBOARDING MODAL -->
+  <!-- VENDOR ONBOARDING MODAL (NATIONWIDE STATE + LGA) -->
   <div id="vendorModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl">
       <div class="flex justify-between items-start mb-3 pb-2.5 border-b border-slate-800">
         <div>
           <h3 class="text-sm font-bold text-white">Vendor & Dispensary Onboarding</h3>
-          <p class="text-[11px] text-slate-400">Submit regulatory credentials to join the PharmaTrust network.</p>
+          <p class="text-[11px] text-slate-400">Submit premises credentials to join the nationwide PharmaTrust network.</p>
         </div>
         <button onclick="closeVendorModal()" class="text-slate-400 hover:text-white text-base">✕</button>
       </div>
 
       <form onsubmit="handleVendorSubmit(event)" class="space-y-3 text-xs">
         <div>
-          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Entity / Business Name</label>
-          <input type="text" id="vEntity" required placeholder="e.g. MedPlus Okada or Fidson Depot" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Entity / Premises Name</label>
+          <input type="text" id="vEntity" required placeholder="e.g. MedPlus Pharmacy or Fidson Central Depot" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
         </div>
         <div>
           <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Seller Category</label>
@@ -437,14 +437,40 @@
             <input type="tel" id="vPhone" required placeholder="+234 806..." class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
           </div>
         </div>
+
         <div>
           <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Superintendent Pharmacist</label>
           <input type="text" id="vPharmName" required placeholder="Pharm. John Doe, MPSN" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
         </div>
-        <div>
-          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Premises Address (Okada or Edo State)</label>
-          <input type="text" id="vAddress" required placeholder="Main Road, Okada Town, Edo State" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+
+        <!-- Geographic Location (Nationwide) -->
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">State (Nigeria)</label>
+            <select id="vState" required class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+              <option value="Edo">Edo State</option>
+              <option value="Lagos">Lagos State</option>
+              <option value="Abuja">FCT Abuja</option>
+              <option value="Oyo">Oyo State</option>
+              <option value="Rivers">Rivers State</option>
+              <option value="Delta">Delta State</option>
+              <option value="Kano">Kano State</option>
+              <option value="Enugu">Enugu State</option>
+              <option value="Ogun">Ogun State</option>
+              <option value="Other">Other State</option>
+            </select>
+          </div>
+          <div>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Local Govt Area (LGA)</label>
+            <input type="text" id="vLga" required placeholder="e.g. Ovia North-East, Ikeja" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+          </div>
         </div>
+
+        <div>
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Physical Street / Facility Address</label>
+          <input type="text" id="vAddress" required placeholder="Street address, building name, landmark" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+        </div>
+
         <button type="submit" id="vSubmitBtn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-900/30">
           Submit Credentials for Verification
         </button>
@@ -481,18 +507,20 @@
       const pcn = document.getElementById('vPcn').value.trim();
       const phone = document.getElementById('vPhone').value.trim();
       const pharm = document.getElementById('vPharmName').value.trim();
+      const state = document.getElementById('vState').value;
+      const lga = document.getElementById('vLga').value.trim();
       const addr = document.getElementById('vAddress').value.trim();
 
-      let msg = `*NEW VENDOR CREDENTIAL SUBMISSION - PHARMATRUST*%0A%0A`;
-      msg += `*Business/Premises:* ${encodeURIComponent(entity)}%0A`;
+      let msg = `*NEW NATIONWIDE VENDOR ONBOARDING - PHARMATRUST*%0A%0A`;
+      msg += `*Premises/Entity:* ${encodeURIComponent(entity)}%0A`;
       msg += `*Role:* ${encodeURIComponent(role)}%0A`;
       msg += `*PCN License No:* ${encodeURIComponent(pcn)}%0A`;
       msg += `*Superintendent Pharmacist:* ${encodeURIComponent(pharm)}%0A`;
-      msg += `*Premises Address:* ${encodeURIComponent(addr)}%0A`;
-      msg += `*Contact Phone:* ${encodeURIComponent(phone)}%0A%0A`;
+      msg += `*State:* ${encodeURIComponent(state)} | *LGA:* ${encodeURIComponent(lga)}%0A`;
+      msg += `*Address:* ${encodeURIComponent(addr)}%0A`;
+      msg += `*WhatsApp Contact:* ${encodeURIComponent(phone)}%0A%0A`;
       msg += `Please verify this regulatory registration and issue an administrative login PIN.`;
 
-      // Dual Line Support Dispatch
       window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
       closeVendorModal();
       e.target.reset();
@@ -526,10 +554,10 @@
         document.getElementById('portalSection').classList.remove('hidden');
         document.getElementById('logoutBtn').classList.remove('hidden');
         
-        const { data: pharm } = await supabaseClient.from('pharmacies').select('pharmacy_id, pharmacy_name').limit(1).single();
+        const { data: pharm } = await supabaseClient.from('pharmacies').select('pharmacy_id, pharmacy_name, state, lga').limit(1).single();
         if (pharm) {
           activePharmacyId = pharm.pharmacy_id;
-          document.getElementById('nodePharmacyName').innerText = pharm.pharmacy_name;
+          document.getElementById('nodePharmacyName').innerText = `${pharm.pharmacy_name} (${pharm.lga}, ${pharm.state})`;
         }
         
         loadInventory();
@@ -594,7 +622,10 @@
               Allergies: ${rx.patient_allergies || 'None'}
             </div>
           </td>
-          <td class="py-3 px-4 text-slate-300 text-xs">${rx.delivery_address}</td>
+          <td class="py-3 px-4 text-slate-300 text-xs">
+            <span class="font-bold text-white">${rx.lga || 'Local Area'}, ${rx.state || 'Edo'}</span><br>
+            <span class="text-[11px] text-slate-400">${rx.street_address || rx.delivery_address}</span>
+          </td>
           <td class="py-3 px-4">
             <a href="${rx.image_url}" target="_blank" class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 text-[11px] inline-flex items-center gap-1">
               Inspect Rx ↗
@@ -618,8 +649,8 @@
       document.getElementById('quoteRxId').value = rx.id;
       document.getElementById('quotePatientName').value = rx.patient_name;
       document.getElementById('quotePatientPhone').value = rx.phone;
-      document.getElementById('quoteDeliveryAddr').value = rx.delivery_address;
-      document.getElementById('quotePatientInfo').innerText = `Patient: ${rx.patient_name} • ${rx.phone}`;
+      document.getElementById('quoteDeliveryAddr').value = `${rx.street_address || rx.delivery_address}, ${rx.lga}, ${rx.state}`;
+      document.getElementById('quotePatientInfo').innerText = `Patient: ${rx.patient_name} • ${rx.lga}, ${rx.state}`;
       document.getElementById('quoteImgPreview').src = rx.image_url;
       document.getElementById('quoteImgLink').href = rx.image_url;
       document.getElementById('quoteItemized').value = rx.itemized_bill || '';
@@ -806,9 +837,8 @@
       msg += `• *Medication Formulation:* ${encodeURIComponent(brand)}%0A`;
       msg += `• *Quantity:* ${encodeURIComponent(qty)} Master Shippers%0A`;
       msg += `• *Estimated Value:* NGN ${total.toLocaleString()}%0A%0A`;
-      msg += `Please confirm batch release and waybill dispatch schedule to Okada Dispensary Node.`;
+      msg += `Please confirm batch release and waybill dispatch schedule.`;
 
-      // Dispatch to support line 2 (+234 816 948 9126)
       window.open(`https://wa.me/2348169489126?text=${msg}`, '_blank');
     }
 
