@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PharmaTrust | Enterprise Portal & B2B Restock</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
+  <link rel="icon" href="logo.jpg">
+  <meta name="theme-color" content="#0f172a">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
   <script>
@@ -23,12 +24,9 @@
 </head>
 <body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500/30">
 
-  <!-- Top Global Header -->
   <header class="border-b border-slate-800/80 bg-charcoal-900/60 backdrop-blur sticky top-0 z-30 px-4 sm:px-8 py-3.5 flex items-center justify-between">
     <div class="flex items-center space-x-3">
-      <div class="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center font-bold text-white shadow-md shadow-emerald-900/30">
-        P+
-      </div>
+      <img src="logo.jpg" alt="Logo" class="h-9 w-9 object-contain rounded-xl border border-slate-700">
       <div>
         <h1 class="text-base font-bold text-white tracking-tight flex items-center gap-2">
           PharmaTrust <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">Enterprise</span>
@@ -48,14 +46,13 @@
 
   <main class="max-w-6xl mx-auto p-4 sm:p-8">
 
-    <!-- Auth Login Card -->
     <div id="loginSection" class="max-w-md mx-auto my-12 bg-charcoal-900/80 border border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur">
       <div class="mb-6">
         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2">
           Licensed Pharmacist Gateway
         </span>
-        <h2 class="text-xl font-bold text-white">Dispensary Portal Sign In</h2>
-        <p class="text-xs text-slate-400 mt-1">Review prescriptions, audit controlled drugs, manage expiry alarms, and order wholesale restock.</p>
+        <h2 class="text-xl font-bold text-white">Dispensary Sign In</h2>
+        <p class="text-xs text-slate-400 mt-1">Audit patient vitals and allergies, process doctor prescriptions, and manage inventory batches.</p>
       </div>
 
       <form onsubmit="handleLogin(event)" class="space-y-4">
@@ -74,10 +71,8 @@
       </form>
     </div>
 
-    <!-- Active Management Dashboard -->
     <div id="portalSection" class="hidden space-y-8">
       
-      <!-- Top Switcher -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-charcoal-900 border border-slate-800 p-2 rounded-2xl">
         <div class="flex w-full sm:w-auto gap-1">
           <button id="navDispensaryBtn" onclick="switchView('dispensary')" class="flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-bold transition bg-emerald-600 text-white shadow">
@@ -92,10 +87,8 @@
         </div>
       </div>
 
-      <!-- DISPENSARY OPERATIONS VIEW -->
       <div id="dispensaryView" class="space-y-8">
         
-        <!-- Metrics Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="bg-charcoal-900 border border-slate-800 p-5 rounded-2xl">
             <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Active Inventory</span>
@@ -105,7 +98,7 @@
           <div class="bg-charcoal-900 border border-slate-800 p-5 rounded-2xl">
             <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Rx Review Queue</span>
             <div id="metricRxPending" class="text-2xl font-bold text-amber-400 mt-1">0 Pending</div>
-            <span class="text-[11px] text-slate-400 mt-1 inline-block">Awaiting pharmacist quote</span>
+            <span class="text-[11px] text-slate-400 mt-1 inline-block">Doctor Prescriptions</span>
           </div>
           <div class="bg-charcoal-900 border border-slate-800 p-5 rounded-2xl">
             <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Expiry Alarms (6 Months)</span>
@@ -114,12 +107,11 @@
           </div>
         </div>
 
-        <!-- PRESCRIPTION REVIEW QUEUE -->
         <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-8 overflow-hidden">
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-base font-bold text-white">Incoming Prescriptions (Clinical Review)</h3>
-              <p class="text-xs text-slate-400">Inspect patient prescription uploads and issue formal bills.</p>
+              <p class="text-xs text-slate-400">Inspect patient prescription uploads, vitals, allergies, and issue formal bills.</p>
             </div>
             <button onclick="loadPrescriptions()" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-400 transition">
               Refresh Queue
@@ -130,8 +122,8 @@
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider">
-                  <th class="py-3 px-4">Patient</th>
-                  <th class="py-3 px-4">Location</th>
+                  <th class="py-3 px-4">Patient & Vitals</th>
+                  <th class="py-3 px-4">Destination</th>
                   <th class="py-3 px-4">Prescription Photo</th>
                   <th class="py-3 px-4">Status</th>
                   <th class="py-3 px-4 text-right">Actions</th>
@@ -144,7 +136,6 @@
           </div>
         </div>
 
-        <!-- ADD PRODUCT & INVENTORY ITEM -->
         <div class="bg-charcoal-900 border border-slate-800 p-6 sm:p-8 rounded-3xl">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
             <div>
@@ -251,7 +242,6 @@
           </form>
         </div>
 
-        <!-- RELATIONAL INVENTORY TABLE -->
         <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-8 overflow-hidden">
           <h3 class="text-base font-bold text-white mb-4">Current Registered Dispensary Inventory</h3>
           <div class="overflow-x-auto -mx-6 sm:mx-0">
@@ -273,7 +263,6 @@
 
       </div>
 
-      <!-- B2B WHOLESALE VIEW -->
       <div id="wholesaleView" class="hidden space-y-8">
         <div class="bg-gradient-to-r from-amber-950/40 via-charcoal-900 to-charcoal-900 border border-amber-500/20 rounded-3xl p-6 sm:p-8">
           <div class="max-w-2xl">
@@ -336,7 +325,6 @@
 
   </main>
 
-  <!-- QUOTE MODAL (Prescriptions) -->
   <div id="quoteModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-start mb-4 pb-3 border-b border-slate-800">
@@ -425,7 +413,6 @@
         document.getElementById('portalSection').classList.remove('hidden');
         document.getElementById('logoutBtn').classList.remove('hidden');
         
-        // Fetch Pharmacy ID
         const { data: pharm } = await supabaseClient.from('pharmacies').select('pharmacy_id, pharmacy_name').limit(1).single();
         if (pharm) {
           activePharmacyId = pharm.pharmacy_id;
@@ -462,7 +449,6 @@
       checkSession();
     }
 
-    // Prescriptions Review Queue
     async function loadPrescriptions() {
       const tbody = document.getElementById('prescriptionList');
       const { data, error } = await supabaseClient
@@ -486,6 +472,14 @@
           <td class="py-3 px-4 font-semibold text-white">
             ${rx.patient_name}<br>
             <a href="https://wa.me/${rx.phone.replace(/[^0-9]/g, '')}" target="_blank" class="text-[10px] text-emerald-400 hover:underline">${rx.phone} ↗</a>
+            <div class="mt-1 text-[10px] text-slate-400">
+              <span class="text-amber-400 font-bold">Age:</span> ${rx.patient_age || 'N/A'} yrs • 
+              <span class="text-amber-400 font-bold">Wt:</span> ${rx.patient_weight_kg ? rx.patient_weight_kg + 'kg' : 'N/A'} • 
+              <span class="text-amber-400 font-bold">Sex:</span> ${rx.patient_gender || 'N/A'}
+            </div>
+            <div class="mt-0.5 text-[10px] ${rx.patient_allergies && rx.patient_allergies !== 'None' ? 'text-rose-400 font-bold' : 'text-slate-500'}">
+              Allergies: ${rx.patient_allergies || 'None'}
+            </div>
           </td>
           <td class="py-3 px-4 text-slate-300 text-xs">${rx.delivery_address}</td>
           <td class="py-3 px-4">
@@ -563,7 +557,7 @@
       const rxId = document.getElementById('quoteRxId').value;
       const patientPhone = document.getElementById('quotePatientPhone').value.replace(/[^0-9]/g, '');
       const patientName = document.getElementById('quotePatientName').value;
-      const reason = prompt("Enter reason for rejection:", "Illegible dosage details or missing clinical signature");
+      const reason = prompt("Enter reason for rejection:", "Illegible dosage details or missing prescriber signature");
       if (!reason) return;
 
       await supabaseClient.from('prescriptions').update({ status: 'rejected_unclear', clinical_notes: reason }).eq('id', rxId);
@@ -571,14 +565,13 @@
       let msg = `*PHARMATRUST CLINICAL NOTICE - PRESCRIPTION RECHECK*%0A%0A`;
       msg += `Hello *${encodeURIComponent(patientName)}*, our pharmacist reviewed your prescription, but cannot safely dispense it due to:%0A`;
       msg += `*Issue:* ${encodeURIComponent(reason)}%0A%0A`;
-      msg += `Please send a clearer, well-lit photo or consult your physician.`;
+      msg += `Please send a clearer photo or consult your physician.`;
 
       window.open(`https://wa.me/${patientPhone}?text=${msg}`, '_blank');
       closeQuoteModal();
       loadPrescriptions();
     }
 
-    // Inventory & Batch Management (Relational)
     async function loadInventory() {
       const { data, error } = await supabaseClient
         .from('inventory')
@@ -640,11 +633,10 @@
 
     async function triggerExpiryScan() {
       await supabaseClient.rpc('scan_expiry_and_apply_clearance');
-      alert("Expiry Engine scanned. All stock expiring within 180 days has been liquidated at 35% discount.");
+      alert("Expiry Engine executed. All stock expiring within 180 days has been liquidated at 35% clearance price.");
       loadInventory();
     }
 
-    // Add Product & Inventory Form
     async function handleAddProductAndStock(e) {
       e.preventDefault();
       
@@ -655,7 +647,6 @@
 
       const productId = document.getElementById('pId').value.trim();
 
-      // 1. Insert/Upsert into Master Products
       const productPayload = {
         product_id: productId,
         brand_name: document.getElementById('pBrand').value.trim(),
@@ -677,7 +668,6 @@
       const { error: prodError } = await supabaseClient.from('products').upsert(productPayload);
       if (prodError) return alert("Product Registry Error: " + prodError.message);
 
-      // 2. Insert into Store Inventory
       const inventoryPayload = {
         pharmacy_id: activePharmacyId,
         product_id: productId,
@@ -705,7 +695,8 @@
       msg += `• *Estimated Value:* NGN ${total.toLocaleString()}%0A%0A`;
       msg += `Please confirm batch release and waybill dispatch schedule to Okada Dispensary Node.`;
 
-      window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
+      // Dispatches to second procurement line (+234 816 948 9126)
+      window.open(`https://wa.me/2348169489126?text=${msg}`, '_blank');
     }
 
     document.addEventListener('DOMContentLoaded', checkSession);
