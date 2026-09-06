@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PharmaTrust | Digital Pharmacy Network</title>
+  <title>PharmaTrust | Verified Digital Pharmacy Network</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
   <meta name="theme-color" content="#0f172a">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,9 +23,9 @@
     }
   </script>
 </head>
-<body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased pb-20">
+<body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased pb-20 selection:bg-emerald-500/30">
 
-  <!-- Navbar -->
+  <!-- Global Header -->
   <header class="sticky top-0 z-40 bg-charcoal-900/90 backdrop-blur border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
@@ -34,14 +34,20 @@
         </div>
         <div>
           <span class="text-xl font-bold tracking-tight text-white">Pharma<span class="text-emerald-500">Trust</span></span>
-          <span class="block text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Verified NAFDAC Dispensary Network</span>
+          <span class="block text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Clinical Pharmacy Network • Okada</span>
         </div>
       </div>
 
       <nav class="flex items-center space-x-3">
         <a href="#catalog" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-emerald-400 transition">Catalog</a>
         <a href="#prescription" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
-        <a href="admin.html" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition border border-slate-700">Pharmacist Portal</a>
+        <div id="userBadge" class="hidden items-center gap-1.5 bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-700 text-xs text-slate-300">
+          <i data-lucide="user-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span id="userDisplayName" class="font-medium">Patient</span>
+        </div>
+        <button id="authTriggerBtn" onclick="openAuthModal()" class="text-xs px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition shadow-md shadow-emerald-900/20">
+          Sign In / Register
+        </button>
         <button onclick="toggleModal('cartModal')" class="relative p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition">
           <i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-400"></i>
           <span id="cartCount" class="absolute -top-1 -right-1 bg-emerald-500 text-charcoal-950 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
@@ -56,27 +62,27 @@
       <div class="max-w-2xl relative z-10">
         <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full mb-3">
           <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-          <span>Direct Pharmacist-Supervised Network • Okada</span>
+          <span>Direct Licensed Pharmacist Supervision • Zero Counterfeit</span>
         </div>
         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
-          Genuine Care, <span class="text-emerald-400">Directly Dispensed.</span>
+          Genuine Medicines, <span class="text-emerald-400">Directly Dispensed.</span>
         </h1>
         <p class="text-slate-400 text-sm sm:text-base mb-6 leading-relaxed">
-          Order authentic medicines from licensed community pharmacies in Okada. Automatic 6-month expiry clearance deals and instant WhatsApp dispatch.
+          Order authentic prescription and OTC drugs with verified dosage strengths. Automated 6-month expiry discount clearance, controlled substance safeguarding, and instant WhatsApp clinical review.
         </p>
         <div class="flex flex-wrap gap-3">
           <a href="#catalog" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm transition shadow-lg shadow-emerald-900/30">
-            <i data-lucide="search" class="w-4 h-4 mr-2"></i> Browse Medications
+            <i data-lucide="search" class="w-4 h-4 mr-2"></i> Browse Verified Catalog
           </a>
           <a href="#prescription" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700 transition">
-            <i data-lucide="file-up" class="w-4 h-4 mr-2"></i> Upload Prescription
+            <i data-lucide="file-up" class="w-4 h-4 mr-2"></i> Upload Doctor Rx
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Filter & Search Bar -->
+  <!-- Catalog Filter Bar -->
   <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
     <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
       <div class="relative w-full md:w-96">
@@ -84,7 +90,7 @@
         <input 
           type="text" 
           id="searchInput" 
-          placeholder="Search brand, generic, or symptom..." 
+          placeholder="Search by brand, generic, strength, or use..." 
           class="w-full bg-charcoal-900 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500"
           oninput="filterProducts()"
         >
@@ -93,28 +99,29 @@
         <button onclick="setCategory('All')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition">All</button>
         <button onclick="setCategory('Anti-Infectives & Antibiotics')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Antibiotics</button>
         <button onclick="setCategory('Pain Relief & Fever')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Pain Relief</button>
-        <button onclick="setCategory('Clearance Deals & OTC')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 transition">Flash Deals (-35%)</button>
+        <button onclick="setCategory('Chronic Care')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Chronic Care</button>
+        <button onclick="setCategory('Clearance')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 transition">Flash Deals (-35%)</button>
       </div>
     </div>
   </section>
 
-  <!-- Product Catalog Grid -->
+  <!-- Live Catalog Grid -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="col-span-full py-16 text-center text-slate-400">Loading catalog from database...</div>
+      <div class="col-span-full py-16 text-center text-slate-400">Loading verified dispensary stock...</div>
     </div>
   </main>
 
-  <!-- Prescription Upload Module -->
+  <!-- Prescription Upload Section -->
   <section id="prescription" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-10">
       <div class="max-w-xl">
         <h2 class="text-2xl font-bold text-white mb-2">Have a Doctor's Prescription?</h2>
-        <p class="text-slate-400 text-xs sm:text-sm mb-6">Upload a photo of your prescription. Our licensed pharmacist will review the regimen, cross-examine allergies, and issue an itemized quote.</p>
+        <p class="text-slate-400 text-xs sm:text-sm mb-6">Upload an image of your prescription slip. A registered pharmacist verifies the dosage regimen, checks for allergy contraindications, and prepares your medications.</p>
         
         <form id="rxForm" onsubmit="handlePrescriptionSubmit(event)" class="space-y-4">
           <div>
-            <label class="block text-[11px] font-semibold uppercase text-slate-400 mb-1">Your Full Name</label>
+            <label class="block text-[11px] font-semibold uppercase text-slate-400 mb-1">Patient Full Name</label>
             <input type="text" required id="rxName" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-500 outline-none" placeholder="e.g. Basit Adeife">
           </div>
           <div>
@@ -123,13 +130,13 @@
           </div>
           <div>
             <label class="block text-[11px] font-semibold uppercase text-slate-400 mb-1">Delivery Address / Hostel Location</label>
-            <input type="text" required id="rxAddress" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-500 outline-none" placeholder="Hostel Block C, IUO Okada">
+            <input type="text" required id="rxAddress" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-500 outline-none" placeholder="e.g. Block C, Crystal Hostel, IUO Okada">
           </div>
           <div>
             <label class="block text-[11px] font-semibold uppercase text-slate-400 mb-1">Upload Prescription Photo</label>
             <div class="border-2 border-dashed border-slate-800 rounded-2xl p-6 text-center hover:border-emerald-500 transition cursor-pointer" onclick="document.getElementById('rxFile').click()">
               <i data-lucide="camera" class="w-8 h-8 text-emerald-500 mx-auto mb-2"></i>
-              <p class="text-xs text-slate-300 font-medium">Click to capture photo or select image</p>
+              <p class="text-xs text-slate-300 font-medium">Capture or select clear photo</p>
               <p class="text-[10px] text-slate-500 mt-1">PNG, JPG, or PDF up to 5MB</p>
               <input type="file" id="rxFile" accept="image/*" class="hidden" onchange="previewRx(this)">
             </div>
@@ -146,7 +153,103 @@
     </div>
   </section>
 
-  <!-- Drug Details Modal -->
+  <!-- Auth Modal (Sign In / Register) -->
+  <div id="authModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <h3 id="authModalTitle" class="text-lg font-bold text-white">Sign In to PharmaTrust</h3>
+          <p id="authModalSubtitle" class="text-xs text-slate-400">Access your confidential patient profile & orders.</p>
+        </div>
+        <button onclick="toggleModal('authModal')" class="text-slate-400 hover:text-white text-lg">✕</button>
+      </div>
+
+      <div class="flex bg-charcoal-950 p-1 rounded-xl border border-slate-800 mb-4">
+        <button id="authTabSignIn" onclick="setAuthMode('signin')" class="flex-1 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition">Sign In</button>
+        <button id="authTabSignUp" onclick="setAuthMode('signup')" class="flex-1 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Register</button>
+      </div>
+
+      <form onsubmit="handleAuthSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Email Address</label>
+          <input type="email" id="authEmail" required placeholder="you@gmail.com" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+        </div>
+        <div>
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Password</label>
+          <input type="password" id="authPassword" required placeholder="••••••••••••" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+        </div>
+        <div id="authError" class="hidden p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px]"></div>
+        <button type="submit" id="authSubmitBtn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition">
+          Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Progressive Clinical Intake Modal -->
+  <div id="intakeModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 max-h-[92vh] overflow-y-auto shadow-2xl">
+      <div class="mb-5">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2 uppercase tracking-wider">
+          Confidential Medical Safeguard
+        </span>
+        <h2 class="text-xl font-bold text-white">Complete Your Clinical Record</h2>
+        <p class="text-xs text-slate-400 mt-1">
+          Our licensed dispensary pharmacists use your age, allergy history, and chronic profile to screen for drug-drug and allergy contraindications before release.
+        </p>
+      </div>
+
+      <form onsubmit="saveIntakeProfile(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Full Legal Name</label>
+          <input type="text" id="intakeFullName" required placeholder="e.g. Basit Adeife" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">WhatsApp Phone</label>
+            <input type="tel" id="intakePhone" required placeholder="+234 812 345 6789" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+          </div>
+          <div>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Age (Years)</label>
+            <input type="number" id="intakeAge" required min="1" max="120" placeholder="21" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Biological Sex</label>
+            <select id="intakeGender" onchange="togglePregnancyField()" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="prefer_not_to_say">Prefer not to say</option>
+            </select>
+          </div>
+          <div id="pregnancyContainer" class="hidden flex items-center pt-5">
+            <label class="flex items-center space-x-2 text-slate-300 cursor-pointer">
+              <input type="checkbox" id="intakePregnant" class="rounded accent-emerald-500 w-4 h-4">
+              <span class="text-[11px]">Pregnant / Lactating</span>
+            </label>
+          </div>
+        </div>
+        <div>
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Known Drug Allergies</label>
+          <input type="text" id="intakeAllergies" placeholder="e.g. Penicillin, Sulfa, Aspirin (or enter None)" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+        </div>
+        <div>
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Chronic Conditions</label>
+          <input type="text" id="intakeChronic" placeholder="e.g. Asthma, Peptic Ulcer, Diabetes, Hypertension (or enter None)" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+        </div>
+        <div>
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Default Okada Delivery Address / Hostel</label>
+          <input type="text" id="intakeAddress" required placeholder="Block C, Crystal Hostel, Okada" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+        </div>
+        <button type="submit" id="saveIntakeBtn" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-900/30">
+          Encrypt & Save Clinical Record
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Drug Safety & Specification Modal -->
   <div id="drugModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-start mb-4">
@@ -159,25 +262,28 @@
 
       <img id="modalImg" class="w-full h-44 object-cover rounded-xl mb-4 border border-slate-800" src="" alt="">
 
-      <div class="space-y-4 text-sm">
-        <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800">
-          <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Indications & Uses</span>
+      <div class="space-y-3.5 text-sm">
+        <div id="controlledWarningBox" class="hidden p-3 bg-rose-950/40 border border-rose-600/50 rounded-xl text-xs text-rose-300 font-medium">
+          🚨 <strong>SCHEDULE II CONTROLLED DRUG:</strong> Doctor prescription verification and valid government identification required prior to physical dispensary packaging.
+        </div>
+        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+          <span class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Clinical Indications</span>
           <p id="modalUses" class="text-slate-200 text-xs"></p>
         </div>
-        <div class="p-3.5 bg-amber-950/20 border border-amber-500/20 rounded-xl">
-          <span class="block text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">Key Warnings</span>
+        <div class="p-3 bg-amber-950/20 border border-amber-500/20 rounded-xl">
+          <span class="block text-[10px] font-semibold text-amber-400 uppercase tracking-wider mb-1">Key Warnings & Adverse Effects</span>
           <p id="modalWarnings" class="text-amber-200/90 text-xs"></p>
         </div>
-        <div class="p-3.5 bg-rose-950/20 border border-rose-500/20 rounded-xl">
-          <span class="block text-xs font-semibold text-rose-400 uppercase tracking-wider mb-1">Contraindications</span>
+        <div class="p-3 bg-rose-950/20 border border-rose-500/20 rounded-xl">
+          <span class="block text-[10px] font-semibold text-rose-400 uppercase tracking-wider mb-1">Contraindications</span>
           <p id="modalContra" class="text-rose-200/90 text-xs"></p>
         </div>
         <div class="flex items-center justify-between pt-2 border-t border-slate-800">
           <div>
-            <span class="text-xs text-slate-400 block">Unit Price</span>
-            <span id="modalPrice" class="text-xl font-bold text-white"></span>
+            <span class="text-[10px] text-slate-400 block uppercase font-semibold">Unit Price</span>
+            <span id="modalPrice" class="text-xl font-extrabold text-white"></span>
           </div>
-          <button id="modalAddBtn" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl uppercase">
+          <button id="modalAddBtn" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl uppercase transition">
             Add to Order
           </button>
         </div>
@@ -196,21 +302,21 @@
       <div id="cartItemsContainer" class="divide-y divide-slate-800 max-h-60 overflow-y-auto mb-4"></div>
 
       <div class="pt-3 border-t border-slate-800 space-y-2 text-sm mb-4">
-        <div class="flex justify-between text-slate-400">
+        <div class="flex justify-between text-slate-400 text-xs">
           <span>Subtotal</span>
-          <span id="cartSubtotal">₦0</span>
+          <span id="cartSubtotal" class="text-white font-semibold">₦0</span>
         </div>
-        <div class="flex justify-between text-slate-400">
-          <span>Delivery Fee (Okada Town)</span>
-          <span id="cartDelivery">₦1,000</span>
+        <div class="flex justify-between text-slate-400 text-xs">
+          <span>Delivery Fee (Okada Town & Campus)</span>
+          <span id="cartDelivery" class="text-white font-semibold">₦1,000</span>
         </div>
         <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800">
-          <span>Total</span>
-          <span id="cartTotal">₦0</span>
+          <span>Total Payable</span>
+          <span id="cartTotal" class="text-emerald-400 font-extrabold">₦0</span>
         </div>
       </div>
 
-      <button onclick="checkoutOrder()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl flex items-center justify-center text-xs uppercase tracking-wider">
+      <button onclick="checkoutOrder()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl flex items-center justify-center text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30">
         <i data-lucide="message-circle" class="w-4 h-4 mr-2"></i> Submit & Dispatch via WhatsApp
       </button>
     </div>
@@ -224,18 +330,224 @@
     let products = [];
     let currentCategory = "All";
     let cart = [];
+    let currentUser = null;
+    let currentUserProfile = null;
+    let authMode = 'signin';
 
+    // 1. Authentication & Profile Sync
+    async function checkAuthSession() {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      const triggerBtn = document.getElementById('authTriggerBtn');
+      const badge = document.getElementById('userBadge');
+      const nameDisplay = document.getElementById('userDisplayName');
+
+      if (session) {
+        currentUser = session.user;
+        triggerBtn.innerText = "Sign Out";
+        triggerBtn.className = "text-xs px-3 py-1.5 rounded-lg bg-rose-500/10 text-rose-300 border border-rose-500/20 hover:bg-rose-500/20 transition";
+        badge.classList.remove('hidden');
+        badge.classList.add('flex');
+        nameDisplay.innerText = currentUser.email.split('@')[0];
+        checkClinicalProfile(currentUser);
+      } else {
+        currentUser = null;
+        currentUserProfile = null;
+        triggerBtn.innerText = "Sign In / Register";
+        triggerBtn.className = "text-xs px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition shadow-md shadow-emerald-900/20";
+        badge.classList.add('hidden');
+        badge.classList.remove('flex');
+      }
+      lucide.createIcons();
+    }
+
+    function openAuthModal() {
+      if (currentUser) {
+        supabaseClient.auth.signOut().then(() => checkAuthSession());
+      } else {
+        document.getElementById('authModal').classList.remove('hidden');
+        document.getElementById('authModal').classList.add('flex');
+      }
+    }
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      const tabSignIn = document.getElementById('authTabSignIn');
+      const tabSignUp = document.getElementById('authTabSignUp');
+      const title = document.getElementById('authModalTitle');
+      const sub = document.getElementById('authModalSubtitle');
+      const btn = document.getElementById('authSubmitBtn');
+
+      if (mode === 'signin') {
+        tabSignIn.className = "flex-1 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition";
+        tabSignUp.className = "flex-1 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
+        title.innerText = "Sign In to PharmaTrust";
+        sub.innerText = "Access your confidential prescriptions & clinical history.";
+        btn.innerText = "Sign In";
+      } else {
+        tabSignUp.className = "flex-1 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition";
+        tabSignIn.className = "flex-1 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
+        title.innerText = "Create Your Account";
+        sub.innerText = "Register to safeguard allergy warnings and fast delivery.";
+        btn.innerText = "Register Account";
+      }
+    }
+
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('authEmail').value.trim();
+      const password = document.getElementById('authPassword').value;
+      const errEl = document.getElementById('authError');
+      errEl.classList.add('hidden');
+
+      if (authMode === 'signin') {
+        const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) {
+          errEl.innerText = error.message;
+          errEl.classList.remove('hidden');
+        } else {
+          toggleModal('authModal');
+          checkAuthSession();
+        }
+      } else {
+        const { error } = await supabaseClient.auth.signUp({ email, password });
+        if (error) {
+          errEl.innerText = error.message;
+          errEl.classList.remove('hidden');
+        } else {
+          toggleModal('authModal');
+          alert("Account created successfully! Please complete your confidential clinical profile.");
+          checkAuthSession();
+        }
+      }
+    }
+
+    async function checkClinicalProfile(user) {
+      if (!user) return;
+      const { data: profile } = await supabaseClient
+        .from('profiles')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+
+      if (!profile || !profile.delivery_address) {
+        document.getElementById('intakeModal').classList.remove('hidden');
+        document.getElementById('intakeModal').classList.add('flex');
+      } else {
+        currentUserProfile = profile;
+        if (document.getElementById('rxName')) document.getElementById('rxName').value = profile.full_name;
+        if (document.getElementById('rxPhone')) document.getElementById('rxPhone').value = profile.phone_number;
+        if (document.getElementById('rxAddress')) document.getElementById('rxAddress').value = profile.delivery_address;
+      }
+    }
+
+    function togglePregnancyField() {
+      const gender = document.getElementById('intakeGender').value;
+      const pregBox = document.getElementById('pregnancyContainer');
+      if (gender === 'female') pregBox.classList.remove('hidden');
+      else {
+        pregBox.classList.add('hidden');
+        document.getElementById('intakePregnant').checked = false;
+      }
+    }
+
+    async function saveIntakeProfile(e) {
+      e.preventDefault();
+      const btn = document.getElementById('saveIntakeBtn');
+      btn.disabled = true;
+      btn.innerText = "Encrypting & Storing...";
+
+      const payload = {
+        user_id: currentUser.id,
+        user_role: 'patient',
+        full_name: document.getElementById('intakeFullName').value.trim(),
+        phone_number: document.getElementById('intakePhone').value.trim(),
+        email: currentUser.email,
+        age: Number(document.getElementById('intakeAge').value),
+        gender: document.getElementById('intakeGender').value,
+        is_pregnant_or_lactating: document.getElementById('intakePregnant').checked,
+        allergies: document.getElementById('intakeAllergies').value.trim() || 'None',
+        chronic_conditions: document.getElementById('intakeChronic').value.trim() || 'None',
+        delivery_address: document.getElementById('intakeAddress').value.trim()
+      };
+
+      const { error } = await supabaseClient.from('profiles').upsert(payload);
+      if (error) {
+        alert("Intake Error: " + error.message);
+        btn.disabled = false;
+        btn.innerText = "Encrypt & Save Clinical Record";
+      } else {
+        currentUserProfile = payload;
+        document.getElementById('intakeModal').classList.add('hidden');
+        document.getElementById('intakeModal').classList.remove('flex');
+        alert("Confidential health profile verified!");
+      }
+    }
+
+    // 2. Relational Catalog Loader (Normalized Join)
     async function loadMedicationsFromDB() {
       const grid = document.getElementById('productGrid');
       try {
         const { data, error } = await supabaseClient
-          .from('medications')
-          .select('*')
-          .neq('target_market', 'b2b_wholesale')
+          .from('inventory')
+          .select(`
+            inventory_id,
+            regular_price_ngn,
+            clearance_price_ngn,
+            stock_quantity,
+            in_stock,
+            is_near_expiry,
+            batch_number,
+            expiry_date,
+            products (
+              product_id,
+              brand_name,
+              generic_name,
+              category,
+              dosage_form,
+              dosage_strength,
+              strength_unit,
+              pack_size,
+              requires_prescription,
+              is_controlled,
+              nafdac_no,
+              product_image_url,
+              primary_uses,
+              contraindications,
+              key_warnings
+            ),
+            pharmacies (
+              pharmacy_name,
+              contact_phone,
+              address_text
+            )
+          `)
           .order('in_stock', { ascending: false });
 
         if (error) throw error;
-        products = data || [];
+
+        products = (data || []).map(row => ({
+          id: row.products.product_id,
+          inventory_id: row.inventory_id,
+          brand: row.products.brand_name,
+          generic: row.products.generic_name,
+          category: row.products.category,
+          dosage: `${row.products.dosage_form} (${row.products.dosage_strength}${row.products.strength_unit})`,
+          pack: row.products.pack_size,
+          price: row.clearance_price_ngn || row.regular_price_ngn,
+          original_price: row.clearance_price_ngn ? row.regular_price_ngn : null,
+          is_clearance: row.is_near_expiry,
+          rx_required: row.products.requires_prescription,
+          is_controlled: row.products.is_controlled,
+          nafdac: row.products.nafdac_no,
+          img: row.products.product_image_url,
+          uses: row.products.primary_uses,
+          warnings: row.products.key_warnings,
+          contraindications: row.products.contraindications,
+          in_stock: row.in_stock,
+          pharmacy: row.pharmacies ? row.pharmacies.pharmacy_name : 'MedPlus Okada',
+          pharmacy_phone: row.pharmacies ? row.pharmacies.contact_phone : '2348065092665'
+        }));
+
         renderProducts(products);
       } catch (err) {
         if (grid) grid.innerHTML = `<div class="col-span-full py-12 text-center text-rose-400 text-xs">Error loading catalog: ${err.message}</div>`;
@@ -257,13 +569,16 @@
               <span class="absolute top-3 left-3 bg-amber-500 text-charcoal-950 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
                 ⚡ Flash Sale (-35%)
               </span>` : ''}
-            ${p.rx_required ? `
-              <span class="absolute top-3 right-3 bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
+            ${p.is_controlled ? `
+              <span class="absolute top-3 right-3 bg-rose-500/30 text-rose-300 border border-rose-500/50 text-[10px] font-bold px-2 py-0.5 rounded-md">
+                🚨 Controlled
+              </span>` : (p.rx_required ? `
+              <span class="absolute top-3 right-3 bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
                 Rx Required
               </span>` : `
               <span class="absolute top-3 right-3 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
                 OTC
-              </span>`}
+              </span>`)}
           </div>
 
           <div class="p-5 flex-1 flex flex-col justify-between">
@@ -286,10 +601,10 @@
               ${p.in_stock ? `
                 <div class="grid grid-cols-2 gap-2">
                   <button onclick="openDrugModal('${p.id}')" class="py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
-                    Safety Info
+                    Clinical Info
                   </button>
-                  <button onclick="addToCart('${p.id}')" class="py-2 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition">
-                    Order
+                  <button onclick="addToCart('${p.id}')" class="py-2 text-xs font-semibold rounded-lg ${p.is_controlled ? 'bg-amber-600 hover:bg-amber-500' : 'bg-emerald-600 hover:bg-emerald-500'} text-white transition">
+                    ${p.is_controlled ? 'Order (Rx Required)' : 'Order'}
                   </button>
                 </div>
               ` : `
@@ -313,15 +628,21 @@
         alert(`Stock located! Available at ${match.pharmacy} for ₦${match.price.toLocaleString()}.`);
         openDrugModal(match.id);
       } else {
-        alert("All dispensaries in Okada are currently out of this generic formula. Please upload your prescription photo for direct allocation.");
+        alert("All dispensaries in Okada are currently out of this generic chemical. Please upload your prescription photo for direct allocation.");
       }
     }
 
     function filterProducts() {
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
       const filtered = products.filter(p => {
-        const matchesCategory = currentCategory === "All" || p.category === currentCategory || (currentCategory.includes('Clearance') && p.is_clearance);
-        const matchesSearch = !q || p.brand.toLowerCase().includes(q) || p.generic.toLowerCase().includes(q) || p.uses.toLowerCase().includes(q);
+        const matchesCategory = currentCategory === "All" || 
+          p.category.includes(currentCategory) || 
+          (currentCategory === 'Clearance' && p.is_clearance);
+        const matchesSearch = !q || 
+          p.brand.toLowerCase().includes(q) || 
+          p.generic.toLowerCase().includes(q) || 
+          p.dosage.toLowerCase().includes(q) || 
+          p.uses.toLowerCase().includes(q);
         return matchesCategory && matchesSearch;
       });
       renderProducts(filtered);
@@ -348,13 +669,18 @@
     function openDrugModal(id) {
       const p = products.find(x => x.id === id);
       if (!p) return;
-      document.getElementById('modalTitle').innerText = p.brand;
+      document.getElementById('modalTitle').innerText = `${p.brand} ${p.dosage}`;
       document.getElementById('modalGeneric').innerText = `${p.generic} • NAFDAC: ${p.nafdac || 'Verified'}`;
       document.getElementById('modalUses').innerText = p.uses;
       document.getElementById('modalWarnings').innerText = p.warnings;
       document.getElementById('modalContra').innerText = p.contraindications;
       document.getElementById('modalPrice').innerText = `₦${Number(p.price).toLocaleString()}`;
       document.getElementById('modalImg').src = p.img;
+      
+      const controlledBox = document.getElementById('controlledWarningBox');
+      if (p.is_controlled) controlledBox.classList.remove('hidden');
+      else controlledBox.classList.add('hidden');
+
       document.getElementById('modalAddBtn').onclick = () => {
         addToCart(p.id);
         toggleModal('drugModal');
@@ -363,8 +689,23 @@
     }
 
     function addToCart(id) {
+      if (!currentUser) {
+        alert("Please sign in or create an account to place an order.");
+        openAuthModal();
+        return;
+      }
+
       const p = products.find(x => x.id === id);
       if (!p) return;
+
+      // Clinical Allergy Check
+      if (currentUserProfile && currentUserProfile.allergies && currentUserProfile.allergies.toLowerCase() !== 'none') {
+        const userAllergies = currentUserProfile.allergies.toLowerCase();
+        if (p.generic.toLowerCase().includes(userAllergies) || p.contraindications.toLowerCase().includes(userAllergies)) {
+          alert(`⚠️ CLINICAL SAFETY INTERVENTION: You reported an allergy to (${currentUserProfile.allergies}). This medication may trigger an adverse reaction.`);
+        }
+      }
+
       const existing = cart.find(x => x.id === id);
       if (existing) existing.qty++;
       else cart.push({ ...p, qty: 1 });
@@ -382,8 +723,11 @@
         container.innerHTML = cart.map(item => `
           <div class="py-2.5 flex justify-between items-center text-xs">
             <div>
-              <div class="font-bold text-white">${item.brand}</div>
-              <div class="text-slate-400">₦${Number(item.price).toLocaleString()} x ${item.qty}</div>
+              <div class="font-bold text-white flex items-center gap-1.5">
+                ${item.brand}
+                ${item.is_controlled ? '<span class="text-[9px] bg-rose-500/20 text-rose-300 px-1 py-0.5 rounded">CONTROLLED</span>' : ''}
+              </div>
+              <div class="text-slate-400 text-[11px]">${item.dosage} • ₦${Number(item.price).toLocaleString()} x ${item.qty}</div>
             </div>
             <div class="font-bold text-white">₦${(Number(item.price) * item.qty).toLocaleString()}</div>
           </div>
@@ -401,14 +745,29 @@
       if (cart.length === 0) return alert("Your cart is empty.");
       const subtotal = cart.reduce((sum, item) => sum + (Number(item.price) * item.qty), 0);
       const total = subtotal + 1000;
+      const hasControlled = cart.some(i => i.is_controlled);
+
+      let msg = hasControlled ? `*🚨 CONTROLLED MEDICATION ORDER - PHARMATRUST*%0A%0A` : `*NEW MEDICATION ORDER - PHARMATRUST*%0A%0A`;
       
-      let msg = `*NEW MEDICATION ORDER - PHARMATRUST*%0A%0A`;
+      if (currentUserProfile) {
+        msg += `*Patient Name:* ${encodeURIComponent(currentUserProfile.full_name)} (Age: ${currentUserProfile.age})%0A`;
+        msg += `*Allergies:* ${encodeURIComponent(currentUserProfile.allergies)}%0A`;
+        msg += `*Delivery Location:* ${encodeURIComponent(currentUserProfile.delivery_address)}%0A%0A`;
+      }
+      
+      msg += `*Items Ordered:*%0A`;
       cart.forEach(i => {
-        msg += `• ${i.brand} (x${i.qty}) [${i.pharmacy}] - NGN ${(Number(i.price) * i.qty).toLocaleString()}%0A`;
+        msg += `• ${i.brand} [${i.dosage}] (x${i.qty}) - NGN ${(Number(i.price) * i.qty).toLocaleString()}%0A`;
       });
-      msg += `%0A*Delivery Fee (Okada Town):* NGN 1,000%0A`;
-      msg += `*Total Amount:* NGN ${total.toLocaleString()}%0A%0A`;
-      msg += `Please send payment account details and delivery confirmation.`;
+      
+      msg += `%0A*Delivery Fee:* NGN 1,000%0A`;
+      msg += `*Grand Total:* NGN ${total.toLocaleString()}%0A%0A`;
+      
+      if (hasControlled) {
+        msg += `⚠️ *PCN AUDIT NOTE:* This order contains a Schedule II Controlled Substance. Physical doctor prescription slip and patient NIN verification will be inspected before release.%0A%0A`;
+      }
+      
+      msg += `Please send bank account settlement details.`;
 
       const targetPhone = cart[0].pharmacy_phone || '2348065092665';
       window.open(`https://wa.me/${targetPhone}?text=${msg}`, '_blank');
@@ -457,15 +816,16 @@
           phone: phone,
           delivery_address: addr,
           image_url: publicUrl,
+          patient_id: currentUser ? currentUser.id : null,
           status: 'pending_review'
         }]);
 
         let msg = `*PRESCRIPTION DISPATCH - PHARMATRUST*%0A%0A`;
         msg += `*Patient Name:* ${encodeURIComponent(name)}%0A`;
-        msg += `*Contact Phone:* ${encodeURIComponent(phone)}%0A`;
-        msg += `*Delivery Address:* ${encodeURIComponent(addr)}%0A%0A`;
-        msg += `*Secure Prescription Link:*%0A${encodeURIComponent(publicUrl)}%0A%0A`;
-        msg += `Please review dosage details and issue an official itemized bill.`;
+        msg += `*Phone:* ${encodeURIComponent(phone)}%0A`;
+        msg += `*Delivery Destination:* ${encodeURIComponent(addr)}%0A%0A`;
+        msg += `*Prescription Image URL:*%0A${encodeURIComponent(publicUrl)}%0A%0A`;
+        msg += `Hello Pharmacist, please review my prescription and issue an official quote.`;
 
         window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
         e.target.reset();
@@ -478,6 +838,7 @@
       }
     }
 
+    checkAuthSession();
     loadMedicationsFromDB();
   </script>
 </body>
