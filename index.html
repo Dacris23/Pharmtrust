@@ -352,14 +352,13 @@
       lucide.createIcons();
     }
 
-    // Filter Logic
+        // Filter Logic
     function filterProducts() {
       const q = document.getElementById('searchInput').value.toLowerCase();
       const filtered = products.filter(p => {
         const matchesCategory = currentCategory === "All" || p.category === currentCategory;
         const matchesSearch = p.brand.toLowerCase().includes(q) || 
                               p.generic.toLowerCase().includes(q) || 
-             udes(q) || 
                               p.uses.toLowerCase().includes(q);
         return matchesCategory && matchesSearch;
       });
