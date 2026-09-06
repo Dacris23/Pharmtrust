@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PharmaTrust | Contact & Emergency Clinical Support</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
+  <title>PharmaTrust | Contact & Emergency Support</title>
+  <link rel="icon" href="logo.jpg">
   <meta name="theme-color" content="#0f172a">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -24,24 +24,21 @@
 </head>
 <body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased pb-20 selection:bg-emerald-500/30">
 
-  <!-- Multi-Page Navigation -->
   <header class="sticky top-0 z-40 bg-charcoal-900/90 backdrop-blur border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <a href="index.html" class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center font-bold text-xl text-white shadow-lg shadow-emerald-900/40">
-          P+
-        </div>
+        <img src="logo.jpg" alt="Logo" class="h-10 w-10 object-contain rounded-xl border border-slate-700">
         <div>
           <span class="text-xl font-bold tracking-tight text-white">Pharma<span class="text-emerald-500">Trust</span></span>
-          <span class="block text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Okada Clinical Network</span>
+          <span class="hidden sm:block text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Okada Clinical Network</span>
         </div>
       </a>
 
-      <nav class="flex items-center space-x-2 sm:space-x-5 text-xs sm:text-sm">
-        <a href="index.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">Storefront</a>
+      <nav class="flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm">
+        <a href="index.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">Catalog</a>
         <a href="upload-rx.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
         <a href="profile.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">My Profile</a>
-        <a href="contact.html" class="font-semibold text-emerald-400 border-b-2 border-emerald-500 pb-0.5">Contact & Support</a>
+        <a href="contact.html" class="font-semibold text-emerald-400 border-b-2 border-emerald-500 pb-0.5">Contact</a>
         <a href="admin.html" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition border border-slate-700">Staff Portal</a>
       </nav>
     </div>
@@ -49,7 +46,6 @@
 
   <main class="max-w-5xl mx-auto px-4 py-10">
     
-    <!-- Emergency Warning Banner -->
     <div class="bg-rose-950/30 border border-rose-600/40 rounded-3xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <div class="flex items-center space-x-3">
         <div class="p-2.5 bg-rose-500/20 text-rose-400 rounded-xl">
@@ -57,44 +53,52 @@
         </div>
         <div>
           <h2 class="text-sm font-bold text-white">Medical Emergency or Acute Adverse Reaction?</h2>
-          <p class="text-xs text-rose-200/80">If you are experiencing severe breathing difficulty, anaphylaxis, or suspected drug poisoning, seek emergency hospital care immediately.</p>
+          <p class="text-xs text-rose-200/80">If you are experiencing severe breathing difficulty, anaphylaxis, or suspected drug poisoning, call our duty pharmacist or seek hospital care immediately.</p>
         </div>
       </div>
-      <a href="tel:2348065092665" class="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider whitespace-nowrap transition shadow-lg shadow-rose-900/30">
-        Emergency Line 📞
-      </a>
+      <div class="flex flex-wrap gap-2">
+        <a href="tel:2348065092665" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider whitespace-nowrap transition shadow-lg shadow-rose-900/30">
+          Line 1: 0806 509 2665
+        </a>
+        <a href="tel:2348169489126" class="px-4 py-2.5 bg-rose-700 hover:bg-rose-600 text-white font-bold rounded-xl text-xs uppercase tracking-wider whitespace-nowrap transition">
+          Line 2: 0816 948 9126
+        </a>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
       
-      <!-- Card 1: On-Call Pharmacist -->
       <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
         <div>
           <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4">
             <i data-lucide="message-circle" class="w-5 h-5"></i>
           </div>
-          <h3 class="text-base font-bold text-white mb-1">WhatsApp Clinical Desk</h3>
-          <p class="text-xs text-slate-400 mb-4">Direct interaction with licensed pharmacists for drug inquiries, dosage confirmation, and prescription status.</p>
+          <h3 class="text-base font-bold text-white mb-1">WhatsApp Clinical Desks</h3>
+          <p class="text-xs text-slate-400 mb-3">Direct consultation with licensed dispensary pharmacists for prescription verification, orders, and inquiries.</p>
           <div class="text-xs space-y-1.5 font-mono text-slate-300">
-            <div><strong>Hours:</strong> 7:30 AM – 10:30 PM</div>
-            <div><strong>Response:</strong> &lt; 15 mins</div>
+            <div><strong>Clinical Line:</strong> +234 806 509 2665</div>
+            <div><strong>Support Desk:</strong> +234 816 948 9126</div>
           </div>
         </div>
-        <a href="https://wa.me/2348065092665?text=Hello%20Pharmacist,%20I%20need%20assistance%20with%20a%20medication%20order." target="_blank" class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider text-center block transition">
-          Message Pharmacist ↗
-        </a>
+        <div class="mt-6 flex flex-col gap-2">
+          <a href="https://wa.me/2348065092665?text=Hello%20Pharmacist,%20I%20need%20assistance%20with%20a%20medication." target="_blank" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider text-center transition">
+            Chat Clinical Desk ↗
+          </a>
+          <a href="https://wa.me/2348169489126?text=Hello%20PharmaTrust%20Support,%20I%20need%20help." target="_blank" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs uppercase tracking-wider text-center border border-slate-700 transition">
+            Chat Support Line ↗
+          </a>
+        </div>
       </div>
 
-      <!-- Card 2: Central Dispensary Node -->
       <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
         <div>
           <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4">
             <i data-lucide="map-pin" class="w-5 h-5"></i>
           </div>
-          <h3 class="text-base font-bold text-white mb-1">Okada Dispensary Node</h3>
-          <p class="text-xs text-slate-400 mb-4">Physical dispensary hub serving Okada town, Igbinedion University campus, and surrounding student residences.</p>
+          <h3 class="text-base font-bold text-white mb-1">Dispensary Hub & Pickup</h3>
+          <p class="text-xs text-slate-400 mb-4">Central pharmaceutical pickup and delivery hub serving Okada town, Igbinedion University campus, and surrounding student residences.</p>
           <div class="text-xs space-y-1.5 text-slate-300">
-            <div><strong>Location:</strong> Main Road, Okada, Edo State</div>
+            <div><strong>Premises:</strong> Main Road, Okada, Edo State</div>
             <div><strong>PCN License:</strong> PCN/OKD/2026/01</div>
           </div>
         </div>
@@ -103,34 +107,32 @@
         </a>
       </div>
 
-      <!-- Card 3: Enterprise & Industrial Hub -->
       <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4">
-            <i data-lucide="building-2" class="w-5 h-5"></i>
+          <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4">
+            <i data-lucide="linkedin" class="w-5 h-5"></i>
           </div>
-          <h3 class="text-base font-bold text-white mb-1">Industrial Supply Desk</h3>
-          <p class="text-xs text-slate-400 mb-4">Bulk distributor restock, manufacturer waybills, and hospital procurement requisitions.</p>
+          <h3 class="text-base font-bold text-white mb-1">Corporate & LinkedIn</h3>
+          <p class="text-xs text-slate-400 mb-4">Connect with our executive clinical team, career opportunities, and healthcare partnership news.</p>
           <div class="text-xs space-y-1.5 text-slate-300">
-            <div><strong>Email:</strong> wholesale@pharmatrust.ng</div>
-            <div><strong>Turnaround:</strong> 24 - 48 hours</div>
+            <div><strong>LinkedIn:</strong> PharmaTrust Nigeria</div>
+            <div><strong>Email:</strong> care@pharmatrust.ng</div>
           </div>
         </div>
-        <a href="mailto:wholesale@pharmatrust.ng" class="mt-6 w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs uppercase tracking-wider text-center block border border-slate-700 transition">
-          Email B2B Desk ↗
+        <a href="https://linkedin.com/company/pharmatrust-ng" target="_blank" class="mt-6 w-full py-2.5 bg-[#0077b5] hover:bg-[#006097] text-white font-bold rounded-xl text-xs uppercase tracking-wider text-center block transition">
+          Follow on LinkedIn ↗
         </a>
       </div>
 
     </div>
 
-    <!-- Direct Clinical Inquiry Form -->
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
       <div class="max-w-xl mb-6">
         <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider mb-2">
-          Clinical Guidance
+          Direct Guidance
         </span>
         <h2 class="text-xl font-bold text-white">Submit a Medication Inquiry</h2>
-        <p class="text-xs text-slate-400 mt-1">Have questions about dosage timing, drug interactions, or generic alternatives? Write to our superintendent pharmacist.</p>
+        <p class="text-xs text-slate-400 mt-1">Have questions regarding drug-drug interactions, administration timing, or generic availability? Write directly to our superintendent pharmacist.</p>
       </div>
 
       <form onsubmit="handleContactSubmit(event)" class="space-y-4 text-xs">
@@ -191,4 +193,3 @@
   </script>
 </body>
 </html>
-
