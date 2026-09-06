@@ -1,1 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PharmaTrust | Inventory Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-4 sm:p-8">
+
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8 pb-4 border-b border-slate-800">
+      <div>
+        <h1 class="text-2xl font-bold text-emerald-400">PharmaTrust Dispensary Portal</h1>
+        <p class="text-xs text-slate-400">Real-time inventory manager</p>
+      </div>
+      <button id="logoutBtn" onclick="logout()" class="hidden px-4 py-2 bg-rose-600/20 text-rose-300 border border-rose-500/30 rounded-lg text-xs font-semibold">
+        Sign Out
+      </button>
+    </header>
+
+    <!-- Login Form (Visible when signed out) -->
+    <div id="loginSection" class="max-w-md mx-auto bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <h2 class="text-lg font-bold text-white mb-4">Pharmacist Login</h2>
+      <form onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs uppercase text-slate-400 mb-1">Email</label>
+          <input type="email" id="loginEmail" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+        </div>
+        <div>
+          <label class="block text-xs uppercase text-slate-400 mb-1">Password</label>
+          <input type="password" id="loginPassword" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+        </div>
+        <p id="loginError" class="text-xs text-rose-400 hidden"></p>
+        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold text-sm">
+          Access Portal
+        </button>
+      </form>
+    </div>
+
+    <!-- Inventory Dashboard (Visible when signed in) -->
+    <div id="portalSection" class="hidden space-y-8">
+      
+      <!-- Quick Add Drug Form -->
+      <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+        <h2 class="text-lg font-bold text-white mb-4">Add New Medicine</h2>
+        <form onsubmit="handleAddDrug(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div>
+            <label class="text-slate-400 uppercase">Product ID</label>
+            <input type="text" id="pId" required placeholder="e.g. PROD-006" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div>
+            <label class="text-slate-400 uppercase">Brand Name</label>
+            <input type="text" id="pBrand" required placeholder="e.g. Ventolin Inhaler" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div>
+            <label class="text-slate-400 uppercase">Generic Name</label>
+            <input type="text" id="pGeneric" required placeholder="e.g. Salbutamol" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div>
+            <label class="text-slate-400 uppercase">Category</label>
+            <select id="pCategory" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+              <option>Anti-Infectives & Antibiotics</option>
+              <option>Pain Relief & Fever</option>
+              <option>Chronic Care & Diabetes</option>
+              <option>Clearance Deals & OTC</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-slate-400 uppercase">Dosage Form</label>
+            <input type="text" id="pDosage" required placeholder="e.g. Inhaler, Syrup, Tablet" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div>
+            <label class="text-slate-400 uppercase">Pack Details</label>
+            <input type="text" id="pPack" required placeholder="e.g. 200 Doses, 100ml" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div>
+            <label class="text-slate-400 uppercase">Price (NGN)</label>
+            <input type="number" id="pPrice" required placeholder="e.g. 6500" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div>
+            <label class="text-slate-400 uppercase">NAFDAC Number</label>
+            <input type="text" id="pNafdac" required placeholder="e.g. 04-9876" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div>
+            <label class="text-slate-400 uppercase">Dispensary Pharmacy</label>
+            <input type="text" id="pPharmacy" required placeholder="e.g. MedPlus Okada" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div>
+            <label class="text-slate-400 uppercase">Image URL</label>
+            <input type="url" id="pImg" required placeholder="https://images.unsplash.com/..." class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="text-slate-400 uppercase">Primary Uses</label>
+            <input type="text" id="pUses" required placeholder="Indications and therapeutic uses" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="text-slate-400 uppercase">Key Warnings & Cautions</label>
+            <input type="text" id="pWarnings" required placeholder="Dosage limits, administration rules" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="text-slate-400 uppercase">Contraindications</label>
+            <input type="text" id="pContra" required placeholder="Conditions or allergies to avoid" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+          </div>
+          <div class="flex items-center space-x-4 pt-2 sm:col-span-2">
+            <label class="flex items-center space-x-2 text-slate-300">
+              <input type="checkbox" id="pRx"> <span>Prescription Required</span>
+            </label>
+            <label class="flex items-center space-x-2 text-slate-300">
+              <input type="checkbox" id="pClearance"> <span>Clearance Deal</span>
+            </label>
+          </div>
+          <button type="submit" class="sm:col-span-2 mt-2 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm">
+            Save & Publish to Live Catalog
+          </button>
+        </form>
+      </div>
+
+      <!-- Current Inventory Table -->
+      <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl overflow-x-auto">
+        <h2 class="text-lg font-bold text-white mb-4">Current Stock</h2>
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400 uppercase">
+              <th class="py-2">Item</th>
+              <th class="py-2">Category</th>
+              <th class="py-2">Price</th>
+              <th class="py-2">Status</th>
+              <th class="py-2 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="inventoryList" class="divide-y divide-slate-800">
+            <!-- Items rendered via JS -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://iydakgrvvwnjacffennc.supabase.co';
+    const SUPABASE_KEY = 'Sb_publishable_AjpEBohY3PE7CCcWG5Mluw_9K-vaI9t';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Check user session
+    async function checkSession() {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      if (session) {
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('portalSection').classList.remove('hidden');
+        document.getElementById('logoutBtn').classList.remove('hidden');
+        loadInventory();
+      } else {
+        document.getElementById('loginSection').classList.remove('hidden');
+        document.getElementById('portalSection').classList.add('hidden');
+        document.getElementById('logoutBtn').classList.add('hidden');
+      }
+    }
+
+    // Login Handler
+    async function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const errEl = document.getElementById('loginError');
+
+      const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      if (error) {
+        errEl.innerText = error.message;
+        errEl.classList.remove('hidden');
+      } else {
+        errEl.classList.add('hidden');
+        checkSession();
+      }
+    }
+
+    // Logout
+    async function logout() {
+      await supabaseClient.auth.signOut();
+      checkSession();
+    }
+
+    // Fetch and display inventory
+    async function loadInventory() {
+      const { data, error } = await supabaseClient
+        .from('medications')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) return console.error(error);
+
+      const tbody = document.getElementById('inventoryList');
+      tbody.innerHTML = data.map(item => `
+        <tr class="py-2">
+          <td class="py-3 font-semibold text-white">${item.brand}<br><span class="text-slate-400 text-[10px]">${item.generic}</span></td>
+          <td class="py-3 text-slate-300">${item.category}</td>
+          <td class="py-3 font-bold text-white">₦${Number(item.price).toLocaleString()}</td>
+          <td class="py-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.in_stock ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">
+              ${item.in_stock ? 'In Stock' : 'Out of Stock'}
+            </span>
+          </td>
+          <td class="py-3 text-right space-x-2">
+            <button onclick="toggleStock('${item.id}', ${item.in_stock})" class="text-slate-300 hover:text-white underline text-[11px]">
+              ${item.in_stock ? 'Mark Out' : 'Mark In'}
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Toggle In Stock / Out of Stock
+    async function toggleStock(id, currentState) {
+      const { error } = await supabaseClient
+        .from('medications')
+        .update({ in_stock: !currentState })
+        .eq('id', id);
+
+      if (!error) loadInventory();
+    }
+
+    // Add Drug Handler
+    async function handleAddDrug(e) {
+      e.preventDefault();
+      const payload = {
+        id: document.getElementById('pId').value,
+        brand: document.getElementById('pBrand').value,
+        generic: document.getElementById('pGeneric').value,
+        category: document.getElementById('pCategory').value,
+        dosage: document.getElementById('pDosage').value,
+        pack: document.getElementById('pPack').value,
+        price: Number(document.getElementById('pPrice').value),
+        nafdac: document.getElementById('pNafdac').value,
+        pharmacy: document.getElementById('pPharmacy').value,
+        img: document.getElementById('pImg').value,
+        uses: document.getElementById('pUses').value,
+        warnings: document.getElementById('pWarnings').value,
+        contraindications: document.getElementById('pContra').value,
+        rx_required: document.getElementById('pRx').checked,
+        is_clearance: document.getElementById('pClearance').checked,
+        in_stock: true
+      };
+
+      const { error } = await supabaseClient.from('medications').insert([payload]);
+      if (error) {
+        alert('Error adding medication: ' + error.message);
+      } else {
+        e.target.reset();
+        loadInventory();
+        alert('Medication added successfully to the live catalog!');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', checkSession);
+  </script>
+</body>
+              </html>
 
