@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PharmaTrust | Patient Clinical Record</title>
+  <title>PharmaTrust | Clinical Profile & Settings</title>
   <link rel="icon" href="logo.jpg">
   <meta name="theme-color" content="#0f172a">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -35,7 +35,7 @@
             Pharma<span class="text-emerald-400">Trust</span>
           </span>
           <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">
-            Okada Network
+            Nationwide Network
           </span>
         </div>
       </a>
@@ -70,7 +70,7 @@
     <div id="unauthNotice" class="hidden bg-charcoal-900 border border-slate-800 rounded-3xl p-8 text-center">
       <i data-lucide="lock" class="w-10 h-10 text-slate-500 mx-auto mb-2.5"></i>
       <h2 class="text-lg font-bold text-white mb-1.5">Sign In Required</h2>
-      <p class="text-xs text-slate-400 mb-5">Please log in to edit your clinical parameters, allergies, and delivery point.</p>
+      <p class="text-xs text-slate-400 mb-5">Please sign in to view and modify your clinical profile, allergies, and delivery location.</p>
       <a href="index.html" class="inline-flex items-center px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs uppercase tracking-wider transition">
         Return to Store & Sign In
       </a>
@@ -80,14 +80,14 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-800">
         <div>
           <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider mb-1.5">
-            Confidential Clinical File
+            Confidential Clinical Record
           </span>
-          <h1 class="text-xl sm:text-2xl font-bold text-white">Patient Medical Profile</h1>
+          <h1 class="text-xl sm:text-2xl font-bold text-white">Patient & Professional Profile</h1>
           <p class="text-xs text-slate-400 mt-0.5">Parameters are visible to the dispensing pharmacist to prevent fatal dosage errors and adverse reactions.</p>
         </div>
         <div class="text-right sm:text-right text-left">
           <span id="accountEmail" class="text-xs text-slate-400 block font-mono">Loading...</span>
-          <span class="text-[10px] text-emerald-400 font-semibold">● Verified Patient</span>
+          <span class="text-[10px] text-emerald-400 font-semibold">● Verified User</span>
         </div>
       </div>
 
@@ -179,9 +179,34 @@
           </div>
         </div>
 
-        <div class="pt-3 border-t border-slate-800">
-          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Okada Delivery Address / Hostel Details</label>
-          <input type="text" id="pAddress" required placeholder="e.g. Block C Room 14, Crystal Hostel, Okada" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+        <!-- Geographic Location (Nationwide Nigeria) -->
+        <div class="pt-3 border-t border-slate-800 space-y-3">
+          <h3 class="text-xs font-bold text-white uppercase text-slate-400">Primary Location in Nigeria</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">State (Nigeria)</label>
+              <select id="pState" required class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+                <option value="Edo">Edo State</option>
+                <option value="Lagos">Lagos State</option>
+                <option value="Abuja">FCT Abuja</option>
+                <option value="Oyo">Oyo State</option>
+                <option value="Rivers">Rivers State</option>
+                <option value="Delta">Delta State</option>
+                <option value="Kano">Kano State</option>
+                <option value="Enugu">Enugu State</option>
+                <option value="Ogun">Ogun State</option>
+                <option value="Other">Other State</option>
+              </select>
+            </div>
+            <div>
+              <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Local Govt Area (LGA)</label>
+              <input type="text" id="pLga" required placeholder="e.g. Ovia North-East, Ikeja, Benin City" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+            </div>
+          </div>
+          <div>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Street Address / Landmark / Hostel</label>
+            <input type="text" id="pAddress" required placeholder="e.g. Room 14 Block C, Crystal Hostel or 12 Broad Street" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+          </div>
         </div>
 
         <div class="pt-3 flex items-center justify-between">
@@ -238,7 +263,9 @@
         document.getElementById('pNin').value = data.national_id_no || '';
         document.getElementById('pAllergies').value = data.allergies || 'None';
         document.getElementById('pChronic').value = data.chronic_conditions || 'None';
-        document.getElementById('pAddress').value = data.delivery_address || '';
+        document.getElementById('pState').value = data.state || 'Edo';
+        document.getElementById('pLga').value = data.lga || '';
+        document.getElementById('pAddress').value = data.street_address || data.delivery_address || '';
         checkPregnancyVisibility();
       }
     }
@@ -259,6 +286,10 @@
       btn.disabled = true;
       btn.innerText = "Saving...";
 
+      const state = document.getElementById('pState').value;
+      const lga = document.getElementById('pLga').value.trim();
+      const street = document.getElementById('pAddress').value.trim();
+
       const payload = {
         user_id: activeUser.id,
         user_role: 'patient',
@@ -274,7 +305,10 @@
         national_id_no: document.getElementById('pNin').value.trim() || null,
         allergies: document.getElementById('pAllergies').value.trim() || 'None',
         chronic_conditions: document.getElementById('pChronic').value.trim() || 'None',
-        delivery_address: document.getElementById('pAddress').value.trim()
+        state: state,
+        lga: lga,
+        street_address: street,
+        delivery_address: `${street}, ${lga}, ${state}`
       };
 
       const { error } = await supabaseClient.from('profiles').upsert(payload);
