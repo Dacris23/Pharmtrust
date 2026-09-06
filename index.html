@@ -25,124 +25,211 @@
 </head>
 <body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500/30">
 
-  <header class="sticky top-0 z-40 bg-charcoal-900/90 backdrop-blur border-b border-slate-800">
+  <!-- ROLE GATEWAY MODAL (ONE-LINK ENTRY SCREEN) -->
+  <div id="roleGatewayModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl text-center">
+      <img src="logo.jpg" alt="PharmaTrust" class="w-14 h-14 rounded-2xl mx-auto mb-3 border border-slate-700 object-contain shadow-lg">
+      <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider mb-2">
+        PharmaTrust Gateway
+      </span>
+      <h2 class="text-xl sm:text-2xl font-extrabold text-white mb-1.5">Who are you accessing as?</h2>
+      <p class="text-xs text-slate-400 mb-5 max-w-md mx-auto">Please select your primary access role to be routed to the appropriate portal.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-2 text-left">
+        <!-- Student / Patient -->
+        <button onclick="selectRole('patient')" class="p-4 rounded-2xl bg-charcoal-950 border border-slate-800 hover:border-emerald-500 hover:bg-slate-900/60 transition group flex flex-col justify-between">
+          <div>
+            <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
+              <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-xs font-bold text-white mb-1">Student / Customer</h3>
+            <p class="text-[11px] text-slate-400 leading-snug">Order medications, upload prescriptions, and get fast delivery in Okada.</p>
+          </div>
+          <span class="mt-3 text-[10px] font-bold text-emerald-400 uppercase">Enter Storefront →</span>
+        </button>
+
+        <!-- Community Pharmacist -->
+        <button onclick="selectRole('pharmacist')" class="p-4 rounded-2xl bg-charcoal-950 border border-slate-800 hover:border-blue-500 hover:bg-slate-900/60 transition group flex flex-col justify-between">
+          <div>
+            <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
+              <i data-lucide="stethoscope" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-xs font-bold text-white mb-1">Dispensary Pharmacist</h3>
+            <p class="text-[11px] text-slate-400 leading-snug">Audit doctor prescriptions, manage stock, and issue patient quotes.</p>
+          </div>
+          <span class="mt-3 text-[10px] font-bold text-blue-400 uppercase">Staff Portal →</span>
+        </button>
+
+        <!-- Industrial Supplier -->
+        <button onclick="selectRole('wholesale')" class="p-4 rounded-2xl bg-charcoal-950 border border-slate-800 hover:border-amber-500 hover:bg-slate-900/60 transition group flex flex-col justify-between">
+          <div>
+            <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
+              <i data-lucide="building-2" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-xs font-bold text-white mb-1">Industrial Supplier</h3>
+            <p class="text-[11px] text-slate-400 leading-snug">Distribute master cartons, receive depot orders, and fulfill bulk waybills.</p>
+          </div>
+          <span class="mt-3 text-[10px] font-bold text-amber-400 uppercase">B2B Wholesale →</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Responsive Navigation Header -->
+  <header class="sticky top-0 z-40 bg-charcoal-900/95 backdrop-blur border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center space-x-3">
-        <img src="logo.jpg" alt="PharmaTrust Logo" class="h-10 w-10 object-contain rounded-xl shadow-md border border-slate-700">
-        <div>
-          <span class="text-xl font-bold tracking-tight text-white">Pharma<span class="text-emerald-500">Trust</span></span>
-          <span class="hidden sm:block text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Okada Clinical Network</span>
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center space-x-2.5 flex-shrink-0">
+        <img src="logo.jpg" alt="PharmaTrust" class="h-9 w-9 object-contain rounded-xl border border-slate-700 shadow">
+        <div class="flex flex-col">
+          <span class="text-base sm:text-lg font-extrabold tracking-tight text-white leading-none">
+            Pharma<span class="text-emerald-400">Trust</span>
+          </span>
+          <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">
+            Okada Network
+          </span>
         </div>
       </a>
 
-      <nav class="flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm">
-        <a href="index.html" class="font-semibold text-emerald-400 border-b-2 border-emerald-500 pb-0.5">Catalog</a>
-        <a href="upload-rx.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
-        <a href="profile.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">My Profile</a>
-        <a href="contact.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">Contact</a>
-        <div id="userBadge" class="hidden items-center gap-1.5 bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-700 text-xs text-slate-300">
-          <i data-lucide="user-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span id="userDisplayName" class="font-medium">Patient</span>
-        </div>
-        <button id="authTriggerBtn" onclick="openAuthModal()" class="text-xs px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition shadow-md shadow-emerald-900/20">
-          Sign In / Register
+      <!-- Desktop Links -->
+      <nav class="hidden md:flex items-center space-x-5 text-xs font-medium">
+        <button onclick="openRoleGateway()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1 text-[11px]">
+          <i data-lucide="repeat" class="w-3 h-3 text-emerald-400"></i> Switch Role
         </button>
-        <button onclick="toggleModal('cartModal')" class="relative p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition">
-          <i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-400"></i>
-          <span id="cartCount" class="absolute -top-1 -right-1 bg-emerald-500 text-charcoal-950 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
-        </button>
+        <a href="index.html" class="text-emerald-400 border-b-2 border-emerald-500 pb-0.5 font-bold">Catalog</a>
+        <a href="upload-rx.html" class="text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
+        <a href="profile.html" class="text-slate-300 hover:text-emerald-400 transition">My Profile</a>
+        <a href="contact.html" class="text-slate-300 hover:text-emerald-400 transition">Contact</a>
       </nav>
+
+      <!-- Right Action Controls -->
+      <div class="flex items-center space-x-2">
+        <button id="authTriggerBtn" onclick="openAuthModal()" class="hidden sm:inline-flex text-xs px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition">
+          Sign In
+        </button>
+        <button onclick="toggleModal('cartModal')" class="relative p-2 bg-slate-800 rounded-xl hover:bg-slate-700 transition">
+          <i data-lucide="shopping-bag" class="w-4 h-4 text-emerald-400"></i>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-emerald-500 text-charcoal-950 text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+        </button>
+        <!-- Mobile Menu Toggle Button -->
+        <button onclick="toggleMobileNav()" class="md:hidden p-2 text-slate-400 hover:text-white bg-slate-800/80 rounded-xl">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Slide-Down Tray -->
+    <div id="mobileNavTray" class="hidden md:hidden border-t border-slate-800 bg-charcoal-900 px-4 py-3 space-y-2 text-xs font-semibold">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-800/60">
+        <button onclick="openRoleGateway(); toggleMobileNav();" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 flex items-center gap-1.5 text-[11px]">
+          <i data-lucide="repeat" class="w-3 h-3 text-emerald-400"></i> Switch Role
+        </button>
+        <button onclick="openAuthModal(); toggleMobileNav();" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold text-[11px]">
+          Sign In / Account
+        </button>
+      </div>
+      <a href="index.html" class="block py-1.5 text-emerald-400 font-bold">Catalog Storefront</a>
+      <a href="upload-rx.html" class="block py-1.5 text-slate-300 hover:text-white">Upload Doctor Prescription</a>
+      <a href="profile.html" class="block py-1.5 text-slate-300 hover:text-white">My Clinical Profile & Allergies</a>
+      <a href="contact.html" class="block py-1.5 text-slate-300 hover:text-white">Emergency Hotlines & Contact</a>
     </div>
   </header>
 
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
     <div class="bg-gradient-to-r from-charcoal-900 via-charcoal-800 to-emerald-950/40 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
       <div class="max-w-2xl relative z-10">
         <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full mb-3">
           <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
           <span>Verified NAFDAC & PCN Regulated Network • Okada</span>
         </div>
-        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3 leading-tight">
+        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3 leading-tight">
           Connecting Pharmacies.<br><span class="text-emerald-400">Building Trust. Improving Lives.</span>
         </h1>
-        <p class="text-slate-400 text-sm sm:text-base mb-6 leading-relaxed">
-          Order genuine medicines with verified dosage strengths and automated 6-month expiry discount clearances. Patient ratings, clinical safety cross-checks, and WhatsApp dispatch.
+        <p class="text-slate-400 text-xs sm:text-sm mb-6 leading-relaxed">
+          Order genuine medicines with verified dosage strengths and automated 6-month expiry discount clearances. Real patient ratings, clinical contraindication checks, and instant WhatsApp dispatch.
         </p>
-        <div class="flex flex-wrap gap-3">
-          <a href="#catalog" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm transition shadow-lg shadow-emerald-900/30">
-            <i data-lucide="search" class="w-4 h-4 mr-2"></i> Browse Verified Catalog
+        <div class="flex flex-wrap gap-2.5">
+          <a href="#catalog" class="inline-flex items-center px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition shadow-lg shadow-emerald-900/30">
+            <i data-lucide="search" class="w-3.5 h-3.5 mr-1.5"></i> Browse Catalog
           </a>
-          <a href="upload-rx.html" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700 transition">
-            <i data-lucide="file-up" class="w-4 h-4 mr-2"></i> Upload Doctor Rx
+          <a href="upload-rx.html" class="inline-flex items-center px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition">
+            <i data-lucide="file-up" class="w-3.5 h-3.5 mr-1.5"></i> Upload Doctor Rx
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-      <div class="bg-charcoal-900/60 border border-slate-800/80 p-4 rounded-2xl flex items-center space-x-3">
-        <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl"><i data-lucide="shield" class="w-5 h-5"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Trusted</h4><p class="text-[11px] text-slate-400">NAFDAC Verified</p></div>
+  <!-- Four Pillars Showcase -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
+      <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
+        <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl"><i data-lucide="shield" class="w-4 h-4"></i></div>
+        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Trusted</h4><p class="text-[10px] text-slate-400">NAFDAC Verified</p></div>
       </div>
-      <div class="bg-charcoal-900/60 border border-slate-800/80 p-4 rounded-2xl flex items-center space-x-3">
-        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-xl"><i data-lucide="network" class="w-5 h-5"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Connected</h4><p class="text-[11px] text-slate-400">Okada Dispensaries</p></div>
+      <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
+        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-xl"><i data-lucide="network" class="w-4 h-4"></i></div>
+        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Connected</h4><p class="text-[10px] text-slate-400">Okada Dispensaries</p></div>
       </div>
-      <div class="bg-charcoal-900/60 border border-slate-800/80 p-4 rounded-2xl flex items-center space-x-3">
-        <div class="p-2 bg-teal-500/10 text-teal-400 rounded-xl"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Accessible</h4><p class="text-[11px] text-slate-400">Campus & Town</p></div>
+      <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
+        <div class="p-2 bg-teal-500/10 text-teal-400 rounded-xl"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
+        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Accessible</h4><p class="text-[10px] text-slate-400">Campus & Town</p></div>
       </div>
-      <div class="bg-charcoal-900/60 border border-slate-800/80 p-4 rounded-2xl flex items-center space-x-3">
-        <div class="p-2 bg-rose-500/10 text-rose-400 rounded-xl"><i data-lucide="heart-pulse" class="w-5 h-5"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Reliable</h4><p class="text-[11px] text-slate-400">Clinical Safety Checks</p></div>
+      <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
+        <div class="p-2 bg-rose-500/10 text-rose-400 rounded-xl"><i data-lucide="heart-pulse" class="w-4 h-4"></i></div>
+        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Reliable</h4><p class="text-[10px] text-slate-400">Safety Checks</p></div>
       </div>
     </div>
   </section>
 
+  <!-- Catalog Filter Bar -->
   <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-    <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
-      <div class="relative w-full md:w-96">
-        <i data-lucide="search" class="absolute left-3 top-3.5 w-5 h-5 text-slate-400"></i>
-        <input type="text" id="searchInput" placeholder="Search brand, generic, strength, or uses..." class="w-full bg-charcoal-900 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500" oninput="filterProducts()">
+    <div class="flex flex-col md:flex-row gap-3 justify-between items-center">
+      <div class="relative w-full md:w-80">
+        <i data-lucide="search" class="absolute left-3 top-3 w-4 h-4 text-slate-400"></i>
+        <input type="text" id="searchInput" placeholder="Search brand, generic, or use..." class="w-full bg-charcoal-900 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500" oninput="filterProducts()">
       </div>
-      <div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 scrollbar-none" id="categoryFilters">
-        <button onclick="setCategory('All')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition">All</button>
-        <button onclick="setCategory('Anti-Infectives & Antibiotics')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Antibiotics</button>
-        <button onclick="setCategory('Pain Relief & Fever')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Pain Relief</button>
-        <button onclick="setCategory('Chronic Care')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Chronic Care</button>
-        <button onclick="setCategory('Clearance')" class="category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 transition">Flash Deals (-35%)</button>
+      <div class="flex gap-1.5 overflow-x-auto w-full md:w-auto pb-1 scrollbar-none" id="categoryFilters">
+        <button onclick="setCategory('All')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition">All</button>
+        <button onclick="setCategory('Anti-Infectives & Antibiotics')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Antibiotics</button>
+        <button onclick="setCategory('Pain Relief & Fever')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Pain Relief</button>
+        <button onclick="setCategory('Chronic Care')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Chronic Care</button>
+        <button onclick="setCategory('Clearance')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 transition">Clearance (-35%)</button>
       </div>
     </div>
   </section>
 
+  <!-- Product Catalog Grid -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="col-span-full py-16 text-center text-slate-400">Loading catalog from database...</div>
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="col-span-full py-16 text-center text-slate-400 text-xs">Loading verified catalog...</div>
     </div>
   </main>
 
-  <footer class="mt-20 border-t border-slate-800 bg-charcoal-900/60 pt-12 pb-10 text-xs text-slate-400">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-      <div class="space-y-3">
+  <!-- Universal Footer with LinkedIn -->
+  <footer class="mt-20 border-t border-slate-800 bg-charcoal-900/60 pt-10 pb-8 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div class="space-y-2.5">
         <div class="flex items-center space-x-2">
-          <img src="logo.jpg" alt="Logo" class="w-7 h-7 rounded-lg object-contain">
+          <img src="logo.jpg" alt="Logo" class="w-6 h-6 rounded-md object-contain">
           <span class="font-bold text-white text-sm">PharmaTrust Ecosystem</span>
         </div>
         <p class="text-[11px] leading-relaxed">
           Decentralized pharmaceutical inventory management, prescription audit trails, and anti-counterfeit drug logistics for Okada.
         </p>
-        <div class="pt-2 flex items-center space-x-3">
-          <a href="https://linkedin.com/company/pharmatrust-ng" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition">
-            <i data-lucide="linkedin" class="w-3.5 h-3.5 text-blue-400"></i>
+        <div class="pt-1">
+          <a href="https://linkedin.com/company/pharmatrust-ng" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition text-[11px]">
+            <i data-lucide="linkedin" class="w-3 h-3 text-blue-400"></i>
             <span>LinkedIn Profile ↗</span>
           </a>
         </div>
       </div>
       <div>
-        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-3">Patient Portals</h4>
-        <ul class="space-y-2">
+        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-2.5">Patient Portals</h4>
+        <ul class="space-y-1.5 text-[11px]">
           <li><a href="index.html" class="hover:text-emerald-400 transition">Medication Catalog</a></li>
           <li><a href="upload-rx.html" class="hover:text-emerald-400 transition">Doctor Prescription Intake</a></li>
           <li><a href="profile.html" class="hover:text-emerald-400 transition">Clinical Health Profile</a></li>
@@ -150,7 +237,7 @@
         </ul>
       </div>
       <div>
-        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-3">Dispensary Hotlines</h4>
+        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-2.5">Dispensary Hotlines</h4>
         <ul class="space-y-1.5 text-[11px] font-mono text-slate-300">
           <li>• <a href="https://wa.me/2348065092665" class="hover:text-emerald-400">+234 806 509 2665</a> (Clinical)</li>
           <li>• <a href="https://wa.me/2348169489126" class="hover:text-emerald-400">+234 816 948 9126</a> (Support)</li>
@@ -158,15 +245,15 @@
         </ul>
       </div>
       <div>
-        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-3">Enterprise Staff</h4>
-        <p class="text-[11px] text-slate-300 mb-2">Licensed Superintendent Pharmacist:</p>
-        <p class="text-xs text-emerald-400 font-semibold mb-3">MedPlus Okada Central Node</p>
-        <a href="admin.html" class="inline-block px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-[11px] transition">Staff Portal ↗</a>
+        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-2.5">Enterprise Staff</h4>
+        <p class="text-[11px] text-slate-300 mb-1">Superintendent Pharmacist On-Call:</p>
+        <p class="text-xs text-emerald-400 font-semibold mb-2">MedPlus Okada Central Node</p>
+        <a href="admin.html" class="inline-block px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-[10px] transition">Staff Portal ↗</a>
       </div>
     </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-[10px] text-slate-500">
-      <div>© 2026 PharmaTrust. All rights reserved. Connecting Pharmacies. Building Trust. Improving Lives.</div>
-      <div class="mt-2 sm:mt-0 space-x-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-[10px] text-slate-500">
+      <div>© 2026 PharmaTrust. Connecting Pharmacies. Building Trust. Improving Lives.</div>
+      <div class="mt-1 sm:mt-0 space-x-2">
         <span>Okada, Edo State, Nigeria</span>
         <span>•</span>
         <span>PCN/OKD/2026/01</span>
@@ -174,6 +261,7 @@
     </div>
   </footer>
 
+  <!-- Auth Modal -->
   <div id="authModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl">
       <div class="flex justify-between items-start mb-4">
@@ -185,69 +273,72 @@
       </div>
 
       <div class="flex bg-charcoal-950 p-1 rounded-xl border border-slate-800 mb-4">
-        <button id="authTabSignIn" onclick="setAuthMode('signin')" class="flex-1 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition">Sign In</button>
-        <button id="authTabSignUp" onclick="setAuthMode('signup')" class="flex-1 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Register</button>
+        <button id="authTabSignIn" onclick="setAuthMode('signin')" class="flex-1 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition">Sign In</button>
+        <button id="authTabSignUp" onclick="setAuthMode('signup')" class="flex-1 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Register</button>
       </div>
 
       <form onsubmit="handleAuthSubmit(event)" class="space-y-3 text-xs">
         <div>
           <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Email Address</label>
-          <input type="email" id="authEmail" required placeholder="you@gmail.com" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+          <input type="email" id="authEmail" required placeholder="you@gmail.com" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
         </div>
         <div>
           <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Password</label>
-          <input type="password" id="authPassword" required placeholder="••••••••••••" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+          <input type="password" id="authPassword" required placeholder="••••••••••••" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
         </div>
-        <div id="authError" class="hidden p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px]"></div>
-        <button type="submit" id="authSubmitBtn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition">
+        <div id="authError" class="hidden p-2 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px]"></div>
+        <button type="submit" id="authSubmitBtn" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition">
           Sign In
         </button>
       </form>
     </div>
   </div>
 
+  <!-- Drug Details & Patient Reviews Modal -->
   <div id="drugModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-start mb-4">
+    <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-lg w-full p-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-start mb-3">
         <div>
-          <h3 id="modalTitle" class="text-2xl font-bold text-white"></h3>
+          <h3 id="modalTitle" class="text-xl font-bold text-white"></h3>
           <p id="modalGeneric" class="text-xs text-emerald-400 font-medium"></p>
         </div>
         <button onclick="toggleModal('drugModal')" class="text-slate-400 hover:text-white">✕</button>
       </div>
 
-      <img id="modalImg" class="w-full h-44 object-cover rounded-xl mb-4 border border-slate-800" src="" alt="">
+      <img id="modalImg" class="w-full h-40 object-cover rounded-xl mb-3 border border-slate-800" src="" alt="">
 
-      <div class="space-y-3.5 text-sm">
-        <div id="controlledWarningBox" class="hidden p-3 bg-rose-950/40 border border-rose-600/50 rounded-xl text-xs text-rose-300 font-medium">
-          🚨 <strong>SCHEDULE II CONTROLLED DRUG:</strong> Doctor prescription verification and valid government identification required prior to physical packaging.
+      <div class="space-y-3 text-xs">
+        <div id="controlledWarningBox" class="hidden p-2.5 bg-rose-950/40 border border-rose-600/50 rounded-xl text-rose-300 font-medium">
+          🚨 <strong>SCHEDULE II CONTROLLED DRUG:</strong> Doctor prescription verification required prior to physical packaging.
         </div>
-        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
-          <span class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Clinical Indications</span>
-          <p id="modalUses" class="text-slate-200 text-xs"></p>
+        <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+          <span class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">Clinical Indications</span>
+          <p id="modalUses" class="text-slate-200"></p>
         </div>
-        <div class="p-3 bg-amber-950/20 border border-amber-500/20 rounded-xl">
-          <span class="block text-[10px] font-semibold text-amber-400 uppercase tracking-wider mb-1">Key Warnings & Adverse Effects</span>
-          <p id="modalWarnings" class="text-amber-200/90 text-xs"></p>
+        <div class="p-2.5 bg-amber-950/20 border border-amber-500/20 rounded-xl">
+          <span class="block text-[10px] font-semibold text-amber-400 uppercase tracking-wider mb-0.5">Key Warnings</span>
+          <p id="modalWarnings" class="text-amber-200/90"></p>
         </div>
-        <div class="p-3 bg-rose-950/20 border border-rose-500/20 rounded-xl">
-          <span class="block text-[10px] font-semibold text-rose-400 uppercase tracking-wider mb-1">Contraindications</span>
-          <p id="modalContra" class="text-rose-200/90 text-xs"></p>
+        <div class="p-2.5 bg-rose-950/20 border border-rose-500/20 rounded-xl">
+          <span class="block text-[10px] font-semibold text-rose-400 uppercase tracking-wider mb-0.5">Contraindications</span>
+          <p id="modalContra" class="text-rose-200/90"></p>
         </div>
 
-        <div class="p-3.5 bg-charcoal-950 rounded-xl border border-slate-800">
+        <!-- Verified Patient Ratings & Reviews Section -->
+        <div class="p-3 bg-charcoal-950 rounded-xl border border-slate-800">
           <div class="flex items-center justify-between mb-2">
             <span class="text-xs font-bold text-white uppercase tracking-wider">Patient Ratings & Feedback</span>
             <span id="reviewAverage" class="text-amber-400 text-xs font-bold">★ 5.0</span>
           </div>
-          <div id="reviewsList" class="space-y-2 max-h-36 overflow-y-auto mb-3 text-xs divide-y divide-slate-800">
-            <p class="text-slate-500 text-[11px] py-2">Loading reviews...</p>
+          <div id="reviewsList" class="space-y-2 max-h-32 overflow-y-auto mb-2.5 divide-y divide-slate-800">
+            <p class="text-slate-500 text-[11px] py-1">Loading reviews...</p>
           </div>
 
-          <form onsubmit="handleReviewSubmit(event)" class="pt-2 border-t border-slate-800/80 space-y-2">
+          <!-- Add Review Form -->
+          <form onsubmit="handleReviewSubmit(event)" class="pt-2 border-t border-slate-800/80 space-y-1.5">
             <div class="flex items-center gap-2">
-              <span class="text-[10px] text-slate-400 font-semibold uppercase">Your Rating:</span>
-              <select id="reviewRating" class="bg-charcoal-900 border border-slate-700 rounded-lg px-2 py-1 text-amber-400 font-bold text-xs outline-none">
+              <span class="text-[10px] text-slate-400 font-semibold uppercase">Rating:</span>
+              <select id="reviewRating" class="bg-charcoal-900 border border-slate-700 rounded-lg px-2 py-0.5 text-amber-400 font-bold text-xs outline-none">
                 <option value="5">★★★★★ (5/5)</option>
                 <option value="4">★★★★☆ (4/5)</option>
                 <option value="3">★★★☆☆ (3/5)</option>
@@ -256,8 +347,8 @@
               </select>
             </div>
             <div class="flex gap-2">
-              <input type="text" id="reviewComment" required placeholder="Share your experience with this medication..." class="flex-1 bg-charcoal-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-emerald-500 outline-none">
-              <button type="submit" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs whitespace-nowrap transition">
+              <input type="text" id="reviewComment" required placeholder="Share your experience with this medication..." class="flex-1 bg-charcoal-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs text-white focus:border-emerald-500 outline-none">
+              <button type="submit" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs whitespace-nowrap transition">
                 Post
               </button>
             </div>
@@ -267,9 +358,9 @@
         <div class="flex items-center justify-between pt-2 border-t border-slate-800">
           <div>
             <span class="text-[10px] text-slate-400 block uppercase font-semibold">Unit Price</span>
-            <span id="modalPrice" class="text-xl font-extrabold text-white"></span>
+            <span id="modalPrice" class="text-lg font-extrabold text-white"></span>
           </div>
-          <button id="modalAddBtn" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl uppercase transition">
+          <button id="modalAddBtn" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl uppercase transition">
             Add to Order
           </button>
         </div>
@@ -277,32 +368,33 @@
     </div>
   </div>
 
+  <!-- Shopping Cart Modal -->
   <div id="cartModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-bold text-white">Your Medication Cart</h3>
+    <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-md w-full p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="text-lg font-bold text-white">Your Medication Cart</h3>
         <button onclick="toggleModal('cartModal')" class="text-slate-400 hover:text-white">✕</button>
       </div>
 
-      <div id="cartItemsContainer" class="divide-y divide-slate-800 max-h-60 overflow-y-auto mb-4"></div>
+      <div id="cartItemsContainer" class="divide-y divide-slate-800 max-h-56 overflow-y-auto mb-3"></div>
 
-      <div class="pt-3 border-t border-slate-800 space-y-2 text-sm mb-4">
-        <div class="flex justify-between text-slate-400 text-xs">
+      <div class="pt-2.5 border-t border-slate-800 space-y-1.5 text-xs mb-3">
+        <div class="flex justify-between text-slate-400">
           <span>Subtotal</span>
           <span id="cartSubtotal" class="text-white font-semibold">₦0</span>
         </div>
-        <div class="flex justify-between text-slate-400 text-xs">
+        <div class="flex justify-between text-slate-400">
           <span>Delivery Fee (Okada Town & Campus)</span>
           <span id="cartDelivery" class="text-white font-semibold">₦1,000</span>
         </div>
-        <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800">
+        <div class="flex justify-between text-sm font-bold text-white pt-1.5 border-t border-slate-800">
           <span>Total Payable</span>
           <span id="cartTotal" class="text-emerald-400 font-extrabold">₦0</span>
         </div>
       </div>
 
-      <button onclick="checkoutOrder()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl flex items-center justify-center text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30">
-        <i data-lucide="message-circle" class="w-4 h-4 mr-2"></i> Submit & Dispatch via WhatsApp
+      <button onclick="checkoutOrder()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl flex items-center justify-center text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30">
+        <i data-lucide="message-circle" class="w-4 h-4 mr-1.5"></i> Submit via WhatsApp
       </button>
     </div>
   </div>
@@ -320,29 +412,51 @@
     let authMode = 'signin';
     let currentModalProductId = null;
 
+    function toggleMobileNav() {
+      const tray = document.getElementById('mobileNavTray');
+      tray.classList.toggle('hidden');
+    }
+
+    function checkGatewayOnLoad() {
+      const savedRole = localStorage.getItem('pharmatrust_role');
+      if (!savedRole) {
+        openRoleGateway();
+      }
+    }
+
+    function openRoleGateway() {
+      const m = document.getElementById('roleGatewayModal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function selectRole(role) {
+      localStorage.setItem('pharmatrust_role', role);
+      const m = document.getElementById('roleGatewayModal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+
+      if (role === 'pharmacist' || role === 'wholesale') {
+        window.location.href = 'admin.html';
+      }
+    }
+
     async function checkAuthSession() {
       const { data: { session } } = await supabaseClient.auth.getSession();
       const triggerBtn = document.getElementById('authTriggerBtn');
-      const badge = document.getElementById('userBadge');
-      const nameDisplay = document.getElementById('userDisplayName');
 
       if (session) {
         currentUser = session.user;
         triggerBtn.innerText = "Sign Out";
-        triggerBtn.className = "text-xs px-3 py-1.5 rounded-lg bg-rose-500/10 text-rose-300 border border-rose-500/20 hover:bg-rose-500/20 transition";
-        badge.classList.remove('hidden');
-        badge.classList.add('flex');
-        nameDisplay.innerText = currentUser.email.split('@')[0];
+        triggerBtn.className = "hidden sm:inline-flex text-xs px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-300 border border-rose-500/20 hover:bg-rose-500/20 transition";
 
         const { data: profile } = await supabaseClient.from('profiles').select('*').eq('user_id', currentUser.id).single();
         if (profile) currentUserProfile = profile;
       } else {
         currentUser = null;
         currentUserProfile = null;
-        triggerBtn.innerText = "Sign In / Register";
-        triggerBtn.className = "text-xs px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition shadow-md shadow-emerald-900/20";
-        badge.classList.add('hidden');
-        badge.classList.remove('flex');
+        triggerBtn.innerText = "Sign In";
+        triggerBtn.className = "hidden sm:inline-flex text-xs px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition";
       }
       lucide.createIcons();
     }
@@ -365,16 +479,16 @@
       const btn = document.getElementById('authSubmitBtn');
 
       if (mode === 'signin') {
-        tabSignIn.className = "flex-1 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition";
-        tabSignUp.className = "flex-1 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
+        tabSignIn.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition";
+        tabSignUp.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
         title.innerText = "Sign In to PharmaTrust";
-        sub.innerText = "Access your confidential patient profile & orders.";
+        sub.innerText = "Access your patient profile & orders.";
         btn.innerText = "Sign In";
       } else {
-        tabSignUp.className = "flex-1 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition";
-        tabSignIn.className = "flex-1 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
+        tabSignUp.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition";
+        tabSignIn.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
         title.innerText = "Create Your Account";
-        sub.innerText = "Register to safeguard allergy warnings and fast delivery.";
+        sub.innerText = "Register to safeguard allergy warnings.";
         btn.innerText = "Register Account";
       }
     }
@@ -406,7 +520,7 @@
           errEl.classList.remove('hidden');
         } else {
           toggleModal('authModal');
-          alert("Account created! Please verify your inbox and update your vitals under My Profile.");
+          alert("Account registered! Please check your email inbox to verify your account.");
           checkAuthSession();
         }
       }
@@ -491,55 +605,55 @@
 
       grid.innerHTML = items.map(p => `
         <div class="bg-charcoal-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col hover:border-slate-700 transition">
-          <div class="relative h-44 overflow-hidden bg-slate-950">
+          <div class="relative h-40 overflow-hidden bg-slate-950">
             <img src="${p.img}" alt="${p.brand}" loading="lazy" class="w-full h-full object-cover">
             ${p.is_clearance ? `
-              <span class="absolute top-3 left-3 bg-amber-500 text-charcoal-950 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-                ⚡ Flash Sale (-35%)
+              <span class="absolute top-2.5 left-2.5 bg-amber-500 text-charcoal-950 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                ⚡ Flash (-35%)
               </span>` : ''}
             ${p.is_controlled ? `
-              <span class="absolute top-3 right-3 bg-rose-500/30 text-rose-300 border border-rose-500/50 text-[10px] font-bold px-2 py-0.5 rounded-md">
+              <span class="absolute top-2.5 right-2.5 bg-rose-500/30 text-rose-300 border border-rose-500/50 text-[10px] font-bold px-2 py-0.5 rounded-md">
                 🚨 Controlled
               </span>` : (p.rx_required ? `
-              <span class="absolute top-3 right-3 bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
+              <span class="absolute top-2.5 right-2.5 bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
                 Rx Required
               </span>` : `
-              <span class="absolute top-3 right-3 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
+              <span class="absolute top-2.5 right-2.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
                 OTC
               </span>`)}
           </div>
 
-          <div class="p-5 flex-1 flex flex-col justify-between">
+          <div class="p-4 flex-1 flex flex-col justify-between">
             <div>
-              <div class="text-[11px] text-emerald-400 font-medium mb-1 flex items-center">
+              <div class="text-[10px] text-emerald-400 font-medium mb-1 flex items-center">
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5"></span>
                 ${p.pharmacy}
               </div>
-              <h3 class="text-base font-bold text-white leading-tight">${p.brand}</h3>
-              <p class="text-xs text-slate-400 italic mb-2">${p.generic}</p>
-              <div class="text-[11px] text-slate-500 mb-3">${p.dosage} • ${p.pack}</div>
+              <h3 class="text-sm font-bold text-white leading-tight">${p.brand}</h3>
+              <p class="text-xs text-slate-400 italic mb-1.5">${p.generic}</p>
+              <div class="text-[10px] text-slate-500 mb-3">${p.dosage} • ${p.pack}</div>
             </div>
 
             <div>
-              <div class="flex items-baseline space-x-2 mb-4">
-                <span class="text-lg font-extrabold text-white">₦${Number(p.price).toLocaleString()}</span>
+              <div class="flex items-baseline space-x-2 mb-3">
+                <span class="text-base font-extrabold text-white">₦${Number(p.price).toLocaleString()}</span>
                 ${p.original_price ? `<span class="text-xs text-slate-500 line-through">₦${Number(p.original_price).toLocaleString()}</span>` : ''}
               </div>
 
               ${p.in_stock ? `
                 <div class="grid grid-cols-2 gap-2">
                   <button onclick="openDrugModal('${p.id}')" class="py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
-                    Clinical & Reviews
+                    Details
                   </button>
                   <button onclick="addToCart('${p.id}')" class="py-2 text-xs font-semibold rounded-lg ${p.is_controlled ? 'bg-amber-600 hover:bg-amber-500' : 'bg-emerald-600 hover:bg-emerald-500'} text-white transition">
                     ${p.is_controlled ? 'Order (Rx)' : 'Order'}
                   </button>
                 </div>
               ` : `
-                <div class="p-2.5 bg-rose-950/20 border border-rose-500/20 rounded-xl text-center">
-                  <span class="text-[11px] text-rose-300 font-semibold block mb-1">Out of Stock at ${p.pharmacy}</span>
+                <div class="p-2 bg-rose-950/20 border border-rose-500/20 rounded-xl text-center">
+                  <span class="text-[10px] text-rose-300 font-semibold block mb-0.5">Out of Stock at Node</span>
                   <button onclick="routeToNearestPharmacy('${p.generic}')" class="text-[10px] text-emerald-400 underline font-semibold">
-                    Find nearest dispensary in Okada ↗
+                    Locate nearby in Okada ↗
                   </button>
                 </div>
               `}
@@ -553,10 +667,10 @@
     function routeToNearestPharmacy(generic) {
       const match = products.find(p => p.generic.toLowerCase().includes(generic.toLowerCase()) && p.in_stock);
       if (match) {
-        alert(`Stock located! Available at ${match.pharmacy} for ₦${match.price.toLocaleString()}.`);
+        alert(`Stock found! Available at ${match.pharmacy} for ₦${match.price.toLocaleString()}.`);
         openDrugModal(match.id);
       } else {
-        alert("All dispensaries in Okada are currently out of this generic formula. Please use the Upload Rx page for direct procurement.");
+        alert("All dispensaries in Okada are currently out of this generic chemical. Use the Upload Rx page for direct dispensary sourcing.");
       }
     }
 
@@ -580,9 +694,9 @@
       currentCategory = cat;
       document.querySelectorAll('.category-btn').forEach(btn => {
         if (btn.innerText.includes(cat) || (cat === 'All' && btn.innerText === 'All')) {
-          btn.className = "category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition";
+          btn.className = "category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition";
         } else {
-          btn.className = "category-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition";
+          btn.className = "category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition";
         }
       });
       filterProducts();
@@ -630,7 +744,7 @@
         .order('created_at', { ascending: false });
 
       if (error || !data || data.length === 0) {
-        container.innerHTML = `<p class="text-slate-500 text-[11px] py-2">No reviews yet. Be the first patient to share feedback!</p>`;
+        container.innerHTML = `<p class="text-slate-500 text-[11px] py-1">No reviews yet. Be the first patient to share feedback!</p>`;
         avgBadge.innerText = 'New';
         return;
       }
@@ -639,7 +753,7 @@
       avgBadge.innerText = `★ ${avg} (${data.length} review${data.length > 1 ? 's' : ''})`;
 
       container.innerHTML = data.map(r => `
-        <div class="py-2">
+        <div class="py-1.5">
           <div class="flex justify-between items-center text-[11px] mb-0.5">
             <span class="font-bold text-white">${r.patient_name}</span>
             <span class="text-amber-400 font-bold">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
@@ -670,7 +784,7 @@
       }]);
 
       if (error) {
-        alert("Review failed: " + error.message);
+        alert("Review error: " + error.message);
       } else {
         document.getElementById('reviewComment').value = '';
         loadReviews(currentModalProductId);
@@ -690,7 +804,7 @@
       if (currentUserProfile && currentUserProfile.allergies && currentUserProfile.allergies.toLowerCase() !== 'none') {
         const userAllergies = currentUserProfile.allergies.toLowerCase();
         if (p.generic.toLowerCase().includes(userAllergies) || p.contraindications.toLowerCase().includes(userAllergies)) {
-          alert(`⚠️ CLINICAL SAFETY ALERT: You reported an allergy to (${currentUserProfile.allergies}). This medication may trigger an adverse reaction.`);
+          alert(`⚠️ CLINICAL INTERVENTION: You reported an allergy to (${currentUserProfile.allergies}). This medication may trigger an adverse reaction.`);
         }
       }
 
@@ -706,16 +820,16 @@
 
       const container = document.getElementById('cartItemsContainer');
       if (cart.length === 0) {
-        container.innerHTML = `<p class="text-xs text-slate-500 py-4 text-center">Cart is currently empty.</p>`;
+        container.innerHTML = `<p class="text-xs text-slate-500 py-3 text-center">Cart is currently empty.</p>`;
       } else {
         container.innerHTML = cart.map(item => `
-          <div class="py-2.5 flex justify-between items-center text-xs">
+          <div class="py-2 flex justify-between items-center text-xs">
             <div>
               <div class="font-bold text-white flex items-center gap-1.5">
                 ${item.brand}
                 ${item.is_controlled ? '<span class="text-[9px] bg-rose-500/20 text-rose-300 px-1 py-0.5 rounded">CONTROLLED</span>' : ''}
               </div>
-              <div class="text-slate-400 text-[11px]">${item.dosage} • ₦${Number(item.price).toLocaleString()} x ${item.qty}</div>
+              <div class="text-slate-400 text-[10px]">${item.dosage} • ₦${Number(item.price).toLocaleString()} x ${item.qty}</div>
             </div>
             <div class="font-bold text-white">₦${(Number(item.price) * item.qty).toLocaleString()}</div>
           </div>
@@ -759,12 +873,14 @@
       
       msg += `Please send bank account transfer details.`;
 
-      // Dual dispatch to primary clinical line (+234 806 509 2665)
       window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
     }
 
-    checkAuthSession();
-    loadMedicationsFromDB();
+    document.addEventListener('DOMContentLoaded', () => {
+      checkGatewayOnLoad();
+      checkAuthSession();
+      loadMedicationsFromDB();
+    });
   </script>
 </body>
 </html>
