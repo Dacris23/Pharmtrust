@@ -23,7 +23,7 @@
 </head>
 <body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500/30">
 
-  <!-- Global Header -->
+  <!-- Top Global Header -->
   <header class="border-b border-slate-800/80 bg-charcoal-900/60 backdrop-blur sticky top-0 z-30 px-4 sm:px-8 py-3.5 flex items-center justify-between">
     <div class="flex items-center space-x-3">
       <div class="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center font-bold text-white shadow-md shadow-emerald-900/30">
@@ -33,7 +33,7 @@
         <h1 class="text-base font-bold text-white tracking-tight flex items-center gap-2">
           PharmaTrust <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">Enterprise</span>
         </h1>
-        <p class="text-[11px] text-slate-400">Clinical Review & Industrial Supply Hub</p>
+        <p class="text-[11px] text-slate-400">Clinical Review & Dispensary Inventory Engine</p>
       </div>
     </div>
     <div class="flex items-center space-x-3 text-xs">
@@ -48,27 +48,27 @@
 
   <main class="max-w-6xl mx-auto p-4 sm:p-8">
 
-    <!-- Auth Login Form -->
+    <!-- Auth Login Card -->
     <div id="loginSection" class="max-w-md mx-auto my-12 bg-charcoal-900/80 border border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur">
       <div class="mb-6">
         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2">
-          Pharmacist Authentication
+          Licensed Pharmacist Gateway
         </span>
-        <h2 class="text-xl font-bold text-white">Dispensary Sign In</h2>
-        <p class="text-xs text-slate-400 mt-1">Manage prescription reviews, run 6-month expiry sales, and order industrial restock.</p>
+        <h2 class="text-xl font-bold text-white">Dispensary Portal Sign In</h2>
+        <p class="text-xs text-slate-400 mt-1">Review prescriptions, audit controlled drugs, manage expiry alarms, and order wholesale restock.</p>
       </div>
 
       <form onsubmit="handleLogin(event)" class="space-y-4">
         <div>
-          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Email</label>
-          <input type="email" id="loginEmail" required placeholder="pharmacist@pharmatrust.com" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 transition">
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Registered Email</label>
+          <input type="email" id="loginEmail" required placeholder="pharmacist@pharmatrust.ng" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 transition">
         </div>
         <div>
           <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Password</label>
           <input type="password" id="loginPassword" required placeholder="••••••••••••" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 transition">
         </div>
         <div id="loginError" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-mono"></div>
-        <button type="submit" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-sm transition">
+        <button type="submit" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-sm transition shadow-lg shadow-emerald-900/30">
           Access Dispensary Portal
         </button>
       </form>
@@ -77,40 +77,40 @@
     <!-- Active Management Dashboard -->
     <div id="portalSection" class="hidden space-y-8">
       
-      <!-- Top View Switcher -->
+      <!-- Top Switcher -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-charcoal-900 border border-slate-800 p-2 rounded-2xl">
         <div class="flex w-full sm:w-auto gap-1">
           <button id="navDispensaryBtn" onclick="switchView('dispensary')" class="flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-bold transition bg-emerald-600 text-white shadow">
             Retail Dispensary & Rx Queue
           </button>
           <button id="navWholesaleBtn" onclick="switchView('wholesale')" class="flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white">
-            B2B Industrial Restock Hub 📦
+            B2B Industrial Supply Hub 📦
           </button>
         </div>
         <div class="text-[11px] text-slate-400 px-3 hidden sm:block">
-          Network Node: <span class="text-emerald-400 font-semibold">Okada Central Dispensary</span>
+          Dispensary Node: <span class="text-emerald-400 font-semibold" id="nodePharmacyName">MedPlus Pharmacy Okada</span>
         </div>
       </div>
 
       <!-- DISPENSARY OPERATIONS VIEW -->
       <div id="dispensaryView" class="space-y-8">
         
-        <!-- Metrics -->
+        <!-- Metrics Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="bg-charcoal-900 border border-slate-800 p-5 rounded-2xl">
             <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Active Inventory</span>
-            <div id="metricTotalItems" class="text-2xl font-bold text-white mt-1">0 SKUs</div>
-            <span class="text-[11px] text-emerald-400 mt-1 inline-block">● Storefront live</span>
+            <div id="metricTotalItems" class="text-2xl font-bold text-white mt-1">0 Batches</div>
+            <span class="text-[11px] text-emerald-400 mt-1 inline-block">● Storefront connected</span>
           </div>
           <div class="bg-charcoal-900 border border-slate-800 p-5 rounded-2xl">
             <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Rx Review Queue</span>
             <div id="metricRxPending" class="text-2xl font-bold text-amber-400 mt-1">0 Pending</div>
-            <span class="text-[11px] text-slate-400 mt-1 inline-block">Doctor Prescriptions</span>
+            <span class="text-[11px] text-slate-400 mt-1 inline-block">Awaiting pharmacist quote</span>
           </div>
           <div class="bg-charcoal-900 border border-slate-800 p-5 rounded-2xl">
-            <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Expiry Alarm (6 Months)</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Expiry Alarms (6 Months)</span>
             <div id="metricNearExpiry" class="text-2xl font-bold text-amber-500 mt-1">0 Short-Dated</div>
-            <button onclick="triggerExpiryScan()" class="text-[10px] text-emerald-400 underline mt-1 block">Scan & apply 35% discount</button>
+            <button onclick="triggerExpiryScan()" class="text-[10px] text-emerald-400 underline mt-1 block font-semibold">Execute 35% liquidation scan</button>
           </div>
         </div>
 
@@ -119,7 +119,7 @@
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-base font-bold text-white">Incoming Prescriptions (Clinical Review)</h3>
-              <p class="text-xs text-slate-400">Inspect patient photos, audit contraindications, and issue official bills.</p>
+              <p class="text-xs text-slate-400">Inspect patient prescription uploads and issue formal bills.</p>
             </div>
             <button onclick="loadPrescriptions()" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-400 transition">
               Refresh Queue
@@ -131,7 +131,7 @@
               <thead>
                 <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider">
                   <th class="py-3 px-4">Patient</th>
-                  <th class="py-3 px-4">Address</th>
+                  <th class="py-3 px-4">Location</th>
                   <th class="py-3 px-4">Prescription Photo</th>
                   <th class="py-3 px-4">Status</th>
                   <th class="py-3 px-4 text-right">Actions</th>
@@ -144,104 +144,125 @@
           </div>
         </div>
 
-        <!-- ADD DRUG FORM -->
+        <!-- ADD PRODUCT & INVENTORY ITEM -->
         <div class="bg-charcoal-900 border border-slate-800 p-6 sm:p-8 rounded-3xl">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
             <div>
-              <h3 class="text-lg font-bold text-white">Add Medicine to Dispensary Stock</h3>
-              <p class="text-xs text-slate-400">Published items update the public catalog immediately.</p>
+              <h3 class="text-lg font-bold text-white">Add Medicine & Stock Batch</h3>
+              <p class="text-xs text-slate-400">Specify exact dosage strength, unit, pack size, and clinical contraindications.</p>
             </div>
-            <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700">Retail Inventory</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700">Clinical Formulation</span>
           </div>
 
-          <form onsubmit="handleAddDrug(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+          <form onsubmit="handleAddProductAndStock(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
             <div>
               <label class="text-slate-400 uppercase font-semibold text-[10px]">Product SKU / ID</label>
-              <input type="text" id="pId" required placeholder="PROD-006" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
+              <input type="text" id="pId" required placeholder="VENT-100-INH" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
             </div>
             <div>
               <label class="text-slate-400 uppercase font-semibold text-[10px]">Brand Name</label>
-              <input type="text" id="pBrand" required placeholder="e.g. Ventolin Inhaler" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
+              <input type="text" id="pBrand" required placeholder="Ventolin Inhaler" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
             </div>
             <div>
-              <label class="text-slate-400 uppercase font-semibold text-[10px]">Generic Name</label>
-              <input type="text" id="pGeneric" required placeholder="e.g. Salbutamol" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Generic Chemical Formula</label>
+              <input type="text" id="pGeneric" required placeholder="Salbutamol" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
             </div>
             <div>
-              <label class="text-slate-400 uppercase font-semibold text-[10px]">Category</label>
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Therapeutic Category</label>
               <select id="pCategory" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
                 <option>Anti-Infectives & Antibiotics</option>
                 <option>Pain Relief & Fever</option>
-                <option>Chronic Care & Diabetes</option>
+                <option>Chronic Care & Respiratory</option>
                 <option>Clearance Deals & OTC</option>
               </select>
             </div>
             <div>
               <label class="text-slate-400 uppercase font-semibold text-[10px]">Dosage Form</label>
-              <input type="text" id="pDosage" required placeholder="e.g. Inhaler, Tablet" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
+              <input type="text" id="pForm" required placeholder="Inhaler, Tablet, Suspension" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
             </div>
             <div>
-              <label class="text-slate-400 uppercase font-semibold text-[10px]">Pack Units</label>
-              <input type="text" id="pPack" required placeholder="e.g. 200 doses, 14 Tablets" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Dosage Strength (Numeric)</label>
+              <input type="number" step="any" id="pStrength" required placeholder="100" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
             </div>
             <div>
-              <label class="text-slate-400 uppercase font-semibold text-[10px]">Unit Price (NGN)</label>
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Strength Unit</label>
+              <select id="pUnit" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
+                <option value="mg">mg</option>
+                <option value="mcg">mcg</option>
+                <option value="g">g</option>
+                <option value="ml">ml</option>
+                <option value="IU">IU</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Pack Size</label>
+              <input type="text" id="pPack" required placeholder="200 doses, 14 Tablets" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
+            </div>
+            <div>
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Regular Price (NGN)</label>
               <input type="number" id="pPrice" required placeholder="6500" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
             </div>
             <div>
-              <label class="text-slate-400 uppercase font-semibold text-[10px]">NAFDAC Reg. Number</label>
-              <input type="text" id="pNafdac" required placeholder="04-9876" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Batch Number</label>
+              <input type="text" id="pBatch" required placeholder="B-VEN-2026" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
             </div>
             <div>
-              <label class="text-slate-400 uppercase font-semibold text-[10px]">Expiry Date</label>
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Batch Expiry Date</label>
               <input type="date" id="pExpiry" required class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
             </div>
-            <div class="sm:col-span-2 lg:col-span-3">
-              <label class="text-slate-400 uppercase font-semibold text-[10px]">Image Web Link</label>
-              <input type="url" id="pImg" required placeholder="https://images.unsplash.com/..." class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
+            <div>
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Current Stock Count</label>
+              <input type="number" id="pQty" required placeholder="50" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white focus:border-emerald-500 outline-none">
             </div>
-            <div class="sm:col-span-2 lg:col-span-3">
-              <label class="text-slate-400 uppercase font-semibold text-[10px]">Indications & Uses</label>
-              <input type="text" id="pUses" required placeholder="Primary therapeutic uses" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white">
+            <div class="sm:col-span-2 lg:col-span-4">
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">NAFDAC Reg. Number & Image Link</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+                <input type="text" id="pNafdac" required placeholder="NAFDAC: 04-9876" class="bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+                <input type="url" id="pImg" required placeholder="Image URL (e.g. https://images.unsplash.com/...)" class="bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+              </div>
             </div>
-            <div class="sm:col-span-1 lg:col-span-2">
-              <label class="text-slate-400 uppercase font-semibold text-[10px]">Warnings</label>
-              <input type="text" id="pWarnings" required placeholder="Dosage limits, directions" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white">
+            <div class="sm:col-span-2 lg:col-span-4">
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Primary Therapeutic Uses</label>
+              <input type="text" id="pUses" required placeholder="Relief of severe bronchospasm in acute bronchial asthma." class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white">
             </div>
-            <div class="sm:col-span-1 lg:col-span-1">
+            <div class="sm:col-span-2">
+              <label class="text-slate-400 uppercase font-semibold text-[10px]">Key Warnings & Side Effects</label>
+              <input type="text" id="pWarnings" required placeholder="Tremors, palpitations. Discontinue if paradoxical bronchospasm occurs." class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white">
+            </div>
+            <div class="sm:col-span-2">
               <label class="text-slate-400 uppercase font-semibold text-[10px]">Contraindications</label>
-              <input type="text" id="pContra" required placeholder="Conditions to avoid" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white">
+              <input type="text" id="pContra" required placeholder="Hypersensitivity to salbutamol. Severe cardiovascular disease." class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 mt-1 text-white">
             </div>
-            <div class="flex items-center space-x-6 sm:col-span-2 lg:col-span-3 pt-2">
-              <label class="flex items-center space-x-2 text-slate-300">
+            <div class="flex items-center space-x-6 sm:col-span-2 lg:col-span-4 pt-2">
+              <label class="flex items-center space-x-2 text-slate-300 cursor-pointer">
                 <input type="checkbox" id="pRx" class="rounded accent-emerald-500 w-4 h-4">
                 <span>Prescription Required (Rx)</span>
               </label>
-              <label class="flex items-center space-x-2 text-slate-300">
-                <input type="checkbox" id="pClearance" class="rounded accent-amber-500 w-4 h-4">
-                <span>Clearance Promotion</span>
+              <label class="flex items-center space-x-2 text-rose-400 cursor-pointer font-semibold">
+                <input type="checkbox" id="pControlled" class="rounded accent-rose-500 w-4 h-4">
+                <span>🚨 Controlled Drug (Schedule II NDLEA Audit)</span>
               </label>
             </div>
-            <div class="sm:col-span-2 lg:col-span-3 pt-2">
+            <div class="sm:col-span-2 lg:col-span-4 pt-2">
               <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-900/30">
-                Publish to Live Catalog
+                Register Product & Seed Inventory
               </button>
             </div>
           </form>
         </div>
 
-        <!-- CURRENT INVENTORY TABLE -->
+        <!-- RELATIONAL INVENTORY TABLE -->
         <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-8 overflow-hidden">
-          <h3 class="text-base font-bold text-white mb-4">Current Registered Stock</h3>
+          <h3 class="text-base font-bold text-white mb-4">Current Registered Dispensary Inventory</h3>
           <div class="overflow-x-auto -mx-6 sm:mx-0">
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider">
-                  <th class="py-3 px-4">Item</th>
-                  <th class="py-3 px-4">Category</th>
+                  <th class="py-3 px-4">Item & Strength</th>
+                  <th class="py-3 px-4">Batch No.</th>
                   <th class="py-3 px-4">Price</th>
                   <th class="py-3 px-4">Expiry</th>
-                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4">Stock Units</th>
                   <th class="py-3 px-4 text-right">Action</th>
                 </tr>
               </thead>
@@ -257,17 +278,57 @@
         <div class="bg-gradient-to-r from-amber-950/40 via-charcoal-900 to-charcoal-900 border border-amber-500/20 rounded-3xl p-6 sm:p-8">
           <div class="max-w-2xl">
             <span class="px-3 py-1 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/20 mb-3 inline-block">
-              Industrial B2B Restock Network
+              Industrial B2B Restock Hub
             </span>
-            <h2 class="text-2xl font-bold text-white">Manufacturer & Wholesale Catalog</h2>
+            <h2 class="text-2xl font-bold text-white">Manufacturer & Wholesale Bulk Procurement</h2>
             <p class="text-slate-400 text-xs sm:text-sm mt-1 leading-relaxed">
-              Order master cartons directly from Emzor, Fidson, Swipha, and licensed distributors.
+              Order outer shippers and cartons directly from verified distributors with tamper-evident batch documentation.
             </p>
           </div>
         </div>
 
-        <div id="wholesaleGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="col-span-full py-12 text-center text-slate-500 text-xs">Loading B2B wholesale listings...</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between shadow-lg">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-300 border border-amber-500/20">MOQ: 2 Cartons</span>
+                <span class="text-[11px] text-slate-400">Analgesic</span>
+              </div>
+              <h3 class="text-base font-bold text-white">Emzor Paracetamol 500mg</h3>
+              <p class="text-xs text-slate-400 italic mb-3">Paracetamol 500mg • Carton of 50 Packs (1000s)</p>
+              <div class="p-3 bg-charcoal-950 rounded-2xl mb-4 space-y-1 text-xs">
+                <div><span class="text-slate-500">Distributor Depot:</span> <span class="text-amber-400">Emzor Pharmaceuticals Ltd</span></div>
+                <div><span class="text-slate-500">Lead Time to Okada:</span> <span class="text-white">24 - 48 Hours</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="text-base font-extrabold text-white mb-3">₦48,000 / Carton</div>
+              <button onclick="orderWholesaleRestock('Emzor Paracetamol 500mg', 48000)" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-charcoal-950 font-bold rounded-xl text-xs uppercase tracking-wider">
+                Requisition Restock Order ↗
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between shadow-lg">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-300 border border-amber-500/20">MOQ: 1 Shipper</span>
+                <span class="text-[11px] text-slate-400">Antibiotic</span>
+              </div>
+              <h3 class="text-base font-bold text-white">Amoxil 500mg Capsules</h3>
+              <p class="text-xs text-slate-400 italic mb-3">Amoxicillin Trihydrate • Master Carton of 20 Tins</p>
+              <div class="p-3 bg-charcoal-950 rounded-2xl mb-4 space-y-1 text-xs">
+                <div><span class="text-slate-500">Distributor Depot:</span> <span class="text-amber-400">Fidson Healthcare Plc</span></div>
+                <div><span class="text-slate-500">Lead Time to Okada:</span> <span class="text-white">48 Hours</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="text-base font-extrabold text-white mb-3">₦92,000 / Shipper</div>
+              <button onclick="orderWholesaleRestock('Amoxil 500mg Capsules', 92000)" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-charcoal-950 font-bold rounded-xl text-xs uppercase tracking-wider">
+                Requisition Restock Order ↗
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -275,7 +336,7 @@
 
   </main>
 
-  <!-- QUOTE MODAL -->
+  <!-- QUOTE MODAL (Prescriptions) -->
   <div id="quoteModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-start mb-4 pb-3 border-b border-slate-800">
@@ -301,16 +362,16 @@
         <input type="hidden" id="quoteDeliveryAddr">
 
         <div>
-          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Itemized Medications & Dosages</label>
-          <textarea id="quoteItemized" required rows="3" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none font-mono" placeholder="• Augmentin 625mg (14 Tabs) - ₦14,500&#10;• Paracetamol 500mg (20 Tabs) - ₦1,000"></textarea>
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Itemized Medications & Strengths</label>
+          <textarea id="quoteItemized" required rows="3" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none font-mono" placeholder="• Augmentin 625mg (14 Tabs) - ₦14,500&#10;• Panadol Extra 500mg (20 Tabs) - ₦1,000"></textarea>
         </div>
         <div>
-          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Pharmacist Directives</label>
-          <input type="text" id="quoteNotes" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none" placeholder="Take Augmentin 1 tablet 12-hourly after food.">
+          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Clinical Pharmacist Directives</label>
+          <input type="text" id="quoteNotes" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none" placeholder="Take Augmentin 1 tablet every 12 hours after meals for 7 days.">
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Total Med Cost (NGN)</label>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Total Medication Cost (NGN)</label>
             <input type="number" id="quoteTotalAmount" required placeholder="15500" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white font-bold text-sm focus:border-emerald-500 outline-none">
           </div>
           <div>
@@ -320,7 +381,7 @@
         </div>
         <div class="pt-3 border-t border-slate-800 flex gap-2">
           <button type="button" onclick="rejectPrescription()" class="px-4 py-3 bg-rose-950/40 border border-rose-800/50 hover:bg-rose-900/60 text-rose-300 font-semibold rounded-xl text-xs transition">
-            Reject (Unclear Rx)
+            Reject (Illegible/Incomplete)
           </button>
           <button type="submit" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-900/40">
             Approve & Send Bill via WhatsApp
@@ -336,7 +397,7 @@
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let prescriptionsCache = [];
-    let wholesaleProducts = [];
+    let activePharmacyId = null;
 
     function switchView(view) {
       const dispView = document.getElementById('dispensaryView');
@@ -354,7 +415,6 @@
         wholeView.classList.remove('hidden');
         wholeBtn.className = "flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-bold transition bg-amber-600 text-charcoal-950 shadow";
         dispBtn.className = "flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
-        loadWholesaleCatalog();
       }
     }
 
@@ -364,6 +424,14 @@
         document.getElementById('loginSection').classList.add('hidden');
         document.getElementById('portalSection').classList.remove('hidden');
         document.getElementById('logoutBtn').classList.remove('hidden');
+        
+        // Fetch Pharmacy ID
+        const { data: pharm } = await supabaseClient.from('pharmacies').select('pharmacy_id, pharmacy_name').limit(1).single();
+        if (pharm) {
+          activePharmacyId = pharm.pharmacy_id;
+          document.getElementById('nodePharmacyName').innerText = pharm.pharmacy_name;
+        }
+        
         loadInventory();
         loadPrescriptions();
       } else {
@@ -394,6 +462,7 @@
       checkSession();
     }
 
+    // Prescriptions Review Queue
     async function loadPrescriptions() {
       const tbody = document.getElementById('prescriptionList');
       const { data, error } = await supabaseClient
@@ -408,7 +477,7 @@
       document.getElementById('metricRxPending').innerText = `${pending} Pending`;
 
       if (prescriptionsCache.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500">No prescriptions in queue.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500">No prescriptions awaiting review.</td></tr>`;
         return;
       }
 
@@ -420,7 +489,9 @@
           </td>
           <td class="py-3 px-4 text-slate-300 text-xs">${rx.delivery_address}</td>
           <td class="py-3 px-4">
-            <a href="${rx.image_url}" target="_blank" class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 text-[11px]">Inspect Image ↗</a>
+            <a href="${rx.image_url}" target="_blank" class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 text-[11px] inline-flex items-center gap-1">
+              Inspect Rx ↗
+            </a>
           </td>
           <td class="py-3 px-4">
             <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${rx.status === 'verified_approved' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-amber-500/10 text-amber-400'}">
@@ -478,8 +549,10 @@
       msg += `Hello *${encodeURIComponent(patientName)}*, our licensed pharmacist reviewed your prescription.%0A%0A`;
       msg += `*Prescribed Items Available:*%0A${encodeURIComponent(itemized)}%0A%0A`;
       if (notes) msg += `*Pharmacist Directives:*%0A${encodeURIComponent(notes)}%0A%0A`;
+      msg += `*Subtotal:* NGN ${medTotal.toLocaleString()}%0A`;
+      msg += `*Delivery Fee:* NGN ${deliveryFee.toLocaleString()}%0A`;
       msg += `*Total Amount Payable:* *NGN ${grandTotal.toLocaleString()}*%0A%0A`;
-      msg += `Please reply *CONFIRM* to receive bank transfer payment instructions.`;
+      msg += `Please reply *CONFIRM* to receive bank transfer settlement instructions.`;
 
       window.open(`https://wa.me/${patientPhone}?text=${msg}`, '_blank');
       closeQuoteModal();
@@ -490,30 +563,47 @@
       const rxId = document.getElementById('quoteRxId').value;
       const patientPhone = document.getElementById('quotePatientPhone').value.replace(/[^0-9]/g, '');
       const patientName = document.getElementById('quotePatientName').value;
-      const reason = prompt("Enter reason for rejection:", "Illegible dosage details");
+      const reason = prompt("Enter reason for rejection:", "Illegible dosage details or missing clinical signature");
       if (!reason) return;
 
       await supabaseClient.from('prescriptions').update({ status: 'rejected_unclear', clinical_notes: reason }).eq('id', rxId);
 
       let msg = `*PHARMATRUST CLINICAL NOTICE - PRESCRIPTION RECHECK*%0A%0A`;
-      msg += `Hello *${encodeURIComponent(patientName)}*, our pharmacist reviewed your prescription photo, but cannot safely dispense it due to:%0A`;
+      msg += `Hello *${encodeURIComponent(patientName)}*, our pharmacist reviewed your prescription, but cannot safely dispense it due to:%0A`;
       msg += `*Issue:* ${encodeURIComponent(reason)}%0A%0A`;
-      msg += `Please send a clearer photo or consult your physician.`;
+      msg += `Please send a clearer, well-lit photo or consult your physician.`;
 
       window.open(`https://wa.me/${patientPhone}?text=${msg}`, '_blank');
       closeQuoteModal();
       loadPrescriptions();
     }
 
+    // Inventory & Batch Management (Relational)
     async function loadInventory() {
       const { data, error } = await supabaseClient
-        .from('medications')
-        .select('*')
-        .neq('target_market', 'b2b_wholesale')
+        .from('inventory')
+        .select(`
+          inventory_id,
+          regular_price_ngn,
+          clearance_price_ngn,
+          stock_quantity,
+          batch_number,
+          expiry_date,
+          in_stock,
+          is_near_expiry,
+          products (
+            product_id,
+            brand_name,
+            generic_name,
+            dosage_form,
+            dosage_strength,
+            strength_unit
+          )
+        `)
         .order('created_at', { ascending: false });
 
       if (error) return console.error(error);
-      document.getElementById('metricTotalItems').innerText = `${data.length} SKUs`;
+      document.getElementById('metricTotalItems').innerText = `${data.length} Batches`;
 
       const nearExpiryCount = data.filter(d => d.is_near_expiry).length;
       document.getElementById('metricNearExpiry').innerText = `${nearExpiryCount} Short-Dated`;
@@ -522,116 +612,100 @@
       tbody.innerHTML = data.map(item => `
         <tr>
           <td class="py-3 px-4 font-semibold text-white">
-            ${item.brand}<br><span class="text-slate-400 text-[10px]">${item.generic}</span>
+            ${item.products.brand_name} (${item.products.dosage_strength}${item.products.strength_unit})<br>
+            <span class="text-slate-400 text-[10px]">${item.products.generic_name} • ${item.products.dosage_form}</span>
           </td>
-          <td class="py-3 px-4">${item.category}</td>
-          <td class="py-3 px-4 font-bold text-white">₦${Number(item.price).toLocaleString()}</td>
+          <td class="py-3 px-4 font-mono text-[11px]">${item.batch_number}</td>
+          <td class="py-3 px-4 font-bold text-white">₦${Number(item.clearance_price_ngn || item.regular_price_ngn).toLocaleString()}</td>
           <td class="py-3 px-4 text-[11px] ${item.is_near_expiry ? 'text-amber-400 font-bold' : 'text-slate-400'}">
-            ${item.expiry_date || 'N/A'} ${item.is_near_expiry ? '⚡' : ''}
+            ${item.expiry_date} ${item.is_near_expiry ? '⚡ (-35%)' : ''}
           </td>
-          <td class="py-3 px-4">
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.in_stock ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">
-              ${item.in_stock ? 'In Stock' : 'Out of Stock'}
-            </span>
+          <td class="py-3 px-4 font-bold ${item.stock_quantity > 0 ? 'text-emerald-400' : 'text-rose-400'}">
+            ${item.stock_quantity} units
           </td>
           <td class="py-3 px-4 text-right">
-            <button onclick="toggleStock('${item.id}', ${item.in_stock})" class="px-3 py-1 rounded bg-slate-800 text-slate-200 text-[11px]">
-              ${item.in_stock ? 'Mark Out' : 'Mark In'}
+            <button onclick="toggleStockQuick('${item.inventory_id}', ${item.stock_quantity})" class="px-3 py-1 rounded bg-slate-800 text-slate-200 text-[11px]">
+              ${item.stock_quantity > 0 ? 'Zero Out' : 'Restock 50'}
             </button>
           </td>
         </tr>
       `).join('');
     }
 
-    async function toggleStock(id, currentState) {
-      await supabaseClient.from('medications').update({ in_stock: !currentState }).eq('id', id);
+    async function toggleStockQuick(inventoryId, currentQty) {
+      const newQty = currentQty > 0 ? 0 : 50;
+      await supabaseClient.from('inventory').update({ stock_quantity: newQty }).eq('inventory_id', inventoryId);
       loadInventory();
     }
 
     async function triggerExpiryScan() {
-      await supabaseClient.rpc('check_and_flag_near_expiry');
-      alert("6-Month Expiry Engine executed. Short-dated products have been discounted 35% and added to Flash Deals.");
+      await supabaseClient.rpc('scan_expiry_and_apply_clearance');
+      alert("Expiry Engine scanned. All stock expiring within 180 days has been liquidated at 35% discount.");
       loadInventory();
     }
 
-    async function handleAddDrug(e) {
+    // Add Product & Inventory Form
+    async function handleAddProductAndStock(e) {
       e.preventDefault();
-      const payload = {
-        id: document.getElementById('pId').value.trim(),
-        brand: document.getElementById('pBrand').value.trim(),
-        generic: document.getElementById('pGeneric').value.trim(),
+      
+      if (!activePharmacyId) {
+        alert("Error: Dispensary pharmacy node not resolved.");
+        return;
+      }
+
+      const productId = document.getElementById('pId').value.trim();
+
+      // 1. Insert/Upsert into Master Products
+      const productPayload = {
+        product_id: productId,
+        brand_name: document.getElementById('pBrand').value.trim(),
+        generic_name: document.getElementById('pGeneric').value.trim(),
         category: document.getElementById('pCategory').value,
-        dosage: document.getElementById('pDosage').value.trim(),
-        pack: document.getElementById('pPack').value.trim(),
-        price: Number(document.getElementById('pPrice').value),
-        nafdac: document.getElementById('pNafdac').value.trim(),
-        expiry_date: document.getElementById('pExpiry').value,
-        pharmacy: 'MedPlus Pharmacy Okada',
-        pharmacy_phone: '2348065092665',
-        img: document.getElementById('pImg').value.trim(),
-        uses: document.getElementById('pUses').value.trim(),
-        warnings: document.getElementById('pWarnings').value.trim(),
+        dosage_form: document.getElementById('pForm').value.trim(),
+        dosage_strength: Number(document.getElementById('pStrength').value),
+        strength_unit: document.getElementById('pUnit').value,
+        pack_size: document.getElementById('pPack').value.trim(),
+        nafdac_no: document.getElementById('pNafdac').value.trim(),
+        product_image_url: document.getElementById('pImg').value.trim(),
+        primary_uses: document.getElementById('pUses').value.trim(),
+        key_warnings: document.getElementById('pWarnings').value.trim(),
         contraindications: document.getElementById('pContra').value.trim(),
-        rx_required: document.getElementById('pRx').checked,
-        is_clearance: document.getElementById('pClearance').checked,
-        in_stock: true,
-        target_market: 'b2c_retail'
+        requires_prescription: document.getElementById('pRx').checked,
+        is_controlled: document.getElementById('pControlled').checked
       };
 
-      const { error } = await supabaseClient.from('medications').insert([payload]);
-      if (error) alert("Error: " + error.message);
-      else {
-        e.target.reset();
-        loadInventory();
-        alert("Medication added to live catalog!");
-      }
+      const { error: prodError } = await supabaseClient.from('products').upsert(productPayload);
+      if (prodError) return alert("Product Registry Error: " + prodError.message);
+
+      // 2. Insert into Store Inventory
+      const inventoryPayload = {
+        pharmacy_id: activePharmacyId,
+        product_id: productId,
+        regular_price_ngn: Number(document.getElementById('pPrice').value),
+        batch_number: document.getElementById('pBatch').value.trim(),
+        expiry_date: document.getElementById('pExpiry').value,
+        stock_quantity: Number(document.getElementById('pQty').value)
+      };
+
+      const { error: invError } = await supabaseClient.from('inventory').upsert(inventoryPayload);
+      if (invError) return alert("Inventory Registry Error: " + invError.message);
+
+      e.target.reset();
+      loadInventory();
+      alert("Medication formulation and stock batch registered successfully!");
     }
 
-    async function loadWholesaleCatalog() {
-      const grid = document.getElementById('wholesaleGrid');
-      const { data, error } = await supabaseClient
-        .from('medications')
-        .select('*')
-        .eq('target_market', 'b2b_wholesale');
-
-      if (error) return;
-      wholesaleProducts = data || [];
-
-      grid.innerHTML = wholesaleProducts.map(p => `
-        <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between shadow-lg">
-          <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-300 border border-amber-500/20">MOQ: ${p.moq} Cartons</span>
-              <span class="text-[11px] text-slate-400">${p.category}</span>
-            </div>
-            <h3 class="text-base font-bold text-white">${p.brand}</h3>
-            <p class="text-xs text-slate-400 italic mb-3">${p.generic}</p>
-            <div class="p-3 bg-charcoal-950 rounded-2xl mb-4 space-y-1 text-xs">
-              <div><span class="text-slate-500">Shipper:</span> <span class="text-white">${p.pack}</span></div>
-              <div><span class="text-slate-500">Distributor:</span> <span class="text-amber-400">${p.distributor_name}</span></div>
-            </div>
-          </div>
-          <div>
-            <div class="text-base font-extrabold text-white mb-3">₦${Number(p.price).toLocaleString()} / carton</div>
-            <button onclick="orderB2BWholesale('${p.brand}', ${p.price}, '${p.distributor_phone}')" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-charcoal-950 font-bold rounded-xl text-xs uppercase tracking-wider">
-              Request Restock Order ↗
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function orderB2BWholesale(brand, price, phone) {
-      const qty = prompt(`How many cartons of ${brand} do you want to requisition?`, "2");
+    function orderWholesaleRestock(brand, price) {
+      const qty = prompt(`How many master cartons of ${brand} do you want to order?`, "2");
       if (!qty) return;
       const total = Number(qty) * price;
-      let msg = `*PHARMATRUST B2B RESTOCK REQUISITION*%0A%0A`;
-      msg += `• *Medication:* ${encodeURIComponent(brand)}%0A`;
-      msg += `• *Quantity:* ${encodeURIComponent(qty)} Master Cartons%0A`;
+      let msg = `*PHARMATRUST INDUSTRIAL B2B REQUISITION*%0A%0A`;
+      msg += `• *Medication Formulation:* ${encodeURIComponent(brand)}%0A`;
+      msg += `• *Quantity:* ${encodeURIComponent(qty)} Master Shippers%0A`;
       msg += `• *Estimated Value:* NGN ${total.toLocaleString()}%0A%0A`;
-      msg += `Please confirm batch release and waybill dispatch schedule to Okada.`;
+      msg += `Please confirm batch release and waybill dispatch schedule to Okada Dispensary Node.`;
 
-      window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+      window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
     }
 
     document.addEventListener('DOMContentLoaded', checkSession);
