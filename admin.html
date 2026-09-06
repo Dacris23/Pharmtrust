@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PharmaTrust | Pharmacist Inventory Portal</title>
+  <title>PharmaTrust | Inventory Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen p-4 sm:p-8">
 
@@ -14,7 +14,7 @@
     <header class="flex justify-between items-center mb-8 pb-4 border-b border-slate-800">
       <div>
         <h1 class="text-2xl font-bold text-emerald-400">PharmaTrust Dispensary Portal</h1>
-        <p class="text-xs text-slate-400">Pharmacist-supervised inventory management</p>
+        <p class="text-xs text-slate-400">Real-time inventory manager</p>
       </div>
       <div class="flex items-center space-x-3">
         <a href="index.html" class="text-xs text-slate-400 hover:text-white transition">View Storefront</a>
@@ -26,8 +26,7 @@
 
     <!-- Login Form -->
     <div id="loginSection" class="max-w-md mx-auto bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-      <h2 class="text-lg font-bold text-white mb-2">Licensed Pharmacist Sign In</h2>
-      <p class="text-xs text-slate-400 mb-4">Enter your dispensary management credentials.</p>
+      <h2 class="text-lg font-bold text-white mb-4">Pharmacist Login</h2>
       <form onsubmit="handleLogin(event)" class="space-y-4">
         <div>
           <label class="block text-xs uppercase text-slate-400 mb-1">Email</label>
@@ -38,7 +37,7 @@
           <input type="password" id="loginPassword" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
         </div>
         <p id="loginError" class="text-xs text-rose-400 hidden"></p>
-        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold text-sm transition">
+        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold text-sm">
           Access Portal
         </button>
       </form>
@@ -47,9 +46,9 @@
     <!-- Inventory Dashboard -->
     <div id="portalSection" class="hidden space-y-8">
       
-      <!-- Add Drug Form -->
+      <!-- Quick Add Drug Form -->
       <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-        <h2 class="text-lg font-bold text-white mb-4">Add Medicine to Dispensary Stock</h2>
+        <h2 class="text-lg font-bold text-white mb-4">Add New Medicine</h2>
         <form onsubmit="handleAddDrug(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
           <div>
             <label class="text-slate-400 uppercase">Product ID</label>
@@ -60,11 +59,11 @@
             <input type="text" id="pBrand" required placeholder="e.g. Ventolin Inhaler" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div>
-            <label class="text-slate-400 uppercase">Generic / Active Chemical</label>
-            <input type="text" id="pGeneric" required placeholder="e.g. Salbutamol Sulphate" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+            <label class="text-slate-400 uppercase">Generic Name</label>
+            <input type="text" id="pGeneric" required placeholder="e.g. Salbutamol" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div>
-            <label class="text-slate-400 uppercase">Therapeutic Category</label>
+            <label class="text-slate-400 uppercase">Category</label>
             <select id="pCategory" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
               <option>Anti-Infectives & Antibiotics</option>
               <option>Pain Relief & Fever</option>
@@ -77,66 +76,66 @@
             <input type="text" id="pDosage" required placeholder="e.g. Inhaler, Syrup, Tablet" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div>
-            <label class="text-slate-400 uppercase">Pack Size</label>
-            <input type="text" id="pPack" required placeholder="e.g. 200 Metred Doses" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+            <label class="text-slate-400 uppercase">Pack Details</label>
+            <input type="text" id="pPack" required placeholder="e.g. 200 Doses, 100ml" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div>
-            <label class="text-slate-400 uppercase">Unit Price (NGN)</label>
+            <label class="text-slate-400 uppercase">Price (NGN)</label>
             <input type="number" id="pPrice" required placeholder="e.g. 6500" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div>
-            <label class="text-slate-400 uppercase">NAFDAC Reg No.</label>
+            <label class="text-slate-400 uppercase">NAFDAC Number</label>
             <input type="text" id="pNafdac" required placeholder="e.g. 04-9876" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div>
-            <label class="text-slate-400 uppercase">Dispensary Pharmacy Name</label>
-            <input type="text" id="pPharmacy" required placeholder="e.g. MedPlus Pharmacy Okada" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+            <label class="text-slate-400 uppercase">Dispensary Pharmacy</label>
+            <input type="text" id="pPharmacy" required placeholder="e.g. MedPlus Okada" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div>
             <label class="text-slate-400 uppercase">Pharmacy WhatsApp Number</label>
             <input type="text" id="pPhone" required placeholder="e.g. 2348065092665" value="2348065092665" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div class="sm:col-span-2">
-            <label class="text-slate-400 uppercase">Image Web Link</label>
+            <label class="text-slate-400 uppercase">Image URL</label>
             <input type="url" id="pImg" required placeholder="https://images.unsplash.com/..." class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div class="sm:col-span-2">
-            <label class="text-slate-400 uppercase">Clinical Indications / Uses</label>
-            <input type="text" id="pUses" required placeholder="Primary therapeutic uses" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+            <label class="text-slate-400 uppercase">Primary Uses</label>
+            <input type="text" id="pUses" required placeholder="Indications and therapeutic uses" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div class="sm:col-span-2">
-            <label class="text-slate-400 uppercase">Key Pharmacological Warnings</label>
-            <input type="text" id="pWarnings" required placeholder="Dosing rules, safety notices" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
+            <label class="text-slate-400 uppercase">Key Warnings & Cautions</label>
+            <input type="text" id="pWarnings" required placeholder="Dosage limits, administration rules" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
           <div class="sm:col-span-2">
             <label class="text-slate-400 uppercase">Contraindications</label>
             <input type="text" id="pContra" required placeholder="Conditions or allergies to avoid" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 mt-1 text-white">
           </div>
-          <div class="flex items-center space-x-6 pt-2 sm:col-span-2">
+          <div class="flex items-center space-x-4 pt-2 sm:col-span-2">
             <label class="flex items-center space-x-2 text-slate-300">
-              <input type="checkbox" id="pRx"> <span>Prescription Required (Rx)</span>
+              <input type="checkbox" id="pRx"> <span>Prescription Required</span>
             </label>
             <label class="flex items-center space-x-2 text-slate-300">
-              <input type="checkbox" id="pClearance"> <span>Clearance Special Deal</span>
+              <input type="checkbox" id="pClearance"> <span>Clearance Deal</span>
             </label>
           </div>
-          <button type="submit" class="sm:col-span-2 mt-3 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition">
-            Publish Item to Live Catalog
+          <button type="submit" class="sm:col-span-2 mt-2 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm">
+            Save & Publish to Live Catalog
           </button>
         </form>
       </div>
 
       <!-- Current Inventory Table -->
       <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl overflow-x-auto">
-        <h2 class="text-lg font-bold text-white mb-4">Current Registered Stock</h2>
+        <h2 class="text-lg font-bold text-white mb-4">Current Stock</h2>
         <table class="w-full text-left text-xs border-collapse">
           <thead>
             <tr class="border-b border-slate-800 text-slate-400 uppercase">
-              <th class="py-2">Medication</th>
+              <th class="py-2">Item</th>
               <th class="py-2">Dispensary</th>
               <th class="py-2">Price</th>
-              <th class="py-2">Availability</th>
-              <th class="py-2 text-right">Action</th>
+              <th class="py-2">Status</th>
+              <th class="py-2 text-right">Actions</th>
             </tr>
           </thead>
           <tbody id="inventoryList" class="divide-y divide-slate-800"></tbody>
@@ -147,10 +146,8 @@
   </div>
 
   <script>
-    // Supabase Credentials
     const SUPABASE_URL = 'https://iydakgrvvwnjacffennc.supabase.co';
-    // REPLACE THIS WITH YOUR REAL COPIED ANON KEY (starts with eyJhbGciOi...)
-    const SUPABASE_KEY = 'PASTE_YOUR_ACTUAL_SUPABASE_ANON_KEY_HERE';
+    const SUPABASE_KEY = 'sb_publishable_AjpEBohY3PE7CCcWG5Mluw_9K-vaI9t';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     async function checkSession() {
@@ -210,8 +207,8 @@
               ${item.in_stock ? 'In Stock' : 'Out of Stock'}
             </span>
           </td>
-          <td class="py-3 text-right">
-            <button onclick="toggleStock('${item.id}', ${item.in_stock})" class="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] transition">
+          <td class="py-3 text-right space-x-2">
+            <button onclick="toggleStock('${item.id}', ${item.in_stock})" class="text-slate-300 hover:text-white underline text-[11px]">
               ${item.in_stock ? 'Mark Out' : 'Mark In'}
             </button>
           </td>
@@ -252,11 +249,11 @@
 
       const { error } = await supabaseClient.from('medications').insert([payload]);
       if (error) {
-        alert('Dispensary Error: ' + error.message);
+        alert('Error adding medication: ' + error.message);
       } else {
         e.target.reset();
         loadInventory();
-        alert('Medication added successfully to the dispensary catalog!');
+        alert('Medication added successfully to the live catalog!');
       }
     }
 
