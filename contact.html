@@ -24,29 +24,48 @@
 </head>
 <body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased pb-20 selection:bg-emerald-500/30">
 
-  <header class="sticky top-0 z-40 bg-charcoal-900/90 backdrop-blur border-b border-slate-800">
+  <!-- Responsive Navigation Header -->
+  <header class="sticky top-0 z-40 bg-charcoal-900/95 backdrop-blur border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center space-x-3">
-        <img src="logo.jpg" alt="Logo" class="h-10 w-10 object-contain rounded-xl border border-slate-700">
-        <div>
-          <span class="text-xl font-bold tracking-tight text-white">Pharma<span class="text-emerald-500">Trust</span></span>
-          <span class="hidden sm:block text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Okada Clinical Network</span>
+      <a href="index.html" class="flex items-center space-x-2.5 flex-shrink-0">
+        <img src="logo.jpg" alt="Logo" class="h-9 w-9 object-contain rounded-xl border border-slate-700 shadow">
+        <div class="flex flex-col">
+          <span class="text-base sm:text-lg font-extrabold tracking-tight text-white leading-none">
+            Pharma<span class="text-emerald-400">Trust</span>
+          </span>
+          <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">
+            Okada Network
+          </span>
         </div>
       </a>
 
-      <nav class="flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm">
-        <a href="index.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">Catalog</a>
-        <a href="upload-rx.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
-        <a href="profile.html" class="font-medium text-slate-300 hover:text-emerald-400 transition">My Profile</a>
-        <a href="contact.html" class="font-semibold text-emerald-400 border-b-2 border-emerald-500 pb-0.5">Contact</a>
-        <a href="admin.html" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition border border-slate-700">Staff Portal</a>
+      <nav class="hidden md:flex items-center space-x-5 text-xs font-medium">
+        <a href="index.html" class="text-slate-300 hover:text-emerald-400 transition">Catalog</a>
+        <a href="upload-rx.html" class="text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
+        <a href="profile.html" class="text-slate-300 hover:text-emerald-400 transition">My Profile</a>
+        <a href="contact.html" class="text-emerald-400 border-b-2 border-emerald-500 pb-0.5 font-bold">Contact</a>
+        <a href="admin.html" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Staff Portal</a>
       </nav>
+
+      <button onclick="toggleMobileNav()" class="md:hidden p-2 text-slate-400 hover:text-white bg-slate-800/80 rounded-xl">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Tray -->
+    <div id="mobileNavTray" class="hidden md:hidden border-t border-slate-800 bg-charcoal-900 px-4 py-3 space-y-2 text-xs font-semibold">
+      <a href="index.html" class="block py-1.5 text-slate-300">Catalog Storefront</a>
+      <a href="upload-rx.html" class="block py-1.5 text-slate-300">Upload Doctor Prescription</a>
+      <a href="profile.html" class="block py-1.5 text-slate-300">My Clinical Profile & Allergies</a>
+      <a href="contact.html" class="block py-1.5 text-emerald-400 font-bold">Emergency Hotlines & Contact</a>
+      <a href="admin.html" class="block py-1.5 text-slate-400 font-mono">Dispensary Staff Portal ↗</a>
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 py-10">
+  <main class="max-w-5xl mx-auto px-4 py-8">
     
-    <div class="bg-rose-950/30 border border-rose-600/40 rounded-3xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <!-- Emergency Warning Banner with Dual Hotlines -->
+    <div class="bg-rose-950/30 border border-rose-600/40 rounded-3xl p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <div class="flex items-center space-x-3">
         <div class="p-2.5 bg-rose-500/20 text-rose-400 rounded-xl">
           <i data-lucide="alert-triangle" class="w-6 h-6"></i>
@@ -57,30 +76,31 @@
         </div>
       </div>
       <div class="flex flex-wrap gap-2">
-        <a href="tel:2348065092665" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider whitespace-nowrap transition shadow-lg shadow-rose-900/30">
+        <a href="tel:2348065092665" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider whitespace-nowrap transition shadow-lg shadow-rose-900/30">
           Line 1: 0806 509 2665
         </a>
-        <a href="tel:2348169489126" class="px-4 py-2.5 bg-rose-700 hover:bg-rose-600 text-white font-bold rounded-xl text-xs uppercase tracking-wider whitespace-nowrap transition">
+        <a href="tel:2348169489126" class="px-3.5 py-2 bg-rose-700 hover:bg-rose-600 text-white font-bold rounded-xl text-xs uppercase tracking-wider whitespace-nowrap transition">
           Line 2: 0816 948 9126
         </a>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       
-      <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+      <!-- WhatsApp Support -->
+      <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-5 shadow-xl flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4">
-            <i data-lucide="message-circle" class="w-5 h-5"></i>
+          <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
           </div>
-          <h3 class="text-base font-bold text-white mb-1">WhatsApp Clinical Desks</h3>
+          <h3 class="text-sm font-bold text-white mb-1">WhatsApp Clinical Desks</h3>
           <p class="text-xs text-slate-400 mb-3">Direct consultation with licensed dispensary pharmacists for prescription verification, orders, and inquiries.</p>
-          <div class="text-xs space-y-1.5 font-mono text-slate-300">
+          <div class="text-[11px] space-y-1 font-mono text-slate-300">
             <div><strong>Clinical Line:</strong> +234 806 509 2665</div>
             <div><strong>Support Desk:</strong> +234 816 948 9126</div>
           </div>
         </div>
-        <div class="mt-6 flex flex-col gap-2">
+        <div class="mt-4 flex flex-col gap-2">
           <a href="https://wa.me/2348065092665?text=Hello%20Pharmacist,%20I%20need%20assistance%20with%20a%20medication." target="_blank" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider text-center transition">
             Chat Clinical Desk ↗
           </a>
@@ -90,65 +110,68 @@
         </div>
       </div>
 
-      <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+      <!-- Okada Dispensary Hub -->
+      <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-5 shadow-xl flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4">
-            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-3">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
           </div>
-          <h3 class="text-base font-bold text-white mb-1">Dispensary Hub & Pickup</h3>
-          <p class="text-xs text-slate-400 mb-4">Central pharmaceutical pickup and delivery hub serving Okada town, Igbinedion University campus, and surrounding student residences.</p>
-          <div class="text-xs space-y-1.5 text-slate-300">
+          <h3 class="text-sm font-bold text-white mb-1">Dispensary Hub & Pickup</h3>
+          <p class="text-xs text-slate-400 mb-3">Central pharmaceutical pickup and delivery hub serving Okada town, Igbinedion University campus, and surrounding student residences.</p>
+          <div class="text-[11px] space-y-1 text-slate-300">
             <div><strong>Premises:</strong> Main Road, Okada, Edo State</div>
             <div><strong>PCN License:</strong> PCN/OKD/2026/01</div>
           </div>
         </div>
-        <a href="https://maps.google.com" target="_blank" class="mt-6 w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs uppercase tracking-wider text-center block border border-slate-700 transition">
+        <a href="https://maps.google.com" target="_blank" class="mt-4 w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs uppercase tracking-wider text-center block border border-slate-700 transition">
           View on Map ↗
         </a>
       </div>
 
-      <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+      <!-- Professional & LinkedIn Desk -->
+      <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-5 shadow-xl flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4">
-            <i data-lucide="linkedin" class="w-5 h-5"></i>
+          <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-3">
+            <i data-lucide="linkedin" class="w-4 h-4"></i>
           </div>
-          <h3 class="text-base font-bold text-white mb-1">Corporate & LinkedIn</h3>
-          <p class="text-xs text-slate-400 mb-4">Connect with our executive clinical team, career opportunities, and healthcare partnership news.</p>
-          <div class="text-xs space-y-1.5 text-slate-300">
+          <h3 class="text-sm font-bold text-white mb-1">Corporate & LinkedIn</h3>
+          <p class="text-xs text-slate-400 mb-3">Connect with our executive clinical team, career opportunities, and healthcare partnership news.</p>
+          <div class="text-[11px] space-y-1 text-slate-300">
             <div><strong>LinkedIn:</strong> PharmaTrust Nigeria</div>
             <div><strong>Email:</strong> care@pharmatrust.ng</div>
           </div>
         </div>
-        <a href="https://linkedin.com/company/pharmatrust-ng" target="_blank" class="mt-6 w-full py-2.5 bg-[#0077b5] hover:bg-[#006097] text-white font-bold rounded-xl text-xs uppercase tracking-wider text-center block transition">
+        <a href="https://linkedin.com/company/pharmatrust-ng" target="_blank" class="mt-4 w-full py-2 bg-[#0077b5] hover:bg-[#006097] text-white font-bold rounded-xl text-xs uppercase tracking-wider text-center block transition">
           Follow on LinkedIn ↗
         </a>
       </div>
 
     </div>
 
-    <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
-      <div class="max-w-xl mb-6">
-        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider mb-2">
+    <!-- Direct Clinical Inquiry Form -->
+    <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="max-w-xl mb-5">
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider mb-1.5">
           Direct Guidance
         </span>
-        <h2 class="text-xl font-bold text-white">Submit a Medication Inquiry</h2>
-        <p class="text-xs text-slate-400 mt-1">Have questions regarding drug-drug interactions, administration timing, or generic availability? Write directly to our superintendent pharmacist.</p>
+        <h2 class="text-lg sm:text-xl font-bold text-white">Submit a Medication Inquiry</h2>
+        <p class="text-xs text-slate-400 mt-0.5">Have questions regarding drug-drug interactions, administration timing, or generic availability? Write directly to our superintendent pharmacist.</p>
       </div>
 
-      <form onsubmit="handleContactSubmit(event)" class="space-y-4 text-xs">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <form onsubmit="handleContactSubmit(event)" class="space-y-3 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Your Name</label>
-            <input type="text" id="cName" required placeholder="Basit Adeife" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+            <input type="text" id="cName" required placeholder="Basit Adeife" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
           </div>
           <div>
             <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">WhatsApp Phone</label>
-            <input type="tel" id="cPhone" required placeholder="+234 812 345 6789" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+            <input type="tel" id="cPhone" required placeholder="+234 812 345 6789" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
           </div>
         </div>
         <div>
           <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Inquiry Subject</label>
-          <select id="cSubject" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none">
+          <select id="cSubject" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
             <option>Drug-Drug Interaction Question</option>
             <option>Dosage Administration & Timing</option>
             <option>Prescription Delivery Status</option>
@@ -158,9 +181,9 @@
         </div>
         <div>
           <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Detailed Message / Question</label>
-          <textarea id="cMessage" rows="4" required placeholder="Describe your question or symptoms..." class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-3 text-white focus:border-emerald-500 outline-none"></textarea>
+          <textarea id="cMessage" rows="3" required placeholder="Describe your question or symptoms..." class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none"></textarea>
         </div>
-        <button type="submit" class="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-900/30">
+        <button type="submit" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-900/30">
           Transmit Inquiry via WhatsApp
         </button>
       </form>
@@ -169,6 +192,10 @@
   </main>
 
   <script>
+    function toggleMobileNav() {
+      document.getElementById('mobileNavTray').classList.toggle('hidden');
+    }
+
     function handleContactSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('cName').value.trim();
