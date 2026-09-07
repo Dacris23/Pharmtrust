@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PharmaTrust | Connecting Pharmacies. Building Trust. Improving Lives.</title>
+  <title>PharmaTrust | Easy Medicine Delivery in Nigeria</title>
   <link rel="icon" href="logo.jpg">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#090d16">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
@@ -15,419 +15,203 @@
       theme: {
         extend: {
           colors: {
-            brand: { 500: '#10b981', 600: '#059669', 700: '#047857' },
-            charcoal: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+            brand: { 500: '#10b981', 600: '#059669' },
+            slateDark: '#0b1120'
           }
         }
       }
     }
   </script>
 </head>
-<body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500/30">
+<body class="bg-[#070b14] text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500/30 pb-20">
 
-  <!-- ROLE GATEWAY MODAL (FIRST VISIT ROUTING) -->
-  <div id="roleGatewayModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl text-center">
-      <img src="logo.jpg" alt="PharmaTrust" class="w-14 h-14 rounded-2xl mx-auto mb-3 border border-slate-700 object-contain shadow-lg">
-      <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider mb-2">
-        PharmaTrust Nationwide Gateway
-      </span>
-      <h2 class="text-xl sm:text-2xl font-extrabold text-white mb-1.5">Who are you accessing as?</h2>
-      <p class="text-xs text-slate-400 mb-5 max-w-md mx-auto">Connecting Pharmacies. Building Trust. Improving Lives. Select your profile to enter.</p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-2 text-left">
-        <!-- Student / Patient -->
-        <button onclick="selectRole('patient')" class="p-4 rounded-2xl bg-charcoal-950 border border-slate-800 hover:border-emerald-500 hover:bg-slate-900/60 transition group flex flex-col justify-between">
-          <div>
-            <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
-              <i data-lucide="graduation-cap" class="w-4 h-4"></i>
-            </div>
-            <h3 class="text-xs font-bold text-white mb-1">Student / Patient</h3>
-            <p class="text-[11px] text-slate-400 leading-snug">Order verified medicines, upload doctor scripts, and get fast delivery nationwide.</p>
-          </div>
-          <span class="mt-3 text-[10px] font-bold text-emerald-400 uppercase">Enter Storefront →</span>
-        </button>
-
-        <!-- Community Pharmacist -->
-        <button onclick="selectRole('pharmacist')" class="p-4 rounded-2xl bg-charcoal-950 border border-slate-800 hover:border-blue-500 hover:bg-slate-900/60 transition group flex flex-col justify-between">
-          <div>
-            <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
-              <i data-lucide="stethoscope" class="w-4 h-4"></i>
-            </div>
-            <h3 class="text-xs font-bold text-white mb-1">Community Pharmacy</h3>
-            <p class="text-[11px] text-slate-400 leading-snug">Review prescriptions, inspect vitals/allergies, and manage counter stock.</p>
-          </div>
-          <span class="mt-3 text-[10px] font-bold text-blue-400 uppercase">Dispensary Portal →</span>
-        </button>
-
-        <!-- Industrial Supplier -->
-        <button onclick="selectRole('wholesale')" class="p-4 rounded-2xl bg-charcoal-950 border border-slate-800 hover:border-amber-500 hover:bg-slate-900/60 transition group flex flex-col justify-between">
-          <div>
-            <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
-              <i data-lucide="building-2" class="w-4 h-4"></i>
-            </div>
-            <h3 class="text-xs font-bold text-white mb-1">Industrial Supplier</h3>
-            <p class="text-[11px] text-slate-400 leading-snug">Distribute master cartons, receive depot orders, and fulfill bulk waybills.</p>
-          </div>
-          <span class="mt-3 text-[10px] font-bold text-amber-400 uppercase">B2B Restock →</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Responsive Navigation Header -->
-  <header class="sticky top-0 z-40 bg-charcoal-900/95 backdrop-blur border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <!-- Simple Header -->
+  <header class="sticky top-0 z-40 bg-[#0b1120]/90 backdrop-blur border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="index.html" class="flex items-center space-x-2.5 flex-shrink-0">
-        <img src="logo.jpg" alt="PharmaTrust" class="h-9 w-9 object-contain rounded-xl border border-slate-700 shadow">
-        <div class="flex flex-col">
-          <span class="text-base sm:text-lg font-extrabold tracking-tight text-white leading-none">
-            Pharma<span class="text-emerald-400">Trust</span>
-          </span>
-          <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">
-            Nationwide Network
-          </span>
+      <a href="index.html" class="flex items-center space-x-2.5">
+        <img src="logo.jpg" alt="Logo" class="h-9 w-9 object-contain rounded-xl border border-slate-700">
+        <div>
+          <span class="text-lg font-bold tracking-tight text-white">Pharma<span class="text-emerald-400">Trust</span></span>
+          <span class="block text-[10px] text-slate-400">Genuine Medicines Made Simple</span>
         </div>
       </a>
 
-      <!-- Desktop Links -->
-      <nav class="hidden md:flex items-center space-x-5 text-xs font-medium">
-        <button onclick="openRoleGateway()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1 text-[11px]">
-          <i data-lucide="repeat" class="w-3 h-3 text-emerald-400"></i> Switch Role
-        </button>
-        <a href="index.html" class="text-emerald-400 border-b-2 border-emerald-500 pb-0.5 font-bold">Catalog</a>
-        <a href="upload-rx.html" class="text-slate-300 hover:text-emerald-400 transition">Upload Rx</a>
-        <a href="profile.html" class="text-slate-300 hover:text-emerald-400 transition">My Profile</a>
-        <a href="contact.html" class="text-slate-300 hover:text-emerald-400 transition">Contact</a>
-        <a href="admin.html" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Pharmacist Portal ↗</a>
-      </nav>
-
-      <!-- Right Action Controls -->
+      <!-- Quick Action Controls -->
       <div class="flex items-center space-x-2">
-        <button id="authTriggerBtn" onclick="openAuthModal()" class="hidden sm:inline-flex text-xs px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition">
+        <a href="upload-rx.html" class="hidden sm:inline-flex items-center text-xs font-semibold px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+          <i data-lucide="file-text" class="w-3.5 h-3.5 mr-1.5 text-emerald-400"></i> Send Prescription
+        </a>
+        
+        <button id="authBtn" onclick="openAuthModal()" class="text-xs font-semibold px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition">
           Sign In
         </button>
-        <button onclick="toggleModal('cartModal')" class="relative p-2 bg-slate-800 rounded-xl hover:bg-slate-700 transition">
-          <i data-lucide="shopping-bag" class="w-4 h-4 text-emerald-400"></i>
-          <span id="cartCount" class="absolute -top-1 -right-1 bg-emerald-500 text-charcoal-950 text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
-        </button>
-        <!-- Mobile Menu Toggle Button -->
-        <button onclick="toggleMobileNav()" class="md:hidden p-2 text-slate-400 hover:text-white bg-slate-800/80 rounded-xl">
-          <i data-lucide="menu" class="w-5 h-5"></i>
+
+        <button onclick="toggleModal('cartModal')" class="relative p-2.5 bg-slate-800 rounded-xl hover:bg-slate-700 text-white transition border border-slate-700">
+          <i data-lucide="shopping-cart" class="w-4 h-4 text-emerald-400"></i>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-emerald-500 text-slate-950 text-[10px] font-extrabold rounded-full h-4 w-4 flex items-center justify-center">0</span>
         </button>
       </div>
 
-    </div>
-
-    <!-- Mobile Slide-Down Tray -->
-    <div id="mobileNavTray" class="hidden md:hidden border-t border-slate-800 bg-charcoal-900 px-4 py-3 space-y-2 text-xs font-semibold">
-      <div class="flex justify-between items-center pb-2 border-b border-slate-800/60">
-        <button onclick="openRoleGateway(); toggleMobileNav();" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 flex items-center gap-1.5 text-[11px]">
-          <i data-lucide="repeat" class="w-3 h-3 text-emerald-400"></i> Switch Role
-        </button>
-        <button onclick="openAuthModal(); toggleMobileNav();" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold text-[11px]">
-          Sign In / Account
-        </button>
-      </div>
-      <a href="index.html" class="block py-1.5 text-emerald-400 font-bold">Catalog Storefront</a>
-      <a href="upload-rx.html" class="block py-1.5 text-slate-300 hover:text-white">Upload Doctor Prescription</a>
-      <a href="profile.html" class="block py-1.5 text-slate-300 hover:text-white">My Clinical Profile & Allergies</a>
-      <a href="contact.html" class="block py-1.5 text-slate-300 hover:text-white">Emergency Hotlines & Contact</a>
-      <a href="admin.html" class="block py-1.5 text-slate-400 font-mono">Pharmacist Portal ↗</a>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-    <div class="bg-gradient-to-r from-charcoal-900 via-charcoal-800 to-emerald-950/40 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-      <div class="max-w-2xl relative z-10">
-        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full mb-3">
-          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-          <span>Verified NAFDAC & PCN Regulated Network • Nationwide Nigeria</span>
-        </div>
-        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3 leading-tight">
-          Connecting Pharmacies.<br><span class="text-emerald-400">Building Trust. Improving Lives.</span>
-        </h1>
-        <p class="text-slate-400 text-xs sm:text-sm mb-6 leading-relaxed">
-          Order genuine medicines with verified dosage strengths and automated 6-month expiry discount clearances. Real patient ratings, clinical contraindication checks, and instant WhatsApp dispatch across Nigeria.
-        </p>
-        <div class="flex flex-wrap gap-2.5">
-          <a href="#catalog" class="inline-flex items-center px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition shadow-lg shadow-emerald-900/30">
-            <i data-lucide="search" class="w-3.5 h-3.5 mr-1.5"></i> Browse Catalog
-          </a>
-          <a href="upload-rx.html" class="inline-flex items-center px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition">
-            <i data-lucide="file-up" class="w-3.5 h-3.5 mr-1.5"></i> Upload Doctor Rx
-          </a>
-        </div>
+  <!-- Clean, Spacious Hero -->
+  <section class="max-w-6xl mx-auto px-4 pt-8 pb-4">
+    <div class="bg-gradient-to-b from-[#0f172a] to-[#0b1120] border border-slate-800 rounded-3xl p-6 sm:p-10 text-center">
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3">
+        ✓ 100% Original & NAFDAC Verified
+      </span>
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
+        Order Original Medicines Online
+      </h1>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto mb-6">
+        Search for your regular drugs or snap a photo of your doctor's paper. Fast delivery straight to your doorstep.
+      </p>
+
+      <!-- Clean Search Bar -->
+      <div class="relative max-w-xl mx-auto">
+        <i data-lucide="search" class="absolute left-4 top-3.5 w-4 h-4 text-slate-400"></i>
+        <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Type drug name (e.g. Paracetamol, Augmentin, Inhaler)..." class="w-full bg-[#070b14] border border-slate-700 rounded-2xl pl-11 pr-4 py-3 text-xs sm:text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500">
       </div>
     </div>
   </section>
 
-  <!-- Four Pillars Showcase -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
-      <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
-        <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl"><i data-lucide="shield" class="w-4 h-4"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Trusted</h4><p class="text-[10px] text-slate-400">NAFDAC Verified</p></div>
-      </div>
-      <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
-        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-xl"><i data-lucide="network" class="w-4 h-4"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Connected</h4><p class="text-[10px] text-slate-400">Licensed Dispensaries</p></div>
-      </div>
-      <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
-        <div class="p-2 bg-teal-500/10 text-teal-400 rounded-xl"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Accessible</h4><p class="text-[10px] text-slate-400">Campus & Nationwide</p></div>
-      </div>
-      <div class="bg-charcoal-900/60 border border-slate-800/80 p-3 sm:p-4 rounded-2xl flex items-center space-x-2.5">
-        <div class="p-2 bg-rose-500/10 text-rose-400 rounded-xl"><i data-lucide="heart-pulse" class="w-4 h-4"></i></div>
-        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Reliable</h4><p class="text-[10px] text-slate-400">Safety Checks</p></div>
-      </div>
+  <!-- Simple Category Pills -->
+  <section class="max-w-6xl mx-auto px-4 py-4">
+    <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none" id="catFilter">
+      <button onclick="setCategory('All')" class="cat-pill px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap transition">All Medicines</button>
+      <button onclick="setCategory('Pain Relief & Fever')" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Fever & Body Pain</button>
+      <button onclick="setCategory('Anti-Infectives & Antibiotics')" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition">Infections & Antibiotics</button>
+      <button onclick="setCategory('Chronic Care')" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">Asthma & Blood Pressure</button>
+      <button onclick="setCategory('Clearance')" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30 whitespace-nowrap transition">Special Deals 🔥</button>
     </div>
   </section>
 
-  <!-- Catalog Filter Bar -->
-  <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-    <div class="flex flex-col md:flex-row gap-3 justify-between items-center">
-      <div class="relative w-full md:w-80">
-        <i data-lucide="search" class="absolute left-3 top-3 w-4 h-4 text-slate-400"></i>
-        <input type="text" id="searchInput" placeholder="Search brand, generic, or use..." class="w-full bg-charcoal-900 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500" oninput="filterProducts()">
-      </div>
-      <div class="flex gap-1.5 overflow-x-auto w-full md:w-auto pb-1 scrollbar-none" id="categoryFilters">
-        <button onclick="setCategory('All')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition">All</button>
-        <button onclick="setCategory('Anti-Infectives & Antibiotics')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Antibiotics</button>
-        <button onclick="setCategory('Pain Relief & Fever')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Pain Relief</button>
-        <button onclick="setCategory('Chronic Care')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Chronic Care</button>
-        <button onclick="setCategory('Clearance')" class="category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 transition">Clearance (-35%)</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Product Catalog Grid -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Easy-to-Read Drug Grid -->
+  <main class="max-w-6xl mx-auto px-4 py-2">
     <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="col-span-full py-16 text-center text-slate-400 text-xs">Loading verified catalog...</div>
+      <div class="col-span-full py-16 text-center text-xs text-slate-500">Finding available medicines...</div>
     </div>
   </main>
 
-  <!-- Universal Footer with LinkedIn -->
-  <footer class="mt-20 border-t border-slate-800 bg-charcoal-900/60 pt-10 pb-8 text-xs text-slate-400">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-      <div class="space-y-2.5">
-        <div class="flex items-center space-x-2">
-          <img src="logo.jpg" alt="Logo" class="w-6 h-6 rounded-md object-contain">
-          <span class="font-bold text-white text-sm">PharmaTrust Ecosystem</span>
+  <!-- CART MODAL (WITH FULL QUANTITY EDIT & REMOVAL) -->
+  <div id="cartModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#0f172a] border border-slate-800 rounded-3xl max-w-md w-full p-5 sm:p-6 max-h-[92vh] flex flex-col justify-between shadow-2xl">
+      
+      <div>
+        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+          <div>
+            <h3 class="text-base font-bold text-white">Your Medicine Bag</h3>
+            <p class="text-[11px] text-slate-400">Review, add, or remove your items</p>
+          </div>
+          <button onclick="toggleModal('cartModal')" class="text-slate-400 hover:text-white p-1">✕</button>
         </div>
-        <p class="text-[11px] leading-relaxed">
-          Decentralized pharmaceutical inventory management, prescription audit trails, and anti-counterfeit drug logistics nationwide.
-        </p>
-        <div class="pt-1">
-          <a href="https://linkedin.com/company/pharmatrust-ng" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition text-[11px]">
-            <i data-lucide="linkedin" class="w-3 h-3 text-blue-400"></i>
-            <span>LinkedIn Profile ↗</span>
-          </a>
-        </div>
-      </div>
-      <div>
-        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-2.5">Patient Portals</h4>
-        <ul class="space-y-1.5 text-[11px]">
-          <li><a href="index.html" class="hover:text-emerald-400 transition">Medication Catalog</a></li>
-          <li><a href="upload-rx.html" class="hover:text-emerald-400 transition">Doctor Prescription Intake</a></li>
-          <li><a href="profile.html" class="hover:text-emerald-400 transition">Clinical Health Profile</a></li>
-          <li><a href="contact.html" class="hover:text-emerald-400 transition">Emergency & Contact Desk</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-2.5">Dispensary Hotlines</h4>
-        <ul class="space-y-1.5 text-[11px] font-mono text-slate-300">
-          <li>• <a href="https://wa.me/2348065092665" class="hover:text-emerald-400">+234 806 509 2665</a> (Clinical)</li>
-          <li>• <a href="https://wa.me/2348169489126" class="hover:text-emerald-400">+234 816 948 9126</a> (Support)</li>
-          <li>• Nationwide Verification & Logistics</li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-bold text-white uppercase text-[10px] tracking-wider mb-2.5">Licensed Practitioners</h4>
-        <p class="text-[11px] text-slate-300 mb-1">Community & Hospital Pharmacists:</p>
-        <p class="text-xs text-emerald-400 font-semibold mb-2">Dispensary Node Operations</p>
-        <a href="admin.html" class="inline-block px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-[10px] transition">Pharmacist Portal ↗</a>
-      </div>
-    </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-[10px] text-slate-500">
-      <div>© 2026 PharmaTrust. Connecting Pharmacies. Building Trust. Improving Lives.</div>
-      <div class="mt-1 sm:mt-0 space-x-2">
-        <span>Nigeria Operations</span>
-        <span>•</span>
-        <span>PCN Regulated Premises</span>
-      </div>
-    </div>
-  </footer>
 
-  <!-- Auth Modal -->
+        <!-- Editable Cart List -->
+        <div id="cartList" class="divide-y divide-slate-800/80 max-h-56 overflow-y-auto my-3 pr-1"></div>
+      </div>
+
+      <!-- Checkout Details -->
+      <div class="space-y-3 pt-3 border-t border-slate-800">
+        <div>
+          <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Where Should We Deliver?</label>
+          <input type="text" id="deliveryAddress" placeholder="Enter your street, hostel or landmark address" class="w-full bg-[#070b14] border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-emerald-500">
+        </div>
+
+        <div class="space-y-1 text-xs text-slate-400">
+          <div class="flex justify-between">
+            <span>Items Cost:</span>
+            <span id="subtotalText" class="text-white font-bold">₦0</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Rider Delivery:</span>
+            <span id="deliveryText" class="text-white font-bold">₦1,000</span>
+          </div>
+          <div class="flex justify-between text-sm font-extrabold text-white pt-1 border-t border-slate-800">
+            <span>Total to Pay:</span>
+            <span id="totalText" class="text-emerald-400">₦0</span>
+          </div>
+        </div>
+
+        <button onclick="checkoutViaWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30">
+          <i data-lucide="message-circle" class="w-4 h-4"></i> Send Order via WhatsApp
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIMPLE MEDICINE DETAILS MODAL -->
+  <div id="drugModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#0f172a] border border-slate-800 rounded-3xl max-w-lg w-full p-5 sm:p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-start mb-3">
+        <div>
+          <h3 id="mTitle" class="text-lg font-extrabold text-white"></h3>
+          <p id="mStrength" class="text-xs text-emerald-400 font-semibold mt-0.5"></p>
+        </div>
+        <button onclick="toggleModal('drugModal')" class="text-slate-400 hover:text-white p-1">✕</button>
+      </div>
+
+      <img id="mImg" src="" alt="Drug photo" class="w-full h-40 object-cover rounded-2xl mb-4 border border-slate-800 bg-[#070b14]">
+
+      <div class="space-y-2.5 text-xs">
+        <div class="p-3 bg-[#070b14] rounded-2xl border border-slate-800">
+          <span class="block text-[10px] font-bold uppercase text-slate-400 mb-0.5">What It Cures / Treats:</span>
+          <p id="mUses" class="text-slate-200 leading-relaxed"></p>
+        </div>
+
+        <div class="p-3 bg-amber-950/20 border border-amber-500/20 rounded-2xl">
+          <span class="block text-[10px] font-bold uppercase text-amber-400 mb-0.5">Important Safety Advice:</span>
+          <p id="mWarnings" class="text-amber-200/90 leading-relaxed"></p>
+        </div>
+
+        <div class="p-3 bg-rose-950/20 border border-rose-500/20 rounded-2xl">
+          <span class="block text-[10px] font-bold uppercase text-rose-400 mb-0.5">Do Not Take If:</span>
+          <p id="mContra" class="text-rose-200/90 leading-relaxed"></p>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mt-5 pt-3 border-t border-slate-800">
+        <div>
+          <span class="text-[10px] text-slate-400 block uppercase font-bold">Price</span>
+          <span id="mPrice" class="text-lg font-extrabold text-white"></span>
+        </div>
+        <button id="mAddBtn" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-900/30">
+          Add to Bag
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL -->
   <div id="authModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-charcoal-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl">
-      <div class="flex justify-between items-start mb-4">
-        <div>
-          <h3 id="authModalTitle" class="text-lg font-bold text-white">Sign In to PharmaTrust</h3>
-          <p id="authModalSubtitle" class="text-xs text-slate-400">Access your confidential patient profile & orders.</p>
-        </div>
-        <button onclick="toggleModal('authModal')" class="text-slate-400 hover:text-white text-lg">✕</button>
+    <div class="bg-[#0f172a] border border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl">
+      <div class="flex justify-between items-center mb-4">
+        <h3 id="authTitle" class="text-base font-bold text-white">Sign In to Your Account</h3>
+        <button onclick="toggleModal('authModal')" class="text-slate-400 hover:text-white">✕</button>
       </div>
 
-      <div class="flex bg-charcoal-950 p-1 rounded-xl border border-slate-800 mb-4">
-        <button id="authTabSignIn" onclick="setAuthMode('signin')" class="flex-1 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition">Sign In</button>
-        <button id="authTabSignUp" onclick="setAuthMode('signup')" class="flex-1 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Register</button>
+      <div class="flex bg-[#070b14] p-1 rounded-xl border border-slate-800 mb-4">
+        <button id="btnSignTab" onclick="setAuthTab('in')" class="flex-1 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white transition">Sign In</button>
+        <button id="btnRegTab" onclick="setAuthTab('up')" class="flex-1 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">Register</button>
       </div>
 
-      <form onsubmit="handleAuthSubmit(event)" class="space-y-3 text-xs">
+      <form onsubmit="handleAuth(event)" class="space-y-3 text-xs">
         <div>
-          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Email Address</label>
-          <input type="email" id="authEmail" required placeholder="you@gmail.com" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+          <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Email Address</label>
+          <input type="email" id="authEmail" required placeholder="you@gmail.com" class="w-full bg-[#070b14] border border-slate-700 rounded-xl p-2.5 text-white outline-none focus:border-emerald-500">
         </div>
         <div>
-          <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Password</label>
-          <input type="password" id="authPassword" required placeholder="••••••••••••" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+          <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Password</label>
+          <input type="password" id="authPass" required placeholder="••••••••••••" class="w-full bg-[#070b14] border border-slate-700 rounded-xl p-2.5 text-white outline-none focus:border-emerald-500">
         </div>
-        <div id="authError" class="hidden p-2 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px]"></div>
-        <button type="submit" id="authSubmitBtn" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition">
+        <div id="authErr" class="hidden p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[11px]"></div>
+        <button type="submit" id="authSubmit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-900/30">
           Sign In
         </button>
       </form>
-    </div>
-  </div>
-
-  <!-- Drug Details & Patient Reviews Modal -->
-  <div id="drugModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-lg w-full p-5 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-start mb-3">
-        <div>
-          <h3 id="modalTitle" class="text-xl font-bold text-white"></h3>
-          <p id="modalGeneric" class="text-xs text-emerald-400 font-medium"></p>
-        </div>
-        <button onclick="toggleModal('drugModal')" class="text-slate-400 hover:text-white">✕</button>
-      </div>
-
-      <img id="modalImg" class="w-full h-40 object-cover rounded-xl mb-3 border border-slate-800" src="" alt="">
-
-      <div class="space-y-3 text-xs">
-        <div id="controlledWarningBox" class="hidden p-2.5 bg-rose-950/40 border border-rose-600/50 rounded-xl text-rose-300 font-medium">
-          🚨 <strong>SCHEDULE II CONTROLLED DRUG:</strong> Doctor prescription verification required prior to physical packaging.
-        </div>
-        <div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800">
-          <span class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">Clinical Indications</span>
-          <p id="modalUses" class="text-slate-200"></p>
-        </div>
-        <div class="p-2.5 bg-amber-950/20 border border-amber-500/20 rounded-xl">
-          <span class="block text-[10px] font-semibold text-amber-400 uppercase tracking-wider mb-0.5">Key Warnings</span>
-          <p id="modalWarnings" class="text-amber-200/90"></p>
-        </div>
-        <div class="p-2.5 bg-rose-950/20 border border-rose-500/20 rounded-xl">
-          <span class="block text-[10px] font-semibold text-rose-400 uppercase tracking-wider mb-0.5">Contraindications</span>
-          <p id="modalContra" class="text-rose-200/90"></p>
-        </div>
-
-        <!-- Verified Patient Ratings & Reviews Section -->
-        <div class="p-3 bg-charcoal-950 rounded-xl border border-slate-800">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-white uppercase tracking-wider">Patient Ratings & Feedback</span>
-            <span id="reviewAverage" class="text-amber-400 text-xs font-bold">★ 5.0</span>
-          </div>
-          <div id="reviewsList" class="space-y-2 max-h-32 overflow-y-auto mb-2.5 divide-y divide-slate-800">
-            <p class="text-slate-500 text-[11px] py-1">Loading reviews...</p>
-          </div>
-
-          <!-- Add Review Form -->
-          <form onsubmit="handleReviewSubmit(event)" class="pt-2 border-t border-slate-800/80 space-y-1.5">
-            <div class="flex items-center gap-2">
-              <span class="text-[10px] text-slate-400 font-semibold uppercase">Rating:</span>
-              <select id="reviewRating" class="bg-charcoal-900 border border-slate-700 rounded-lg px-2 py-0.5 text-amber-400 font-bold text-xs outline-none">
-                <option value="5">★★★★★ (5/5)</option>
-                <option value="4">★★★★☆ (4/5)</option>
-                <option value="3">★★★☆☆ (3/5)</option>
-                <option value="2">★★☆☆☆ (2/5)</option>
-                <option value="1">★☆☆☆☆ (1/5)</option>
-              </select>
-            </div>
-            <div class="flex gap-2">
-              <input type="text" id="reviewComment" required placeholder="Share your experience with this medication..." class="flex-1 bg-charcoal-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs text-white focus:border-emerald-500 outline-none">
-              <button type="submit" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs whitespace-nowrap transition">
-                Post
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <div class="flex items-center justify-between pt-2 border-t border-slate-800">
-          <div>
-            <span class="text-[10px] text-slate-400 block uppercase font-semibold">Unit Price</span>
-            <span id="modalPrice" class="text-lg font-extrabold text-white"></span>
-          </div>
-          <button id="modalAddBtn" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl uppercase transition">
-            Add to Order
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Shopping Cart Modal with Dynamic Nationwide Address -->
-  <div id="cartModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-charcoal-900 border border-slate-800 rounded-2xl max-w-md w-full p-5 max-h-[92vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-3">
-        <h3 class="text-lg font-bold text-white">Your Medication Cart</h3>
-        <button onclick="toggleModal('cartModal')" class="text-slate-400 hover:text-white">✕</button>
-      </div>
-
-      <div id="cartItemsContainer" class="divide-y divide-slate-800 max-h-48 overflow-y-auto mb-3"></div>
-
-      <!-- Nationwide Delivery Form -->
-      <div class="p-3 bg-charcoal-950 rounded-xl border border-slate-800 space-y-2 mb-3 text-xs">
-        <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block">Delivery Destination in Nigeria</span>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="text-[9px] text-slate-400 uppercase font-semibold">State</label>
-            <select id="cartState" class="w-full bg-charcoal-900 border border-slate-800 rounded-lg p-1.5 text-white outline-none">
-              <option value="Edo">Edo State</option>
-              <option value="Lagos">Lagos State</option>
-              <option value="Abuja">FCT Abuja</option>
-              <option value="Oyo">Oyo State</option>
-              <option value="Rivers">Rivers State</option>
-              <option value="Delta">Delta State</option>
-              <option value="Kano">Kano State</option>
-              <option value="Enugu">Enugu State</option>
-              <option value="Ogun">Ogun State</option>
-              <option value="Other">Other State</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-[9px] text-slate-400 uppercase font-semibold">Local Govt (LGA)</label>
-            <input type="text" id="cartLga" placeholder="e.g. Ovia North-East" class="w-full bg-charcoal-900 border border-slate-800 rounded-lg p-1.5 text-white outline-none">
-          </div>
-        </div>
-        <div>
-          <label class="text-[9px] text-slate-400 uppercase font-semibold">Street / Landmark Address</label>
-          <input type="text" id="cartStreet" placeholder="e.g. Room 14 Block C, Crystal Hostel or 12 Broad St" class="w-full bg-charcoal-900 border border-slate-800 rounded-lg p-1.5 text-white outline-none">
-        </div>
-      </div>
-
-      <div class="pt-2.5 border-t border-slate-800 space-y-1.5 text-xs mb-3">
-        <div class="flex justify-between text-slate-400">
-          <span>Subtotal</span>
-          <span id="cartSubtotal" class="text-white font-semibold">₦0</span>
-        </div>
-        <div class="flex justify-between text-slate-400">
-          <span>Delivery Fee (Local / Regional)</span>
-          <span id="cartDelivery" class="text-white font-semibold">₦1,000</span>
-        </div>
-        <div class="flex justify-between text-sm font-bold text-white pt-1.5 border-t border-slate-800">
-          <span>Total Payable</span>
-          <span id="cartTotal" class="text-emerald-400 font-extrabold">₦0</span>
-        </div>
-      </div>
-
-      <button onclick="checkoutOrder()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl flex items-center justify-center text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30">
-        <i data-lucide="message-circle" class="w-4 h-4 mr-1.5"></i> Submit via WhatsApp
-      </button>
     </div>
   </div>
 
@@ -436,134 +220,84 @@
     const SUPABASE_KEY = 'sb_publishable_AjpEBohY3PE7CCcWG5Mluw_9K-vaI9t';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    let products = [];
-    let currentCategory = "All";
+    let allProducts = [];
     let cart = [];
+    let activeCat = 'All';
     let currentUser = null;
-    let currentUserProfile = null;
-    let authMode = 'signin';
-    let currentModalProductId = null;
+    let authMode = 'in';
 
-    function toggleMobileNav() {
-      const tray = document.getElementById('mobileNavTray');
-      tray.classList.toggle('hidden');
-    }
-
-    function checkGatewayOnLoad() {
-      const savedRole = localStorage.getItem('pharmatrust_role');
-      if (!savedRole) {
-        openRoleGateway();
-      }
-    }
-
-    function openRoleGateway() {
-      const m = document.getElementById('roleGatewayModal');
-      m.classList.remove('hidden');
-      m.classList.add('flex');
-    }
-
-    function selectRole(role) {
-      localStorage.setItem('pharmatrust_role', role);
-      const m = document.getElementById('roleGatewayModal');
-      m.classList.add('hidden');
-      m.classList.remove('flex');
-
-      if (role === 'pharmacist' || role === 'wholesale') {
-        window.location.href = 'admin.html';
-      }
-    }
-
-    async function checkAuthSession() {
+    // 1. Check Login
+    async function checkAuth() {
       const { data: { session } } = await supabaseClient.auth.getSession();
-      const triggerBtn = document.getElementById('authTriggerBtn');
-
+      const btn = document.getElementById('authBtn');
       if (session) {
         currentUser = session.user;
-        triggerBtn.innerText = "Sign Out";
-        triggerBtn.className = "hidden sm:inline-flex text-xs px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-300 border border-rose-500/20 hover:bg-rose-500/20 transition";
-
-        const { data: profile } = await supabaseClient.from('profiles').select('*').eq('user_id', currentUser.id).single();
-        if (profile) {
-          currentUserProfile = profile;
-          if (document.getElementById('cartState')) document.getElementById('cartState').value = profile.state || 'Edo';
-          if (document.getElementById('cartLga')) document.getElementById('cartLga').value = profile.lga || '';
-          if (document.getElementById('cartStreet')) document.getElementById('cartStreet').value = profile.street_address || profile.delivery_address || '';
-        }
+        btn.innerText = "My Account";
+        btn.className = "text-xs font-semibold px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition";
+        btn.onclick = () => { window.location.href = 'profile.html'; };
       } else {
         currentUser = null;
-        currentUserProfile = null;
-        triggerBtn.innerText = "Sign In";
-        triggerBtn.className = "hidden sm:inline-flex text-xs px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition";
+        btn.innerText = "Sign In";
+        btn.className = "text-xs font-semibold px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition";
+        btn.onclick = openAuthModal;
       }
-      lucide.createIcons();
     }
 
     function openAuthModal() {
-      if (currentUser) {
-        supabaseClient.auth.signOut().then(() => checkAuthSession());
-      } else {
-        document.getElementById('authModal').classList.remove('hidden');
-        document.getElementById('authModal').classList.add('flex');
-      }
+      toggleModal('authModal');
     }
 
-    function setAuthMode(mode) {
+    function setAuthTab(mode) {
       authMode = mode;
-      const tabSignIn = document.getElementById('authTabSignIn');
-      const tabSignUp = document.getElementById('authTabSignUp');
-      const title = document.getElementById('authModalTitle');
-      const sub = document.getElementById('authModalSubtitle');
-      const btn = document.getElementById('authSubmitBtn');
+      const inTab = document.getElementById('btnSignTab');
+      const upTab = document.getElementById('btnRegTab');
+      const title = document.getElementById('authTitle');
+      const sub = document.getElementById('authSubmit');
 
-      if (mode === 'signin') {
-        tabSignIn.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition";
-        tabSignUp.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
-        title.innerText = "Sign In to PharmaTrust";
-        sub.innerText = "Access your patient profile & orders.";
-        btn.innerText = "Sign In";
+      if (mode === 'in') {
+        inTab.className = "flex-1 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white transition";
+        upTab.className = "flex-1 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+        title.innerText = "Sign In to Your Account";
+        sub.innerText = "Sign In";
       } else {
-        tabSignUp.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition";
-        tabSignIn.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
-        title.innerText = "Create Your Account";
-        sub.innerText = "Register to safeguard allergy warnings.";
-        btn.innerText = "Register Account";
+        upTab.className = "flex-1 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white transition";
+        inTab.className = "flex-1 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+        title.innerText = "Create Free Account";
+        sub.innerText = "Register Account";
       }
     }
 
-    async function handleAuthSubmit(e) {
+    async function handleAuth(e) {
       e.preventDefault();
       const email = document.getElementById('authEmail').value.trim();
-      const password = document.getElementById('authPassword').value;
-      const errEl = document.getElementById('authError');
-      errEl.classList.add('hidden');
+      const password = document.getElementById('authPass').value;
+      const err = document.getElementById('authErr');
+      err.classList.add('hidden');
 
-      if (authMode === 'signin') {
+      if (authMode === 'in') {
         const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
         if (error) {
-          errEl.innerText = error.message;
-          errEl.classList.remove('hidden');
+          err.innerText = error.message;
+          err.classList.remove('hidden');
         } else {
           toggleModal('authModal');
-          checkAuthSession();
+          checkAuth();
         }
       } else {
-        const { error } = await supabaseClient.auth.signUp({ 
-          email, 
-          password,
-          options: { emailRedirectTo: 'https://dacris23.github.io/Pharmtrust/profile.html' }
-        });
+        const { error } = await supabaseClient.auth.signUp({ email, password });
         if (error) {
-          errEl.innerText = error.message;
-          errEl.classList.remove('hidden');
+          err.innerText = error.message;
+          err.classList.remove('hidden');
         } else {
+          alert("Account created! You are now logged in.");
           toggleModal('authModal');
-          alert("Account registered! Please check your email inbox to verify your account.");
-          checkAuthSession();
+          checkAuth();
         }
       }
     }
 
-    async function loadMedicationsFromDB() {
+    // 2. Fetch Clean Catalog
+    async function loadCatalog() {
       const grid = document.getElementById('productGrid');
       try {
         const { data, error } = await supabaseClient
@@ -573,10 +307,7 @@
             regular_price_ngn,
             clearance_price_ngn,
             stock_quantity,
-            in_stock,
             is_near_expiry,
-            batch_number,
-            expiry_date,
             products (
               product_id,
               brand_name,
@@ -587,115 +318,72 @@
               strength_unit,
               pack_size,
               requires_prescription,
-              is_controlled,
-              nafdac_no,
               product_image_url,
               primary_uses,
               contraindications,
               key_warnings
-            ),
-            pharmacies (
-              pharmacy_name,
-              contact_phone,
-              address_text,
-              state,
-              lga
             )
-          `)
-          .order('in_stock', { ascending: false });
+          `);
 
         if (error) throw error;
 
-        products = (data || []).map(row => ({
+        allProducts = (data || []).map(row => ({
           id: row.products.product_id,
-          inventory_id: row.inventory_id,
-          brand: row.products.brand_name,
+          name: row.products.brand_name,
           generic: row.products.generic_name,
           category: row.products.category,
-          dosage: `${row.products.dosage_form} (${row.products.dosage_strength}${row.products.strength_unit})`,
-          pack: row.products.pack_size,
+          specs: `${row.products.dosage_strength}${row.products.strength_unit} • ${row.products.pack_size}`,
           price: row.clearance_price_ngn || row.regular_price_ngn,
-          original_price: row.clearance_price_ngn ? row.regular_price_ngn : null,
-          is_clearance: row.is_near_expiry,
-          rx_required: row.products.requires_prescription,
-          is_controlled: row.products.is_controlled,
-          nafdac: row.products.nafdac_no,
-          img: row.products.product_image_url,
+          oldPrice: row.clearance_price_ngn ? row.regular_price_ngn : null,
+          isSale: row.is_near_expiry,
+          needsRx: row.products.requires_prescription,
+          img: row.products.product_image_url || 'logo.jpg',
           uses: row.products.primary_uses,
           warnings: row.products.key_warnings,
-          contraindications: row.products.contraindications,
-          in_stock: row.in_stock,
-          pharmacy: row.pharmacies ? `${row.pharmacies.pharmacy_name} (${row.pharmacies.state})` : 'Central Dispensary',
-          pharmacy_phone: '2348065092665'
+          contra: row.products.contraindications,
+          inStock: row.stock_quantity > 0
         }));
 
-        renderProducts(products);
+        renderList(allProducts);
       } catch (err) {
-        if (grid) grid.innerHTML = `<div class="col-span-full py-12 text-center text-rose-400 text-xs">Error loading catalog: ${err.message}</div>`;
+        grid.innerHTML = `<p class="col-span-full py-12 text-center text-xs text-rose-400">Failed to load medicines: ${err.message}</p>`;
       }
     }
 
-    function renderProducts(items) {
+    function renderList(items) {
       const grid = document.getElementById('productGrid');
       if (items.length === 0) {
-        grid.innerHTML = '<div class="col-span-full py-16 text-center text-slate-500 text-xs">No matching medications found.</div>';
+        grid.innerHTML = `<p class="col-span-full py-12 text-center text-xs text-slate-500">No matching medicines found.</p>`;
         return;
       }
 
       grid.innerHTML = items.map(p => `
-        <div class="bg-charcoal-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col hover:border-slate-700 transition">
-          <div class="relative h-40 overflow-hidden bg-slate-950">
-            <img src="${p.img}" alt="${p.brand}" loading="lazy" class="w-full h-full object-cover">
-            ${p.is_clearance ? `
-              <span class="absolute top-2.5 left-2.5 bg-amber-500 text-charcoal-950 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                ⚡ Flash (-35%)
-              </span>` : ''}
-            ${p.is_controlled ? `
-              <span class="absolute top-2.5 right-2.5 bg-rose-500/30 text-rose-300 border border-rose-500/50 text-[10px] font-bold px-2 py-0.5 rounded-md">
-                🚨 Controlled
-              </span>` : (p.rx_required ? `
-              <span class="absolute top-2.5 right-2.5 bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
-                Rx Required
-              </span>` : `
-              <span class="absolute top-2.5 right-2.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold px-2 py-0.5 rounded-md">
-                OTC
-              </span>`)}
+        <div class="bg-[#0c1222] border border-slate-800 hover:border-slate-700 rounded-3xl p-4 flex flex-col justify-between transition">
+          <div>
+            <div class="relative h-36 rounded-2xl overflow-hidden bg-[#070b14] mb-3">
+              <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover">
+              ${p.isSale ? `<span class="absolute top-2 left-2 bg-amber-500 text-slate-950 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase">🔥 Special Deal</span>` : ''}
+              ${p.needsRx ? `<span class="absolute top-2 right-2 bg-rose-500/20 text-rose-300 text-[10px] font-bold px-2 py-0.5 rounded-lg border border-rose-500/40">Doctor Script</span>` : ''}
+            </div>
+            
+            <h3 class="text-sm font-bold text-white leading-tight mb-0.5">${p.name}</h3>
+            <p class="text-[11px] text-slate-400 italic mb-1">${p.generic}</p>
+            <p class="text-[11px] text-emerald-400 font-semibold mb-3">${p.specs}</p>
           </div>
 
-          <div class="p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <div class="text-[10px] text-emerald-400 font-medium mb-1 flex items-center">
-                <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5"></span>
-                ${p.pharmacy}
-              </div>
-              <h3 class="text-sm font-bold text-white leading-tight">${p.brand}</h3>
-              <p class="text-xs text-slate-400 italic mb-1.5">${p.generic}</p>
-              <div class="text-[10px] text-slate-500 mb-3">${p.dosage} • ${p.pack}</div>
+          <div>
+            <div class="flex items-baseline gap-2 mb-3">
+              <span class="text-base font-extrabold text-white">₦${Number(p.price).toLocaleString()}</span>
+              ${p.oldPrice ? `<span class="text-xs text-slate-500 line-through">₦${Number(p.oldPrice).toLocaleString()}</span>` : ''}
             </div>
 
-            <div>
-              <div class="flex items-baseline space-x-2 mb-3">
-                <span class="text-base font-extrabold text-white">₦${Number(p.price).toLocaleString()}</span>
-                ${p.original_price ? `<span class="text-xs text-slate-500 line-through">₦${Number(p.original_price).toLocaleString()}</span>` : ''}
-              </div>
-
-              ${p.in_stock ? `
-                <div class="grid grid-cols-2 gap-2">
-                  <button onclick="openDrugModal('${p.id}')" class="py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
-                    Details
-                  </button>
-                  <button onclick="addToCart('${p.id}')" class="py-2 text-xs font-semibold rounded-lg ${p.is_controlled ? 'bg-amber-600 hover:bg-amber-500' : 'bg-emerald-600 hover:bg-emerald-500'} text-white transition">
-                    ${p.is_controlled ? 'Order (Rx)' : 'Order'}
-                  </button>
-                </div>
-              ` : `
-                <div class="p-2 bg-rose-950/20 border border-rose-500/20 rounded-xl text-center">
-                  <span class="text-[10px] text-rose-300 font-semibold block mb-0.5">Out of Stock at Node</span>
-                  <button onclick="routeToNearestPharmacy('${p.generic}')" class="text-[10px] text-emerald-400 underline font-semibold">
-                    Locate nearby in Nigeria ↗
-                  </button>
-                </div>
-              `}
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="openInfo('${p.id}')" class="py-2.5 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+                Read Info
+              </button>
+              <button onclick="addToBag('${p.id}')" class="py-2.5 text-xs font-bold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition">
+                + Add to Bag
+              </button>
             </div>
           </div>
         </div>
@@ -703,232 +391,149 @@
       lucide.createIcons();
     }
 
-    function routeToNearestPharmacy(generic) {
-      const match = products.find(p => p.generic.toLowerCase().includes(generic.toLowerCase()) && p.in_stock);
-      if (match) {
-        alert(`Stock found! Available at ${match.pharmacy} for ₦${match.price.toLocaleString()}.`);
-        openDrugModal(match.id);
-      } else {
-        alert("All registered dispensaries in our network are currently out of this generic chemical. Use the Upload Rx page for special prescription sourcing.");
-      }
-    }
-
     function filterProducts() {
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
-      const filtered = products.filter(p => {
-        const matchesCategory = currentCategory === "All" || 
-          p.category.includes(currentCategory) || 
-          (currentCategory === 'Clearance' && p.is_clearance);
-        const matchesSearch = !q || 
-          p.brand.toLowerCase().includes(q) || 
-          p.generic.toLowerCase().includes(q) || 
-          p.dosage.toLowerCase().includes(q) || 
-          p.uses.toLowerCase().includes(q);
-        return matchesCategory && matchesSearch;
+      const filtered = allProducts.filter(p => {
+        const catMatch = activeCat === 'All' || p.category.includes(activeCat) || (activeCat === 'Clearance' && p.isSale);
+        const textMatch = !q || p.name.toLowerCase().includes(q) || p.generic.toLowerCase().includes(q) || p.uses.toLowerCase().includes(q);
+        return catMatch && textMatch;
       });
-      renderProducts(filtered);
+      renderList(filtered);
     }
 
     function setCategory(cat) {
-      currentCategory = cat;
-      document.querySelectorAll('.category-btn').forEach(btn => {
-        if (btn.innerText.includes(cat) || (cat === 'All' && btn.innerText === 'All')) {
-          btn.className = "category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white transition";
+      activeCat = cat;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.innerText.includes(cat) || (cat === 'All' && btn.innerText.includes('All'))) {
+          btn.className = "cat-pill px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap transition";
         } else {
-          btn.className = "category-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition";
+          btn.className = "cat-pill px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 text-slate-300 hover:bg-slate-800 whitespace-nowrap transition";
         }
       });
       filterProducts();
     }
 
-    function toggleModal(id) {
-      const modal = document.getElementById(id);
-      modal.classList.toggle('hidden');
-      modal.classList.toggle('flex');
+    // 3. EDITABLE CART LOGIC (+, -, REMOVE)
+    function addToBag(id) {
+      const p = allProducts.find(x => x.id === id);
+      if (!p) return;
+
+      const item = cart.find(x => x.id === id);
+      if (item) {
+        item.qty += 1;
+      } else {
+        cart.push({ ...p, qty: 1 });
+      }
+      renderCart();
     }
 
-    async function openDrugModal(id) {
-      const p = products.find(x => x.id === id);
+    function changeQty(id, delta) {
+      const item = cart.find(x => x.id === id);
+      if (!item) return;
+
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(x => x.id !== id);
+      }
+      renderCart();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(x => x.id !== id);
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartList');
+      const totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
+      document.getElementById('cartCount').innerText = totalCount;
+
+      if (cart.length === 0) {
+        container.innerHTML = `<p class="text-xs text-slate-500 py-6 text-center">Your bag is empty.</p>`;
+        document.getElementById('subtotalText').innerText = '₦0';
+        document.getElementById('totalText').innerText = '₦0';
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="py-2.5 flex items-center justify-between gap-2">
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
+            <p class="text-[10px] text-slate-400">₦${Number(item.price).toLocaleString()} each</p>
+          </div>
+
+          <!-- Quantity Controls (+, -, Trash) -->
+          <div class="flex items-center space-x-1.5 bg-[#070b14] border border-slate-700 px-2 py-1 rounded-xl">
+            <button onclick="changeQty('${item.id}', -1)" class="text-slate-400 hover:text-white px-1 font-bold text-xs">−</button>
+            <span class="text-xs font-bold text-emerald-400 px-1">${item.qty}</span>
+            <button onclick="changeQty('${item.id}', 1)" class="text-slate-400 hover:text-white px-1 font-bold text-xs">+</button>
+          </div>
+
+          <span class="text-xs font-extrabold text-white whitespace-nowrap">₦${(item.price * item.qty).toLocaleString()}</span>
+
+          <button onclick="removeFromCart('${item.id}')" class="text-slate-500 hover:text-rose-400 p-1">
+            ✕
+          </button>
+        </div>
+      `).join('');
+
+      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      const delivery = subtotal > 0 ? 1000 : 0;
+      document.getElementById('subtotalText').innerText = `₦${subtotal.toLocaleString()}`;
+      document.getElementById('deliveryText').innerText = `₦${delivery.toLocaleString()}`;
+      document.getElementById('totalText').innerText = `₦${(subtotal + delivery).toLocaleString()}`;
+    }
+
+    function openInfo(id) {
+      const p = allProducts.find(x => x.id === id);
       if (!p) return;
-      currentModalProductId = id;
 
-      document.getElementById('modalTitle').innerText = `${p.brand} ${p.dosage}`;
-      document.getElementById('modalGeneric').innerText = `${p.generic} • NAFDAC: ${p.nafdac || 'Verified'}`;
-      document.getElementById('modalUses').innerText = p.uses;
-      document.getElementById('modalWarnings').innerText = p.warnings;
-      document.getElementById('modalContra').innerText = p.contraindications;
-      document.getElementById('modalPrice').innerText = `₦${Number(p.price).toLocaleString()}`;
-      document.getElementById('modalImg').src = p.img;
-      
-      const controlledBox = document.getElementById('controlledWarningBox');
-      if (p.is_controlled) controlledBox.classList.remove('hidden');
-      else controlledBox.classList.add('hidden');
+      document.getElementById('mTitle').innerText = p.name;
+      document.getElementById('mStrength').innerText = p.specs;
+      document.getElementById('mUses').innerText = p.uses || "Relief of indicated symptoms.";
+      document.getElementById('mWarnings').innerText = p.warnings || "Take as directed by doctor or pharmacist.";
+      document.getElementById('mContra').innerText = p.contra || "Do not use if allergic to active compounds.";
+      document.getElementById('mPrice').innerText = `₦${Number(p.price).toLocaleString()}`;
+      document.getElementById('mImg').src = p.img;
 
-      loadReviews(id);
-
-      document.getElementById('modalAddBtn').onclick = () => {
-        addToCart(p.id);
+      document.getElementById('mAddBtn').onclick = () => {
+        addToBag(p.id);
         toggleModal('drugModal');
       };
+
       toggleModal('drugModal');
     }
 
-    async function loadReviews(productId) {
-      const container = document.getElementById('reviewsList');
-      const avgBadge = document.getElementById('reviewAverage');
-      const { data, error } = await supabaseClient
-        .from('product_reviews')
-        .select('*')
-        .eq('product_id', productId)
-        .order('created_at', { ascending: false });
-
-      if (error || !data || data.length === 0) {
-        container.innerHTML = `<p class="text-slate-500 text-[11px] py-1">No reviews yet. Be the first patient to share feedback!</p>`;
-        avgBadge.innerText = 'New';
-        return;
-      }
-
-      const avg = (data.reduce((acc, cur) => acc + cur.rating, 0) / data.length).toFixed(1);
-      avgBadge.innerText = `★ ${avg} (${data.length} review${data.length > 1 ? 's' : ''})`;
-
-      container.innerHTML = data.map(r => `
-        <div class="py-1.5">
-          <div class="flex justify-between items-center text-[11px] mb-0.5">
-            <span class="font-bold text-white">${r.patient_name}</span>
-            <span class="text-amber-400 font-bold">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-          </div>
-          <p class="text-slate-300 text-[11px]">${r.comment}</p>
-        </div>
-      `).join('');
+    function toggleModal(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('hidden');
+      el.classList.toggle('flex');
     }
 
-    async function handleReviewSubmit(e) {
-      e.preventDefault();
-      if (!currentUser) {
-        alert("Please sign in or register to post a verified review.");
-        openAuthModal();
-        return;
-      }
+    function checkoutViaWhatsApp() {
+      if (cart.length === 0) return alert("Your bag is empty.");
+      const address = document.getElementById('deliveryAddress').value.trim();
+      if (!address) return alert("Please enter your street address or landmark so we know where to deliver.");
 
-      const rating = Number(document.getElementById('reviewRating').value);
-      const comment = document.getElementById('reviewComment').value.trim();
-      const patientName = currentUserProfile ? currentUserProfile.full_name : currentUser.email.split('@')[0];
-
-      const { error } = await supabaseClient.from('product_reviews').insert([{
-        product_id: currentModalProductId,
-        user_id: currentUser.id,
-        patient_name: patientName,
-        rating: rating,
-        comment: comment
-      }]);
-
-      if (error) {
-        alert("Review error: " + error.message);
-      } else {
-        document.getElementById('reviewComment').value = '';
-        loadReviews(currentModalProductId);
-      }
-    }
-
-    function addToCart(id) {
-      if (!currentUser) {
-        alert("Please sign in or create an account to place an order.");
-        openAuthModal();
-        return;
-      }
-
-      const p = products.find(x => x.id === id);
-      if (!p) return;
-
-      if (currentUserProfile && currentUserProfile.allergies && currentUserProfile.allergies.toLowerCase() !== 'none') {
-        const userAllergies = currentUserProfile.allergies.toLowerCase();
-        if (p.generic.toLowerCase().includes(userAllergies) || p.contraindications.toLowerCase().includes(userAllergies)) {
-          alert(`⚠️ CLINICAL INTERVENTION: You reported an allergy to (${currentUserProfile.allergies}). This medication may trigger an adverse reaction.`);
-        }
-      }
-
-      const existing = cart.find(x => x.id === id);
-      if (existing) existing.qty++;
-      else cart.push({ ...p, qty: 1 });
-      updateCartUI();
-    }
-
-    function updateCartUI() {
-      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-      document.getElementById('cartCount').innerText = totalQty;
-
-      const container = document.getElementById('cartItemsContainer');
-      if (cart.length === 0) {
-        container.innerHTML = `<p class="text-xs text-slate-500 py-3 text-center">Cart is currently empty.</p>`;
-      } else {
-        container.innerHTML = cart.map(item => `
-          <div class="py-2 flex justify-between items-center text-xs">
-            <div>
-              <div class="font-bold text-white flex items-center gap-1.5">
-                ${item.brand}
-                ${item.is_controlled ? '<span class="text-[9px] bg-rose-500/20 text-rose-300 px-1 py-0.5 rounded">CONTROLLED</span>' : ''}
-              </div>
-              <div class="text-slate-400 text-[10px]">${item.dosage} • ₦${Number(item.price).toLocaleString()} x ${item.qty}</div>
-            </div>
-            <div class="font-bold text-white">₦${(Number(item.price) * item.qty).toLocaleString()}</div>
-          </div>
-        `).join('');
-      }
-
-      const subtotal = cart.reduce((sum, item) => sum + (Number(item.price) * item.qty), 0);
-      const delivery = subtotal > 0 ? 1000 : 0;
-      document.getElementById('cartSubtotal').innerText = `₦${subtotal.toLocaleString()}`;
-      document.getElementById('cartDelivery').innerText = `₦${delivery.toLocaleString()}`;
-      document.getElementById('cartTotal').innerText = `₦${(subtotal + delivery).toLocaleString()}`;
-    }
-
-    function checkoutOrder() {
-      if (cart.length === 0) return alert("Your cart is empty.");
-      const subtotal = cart.reduce((sum, item) => sum + (Number(item.price) * item.qty), 0);
+      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
       const total = subtotal + 1000;
-      const hasControlled = cart.some(i => i.is_controlled);
 
-      const state = document.getElementById('cartState') ? document.getElementById('cartState').value : 'Edo';
-      const lga = document.getElementById('cartLga') ? document.getElementById('cartLga').value.trim() : '';
-      const street = document.getElementById('cartStreet') ? document.getElementById('cartStreet').value.trim() : '';
-
-      if (!lga || !street) {
-        alert("Please enter your delivery State, LGA, and street address inside the cart.");
-        return;
-      }
-
-      let msg = hasControlled ? `*🚨 CONTROLLED DRUG DISPATCH - PHARMATRUST*%0A%0A` : `*NEW MEDICATION ORDER - PHARMATRUST*%0A%0A`;
-      
-      if (currentUserProfile) {
-        msg += `*Patient Name:* ${encodeURIComponent(currentUserProfile.full_name)}%0A`;
-        msg += `*Age:* ${currentUserProfile.age} yrs • *Weight:* ${currentUserProfile.weight_kg ? currentUserProfile.weight_kg + 'kg' : 'N/A'} • *Sex:* ${currentUserProfile.gender}%0A`;
-        msg += `*Blood Group:* ${currentUserProfile.blood_group || 'N/A'} • *Genotype:* ${currentUserProfile.genotype || 'N/A'}%0A`;
-        msg += `*Allergies:* ${encodeURIComponent(currentUserProfile.allergies)}%0A`;
-      }
-      
-      msg += `*Delivery Location:* ${encodeURIComponent(street)}, ${encodeURIComponent(lga)}, ${encodeURIComponent(state)} State%0A%0A`;
-      
-      msg += `*Medications Ordered:*%0A`;
+      let msg = `*NEW MEDICINE ORDER - PHARMATRUST*%0A%0A`;
+      msg += `*Delivery Destination:* ${encodeURIComponent(address)}%0A%0A`;
+      msg += `*Items Ordered:*%0A`;
       cart.forEach(i => {
-        msg += `• ${i.brand} [${i.dosage}] (x${i.qty}) - NGN ${(Number(i.price) * i.qty).toLocaleString()}%0A`;
+        msg += `• ${i.name} [${i.specs}] x ${i.qty} = NGN ${(i.price * i.qty).toLocaleString()}%0A`;
       });
-      
-      msg += `%0A*Delivery Fee:* NGN 1,000%0A`;
-      msg += `*Grand Total:* NGN ${total.toLocaleString()}%0A%0A`;
-      
-      if (hasControlled) {
-        msg += `⚠️ *PCN / NDLEA AUDIT:* Contains Schedule II Controlled Substance. Physical doctor prescription slip and NIN verification required prior to release.%0A%0A`;
-      }
-      
-      msg += `Please send bank account transfer details.`;
+      msg += `%0A*Rider Delivery:* NGN 1,000%0A`;
+      msg += `*Total to Pay:* *NGN ${total.toLocaleString()}*%0A%0A`;
+      msg += `Please confirm order and send bank transfer account details.`;
 
       window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      checkGatewayOnLoad();
-      checkAuthSession();
-      loadMedicationsFromDB();
+      checkAuth();
+      loadCatalog();
     });
   </script>
 </body>
