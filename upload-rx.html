@@ -9,6 +9,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+  <!-- In-Browser Image Compression Library -->
+  <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -70,7 +72,7 @@
           Prescription Intake
         </span>
         <h1 class="text-xl sm:text-2xl font-bold text-white">Upload Doctor's Prescription</h1>
-        <p class="text-xs text-slate-400 mt-1">Our licensed dispensary pharmacists verify your dosage regimen, cross-examine allergies, and prepare your medications for dispatch anywhere in Nigeria.</p>
+        <p class="text-xs text-slate-400 mt-1">Our licensed dispensary pharmacists verify your dosage regimen, cross-examine allergies, and prepare your medications for dispatch nationwide.</p>
       </div>
 
       <form id="rxUploadForm" onsubmit="submitPrescription(event)" class="space-y-3.5 text-xs">
@@ -143,12 +145,12 @@
           <div class="border-2 border-dashed border-slate-800 rounded-2xl p-5 text-center hover:border-emerald-500 transition cursor-pointer" onclick="document.getElementById('rxFile').click()">
             <i data-lucide="camera" class="w-7 h-7 text-emerald-500 mx-auto mb-1.5"></i>
             <p class="text-xs text-slate-300 font-medium">Click to capture or upload photo</p>
-            <p class="text-[10px] text-slate-500 mt-0.5">PNG, JPG, or PDF up to 5MB</p>
+            <p class="text-[10px] text-slate-500 mt-0.5">Images auto-compress to save data</p>
             <input type="file" id="rxFile" accept="image/*" class="hidden" onchange="previewRxImage(this)">
           </div>
-          <div id="fileNotice" class="hidden mt-2 text-xs text-emerald-400 items-center gap-1.5">
-            <i data-lucide="check" class="w-4 h-4"></i>
-            <span id="fileName">Selected</span>
+          <div id="fileNotice" class="hidden mt-2 text-xs text-emerald-400 items-center justify-between">
+            <span id="fileName" class="truncate max-w-[200px]">Selected</span>
+            <span id="fileSizeTag" class="text-[10px] text-slate-400 font-mono"></span>
           </div>
         </div>
 
@@ -191,7 +193,10 @@
 
     function previewRxImage(input) {
       if (input.files && input.files[0]) {
-        document.getElementById('fileName').innerText = input.files[0].name;
+        const file = input.files[0];
+        const sizeMb = (file.size / 1024 / 1024).toFixed(2);
+        document.getElementById('fileName').innerText = file.name;
+        document.getElementById('fileSizeTag').innerText = `Original: ${sizeMb} MB`;
         document.getElementById('fileNotice').classList.remove('hidden');
         document.getElementById('fileNotice').classList.add('flex');
       }
@@ -201,13 +206,26 @@
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       const fileInput = document.getElementById('rxFile');
-      const file = fileInput.files[0];
+      let file = fileInput.files[0];
 
       if (!file) return alert("Please select or capture a prescription photo.");
 
       try {
         btn.disabled = true;
-        btn.innerText = "Uploading Securely...";
+
+        // --- Client-Side Image Compression ---
+        if (file.type.startsWith('image/')) {
+          btn.innerText = "Compressing Photo (0% data wasted)...";
+          const options = {
+            maxSizeMB: 0.3,          // Target max ~300 KB
+            maxWidthOrHeight: 1600,   // High resolution for clear doctor handwriting
+            useWebWorker: true
+          };
+          const compressedBlob = await imageCompression(file, options);
+          file = new File([compressedBlob], file.name, { type: file.type });
+        }
+
+        btn.innerText = "Uploading to Dispensary Vault...";
 
         const fileExt = file.name.split('.').pop();
         const filePath = `rx_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
