@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PharmaTrust | Upload Doctor Prescription</title>
   <link rel="icon" href="logo.jpg">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#070b14">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
-  <!-- In-Browser Image Compression Library -->
+  <!-- In-Browser Client-Side Image Compression -->
   <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
   <script>
     tailwind.config = {
@@ -27,9 +27,9 @@
 </head>
 <body class="bg-charcoal-950 text-slate-100 min-h-screen font-sans antialiased pb-20 selection:bg-emerald-500/30">
 
-  <!-- Responsive Navigation Header -->
+  <!-- Responsive Header -->
   <header class="sticky top-0 z-40 bg-charcoal-900/95 backdrop-blur border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <a href="index.html" class="flex items-center space-x-2.5 flex-shrink-0">
         <img src="logo.jpg" alt="Logo" class="h-9 w-9 object-contain rounded-xl border border-slate-700 shadow">
         <div class="flex flex-col">
@@ -37,16 +37,16 @@
             Pharma<span class="text-emerald-400">Trust</span>
           </span>
           <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">
-            Nationwide Network
+            Prescription Intake
           </span>
         </div>
       </a>
 
       <nav class="hidden md:flex items-center space-x-5 text-xs font-medium">
-        <a href="index.html" class="text-slate-300 hover:text-emerald-400 transition">Catalog</a>
+        <a href="index.html" class="text-slate-300 hover:text-emerald-400 transition">Storefront</a>
         <a href="upload-rx.html" class="text-emerald-400 border-b-2 border-emerald-500 pb-0.5 font-bold">Upload Rx</a>
         <a href="profile.html" class="text-slate-300 hover:text-emerald-400 transition">My Profile</a>
-        <a href="contact.html" class="text-slate-300 hover:text-emerald-400 transition">Contact</a>
+        <a href="contact.html" class="text-slate-300 hover:text-emerald-400 transition">Help Desk</a>
         <a href="admin.html" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Pharmacist Portal ↗</a>
       </nav>
 
@@ -55,9 +55,9 @@
       </button>
     </div>
 
-    <!-- Mobile Tray -->
+    <!-- Mobile Navigation Drawer -->
     <div id="mobileNavTray" class="hidden md:hidden border-t border-slate-800 bg-charcoal-900 px-4 py-3 space-y-2 text-xs font-semibold">
-      <a href="index.html" class="block py-1.5 text-slate-300">Catalog Storefront</a>
+      <a href="index.html" class="block py-1.5 text-slate-300">Storefront Catalog</a>
       <a href="upload-rx.html" class="block py-1.5 text-emerald-400 font-bold">Upload Doctor Prescription</a>
       <a href="profile.html" class="block py-1.5 text-slate-300">My Clinical Profile & Allergies</a>
       <a href="contact.html" class="block py-1.5 text-slate-300">Emergency Hotlines & Contact</a>
@@ -67,18 +67,30 @@
 
   <main class="max-w-2xl mx-auto px-4 py-8">
     <div class="bg-charcoal-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
+      
+      <!-- Regulatory Intake Header & Checklist -->
       <div class="mb-5">
         <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider mb-2">
-          Prescription Intake
+          POM Prescription Intake & Routing
         </span>
         <h1 class="text-xl sm:text-2xl font-bold text-white">Upload Doctor's Prescription</h1>
-        <p class="text-xs text-slate-400 mt-1">Our licensed dispensary pharmacists verify your dosage regimen, cross-examine allergies, and prepare your medications for dispatch nationwide.</p>
+        <p class="text-xs text-slate-400 mt-1">
+          Standard Prescription-Only Medicines (POMs) such as antibiotics, inhalers, and chronic care medications require review by a licensed dispensary pharmacist before dispensing.
+        </p>
+
+        <div class="mt-3 p-3 bg-charcoal-950 rounded-2xl border border-slate-800 text-[11px] text-slate-400 space-y-1">
+          <div class="text-slate-200 font-bold mb-1">Prescription Slip Requirements:</div>
+          <div>✓ Doctor / Prescriber Full Name & Signature</div>
+          <div>✓ Doctor's MDCN Folio Number & Clinic Stamp</div>
+          <div>✓ Date of Consultation (current and valid)</div>
+          <div class="text-rose-400 pt-1 font-semibold">✕ Controlled psychotropics & scheduled narcotics (Tramadol, Codeine, Rohypnol) are rejected and will not be dispensed online.</div>
+        </div>
       </div>
 
       <form id="rxUploadForm" onsubmit="submitPrescription(event)" class="space-y-3.5 text-xs">
         <div>
           <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Patient Full Name</label>
-          <input type="text" id="rxName" required placeholder="Basit Adeife" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+          <input type="text" id="rxName" required placeholder="Patient legal name" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -112,10 +124,10 @@
           <input type="text" id="rxAllergies" placeholder="e.g. Penicillin, Sulfa, NSAIDs (or write None)" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-rose-500 outline-none">
         </div>
 
-        <!-- Geographic Location (Nationwide) -->
+        <!-- Geographic Location -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Delivery State</label>
+            <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">State</label>
             <select id="rxState" required class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
               <option value="Edo">Edo State</option>
               <option value="Lagos">Lagos State</option>
@@ -137,7 +149,7 @@
 
         <div>
           <label class="block uppercase font-semibold text-[10px] text-slate-400 mb-1">Street Address / Landmark / Hostel Details</label>
-          <input type="text" id="rxAddress" required placeholder="e.g. Room 14 Block C, Crystal Hostel or 12 Broad Street" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
+          <input type="text" id="rxAddress" required placeholder="e.g. Room 14 Block C, Crystal Hostel or Street Address" class="w-full bg-charcoal-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-emerald-500 outline-none">
         </div>
 
         <div>
@@ -145,7 +157,7 @@
           <div class="border-2 border-dashed border-slate-800 rounded-2xl p-5 text-center hover:border-emerald-500 transition cursor-pointer" onclick="document.getElementById('rxFile').click()">
             <i data-lucide="camera" class="w-7 h-7 text-emerald-500 mx-auto mb-1.5"></i>
             <p class="text-xs text-slate-300 font-medium">Click to capture or upload photo</p>
-            <p class="text-[10px] text-slate-500 mt-0.5">Images auto-compress to save data</p>
+            <p class="text-[10px] text-slate-500 mt-0.5">Auto-compressed in your browser before upload</p>
             <input type="file" id="rxFile" accept="image/*" class="hidden" onchange="previewRxImage(this)">
           </div>
           <div id="fileNotice" class="hidden mt-2 text-xs text-emerald-400 items-center justify-between">
@@ -213,19 +225,19 @@
       try {
         btn.disabled = true;
 
-        // --- Client-Side Image Compression ---
+        // In-Browser Client-Side Image Compression
         if (file.type.startsWith('image/')) {
-          btn.innerText = "Compressing Photo (0% data wasted)...";
+          btn.innerText = "Compressing Photo...";
           const options = {
-            maxSizeMB: 0.3,          // Target max ~300 KB
-            maxWidthOrHeight: 1600,   // High resolution for clear doctor handwriting
+            maxSizeMB: 0.3,          // Target ~300 KB max
+            maxWidthOrHeight: 1600,   // High clarity for physician handwriting
             useWebWorker: true
           };
           const compressedBlob = await imageCompression(file, options);
           file = new File([compressedBlob], file.name, { type: file.type });
         }
 
-        btn.innerText = "Uploading to Dispensary Vault...";
+        btn.innerText = "Uploading to Secure Vault...";
 
         const fileExt = file.name.split('.').pop();
         const filePath = `rx_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
@@ -261,13 +273,13 @@
           status: 'pending_review'
         }]);
 
-        let msg = `*PRESCRIPTION DISPATCH - PHARMATRUST*%0A%0A`;
+        let msg = `*PRESCRIPTION INTAKE - PHARMATRUST*%0A%0A`;
         msg += `*Patient Name:* ${encodeURIComponent(name)}%0A`;
-        msg += `*Vitals:* Age: ${age} yrs • Weight: ${weight}kg • Sex: ${gender}%0A`;
+        msg += `*Clinical Parameters:* Age: ${age} yrs • Weight: ${weight}kg • Sex: ${gender}%0A`;
         msg += `*Allergies:* ${encodeURIComponent(allergies)}%0A`;
         msg += `*Destination:* ${encodeURIComponent(addr)}, ${encodeURIComponent(lga)}, ${encodeURIComponent(state)} State%0A%0A`;
         msg += `*Prescription Image Link:*%0A${encodeURIComponent(publicUrl)}%0A%0A`;
-        msg += `Hello Pharmacist, please review my prescription and issue an official itemized bill.`;
+        msg += `Hello Pharmacist, please verify my prescription details and send an itemized bill.`;
 
         window.open(`https://wa.me/2348065092665?text=${msg}`, '_blank');
         e.target.reset();
